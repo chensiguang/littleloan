@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fa_bank_account_info">
+	
+	<insert id="insert" parameterType="com.hexin.pettyLoan.finance.model.BankAccountInfo">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_fa_bank_account_info')
+		</selectKey>
+		insert into fa_bank_account_info(id,subid,subcode,subname,bankname,type,
+		,bankaccount,bankbalance,opendate,useprint,canclesign,cancledate,remark,orgid,creater,ctime,rtime) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{subid,jdbcType=INTEGER},
+		#{subcode,jdbcType=VARCHAR},
+		#{bankname,jdbcType=VARCHAR},
+		#{type,jdbcType=INTEGER},
+		#{bankaccount,jdbcType=VARCHAR},
+		#{bankbalance,jdbcType=DOUBLE},
+		#{opendate,jdbcType=DATE},
+		#{useprint,jdbcType=VARCHAR},
+		#{canclesign,jdbcType=INTEGER},
+		#{cancledate,jdbcType=DATE},
+		#{remark,jdbcType=VARCHAR},
+		#{orgid,jdbcType=INTEGER},
+		#{creater,jdbcType=INTEGER}
+		now(),
+		now(),
+		)
+	</insert>
+	
+	<select id="query" parameterType="com.hexin.pettyLoan.finance.model.BankAccountInfo" resultType="com.hexin.pettyLoan.finance.model.BankAccountInfo">
+		select * from fa_bank_account_info 
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="subid != null and subid != 0 ">
+					<![CDATA[
+						AND subid = #{subid} 
+					]]>
+				</if>
+				<if test="bankname != null and bankname != 0 ">
+					<![CDATA[
+						AND bankname = #{bankname} 
+					]]>
+				</if>
+				<if test="bankaccount != null and bankaccount != 0 ">
+					<![CDATA[
+						AND bankaccount = #{bankaccount} 
+					]]>
+				</if>
+		</where>
+	</select>
+</mapper>

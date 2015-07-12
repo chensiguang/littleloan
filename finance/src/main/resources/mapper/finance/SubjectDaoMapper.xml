@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="fa_subject_info">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.finance.model.SubjectItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_fa_subject_info')
+		</selectKey>
+		insert into fa_subject_info(id,orgid,subcode,subcode1,subcode2,subcode3,subcode4,subcode5,subcode6,
+		subcode7,subname,subtype,level,balance,debitorloan,iscontrol,iscommon,isbill,islast,isoverdraft,
+		iscount,iscash,isadjust,adjusttypes,pushstate,enablestate,parentid,remark,applier,apptime,appdesc,
+		appstate,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{orgid,jdbcType=INTEGER},
+			#{subcode,jdbcType=VARCHAR},
+			#{subcode1,jdbcType=VARCHAR},
+			#{subcode2,jdbcType=VARCHAR},
+			#{subcode3,jdbcType=VARCHAR},
+			#{subcode4,jdbcType=VARCHAR},
+			#{subcode5,jdbcType=VARCHAR},
+			#{subcode6,jdbcType=VARCHAR},
+			#{subcode7,jdbcType=VARCHAR},
+			#{subname,jdbcType=VARCHAR},
+			#{subtype,jdbcType=INTEGER},
+			#{level,jdbcType=INTEGER},
+			#{balance,jdbcType=DOUBLE},
+			#{debitorloan,jdbcType=INTEGER},
+			#{iscontrol,jdbcType=INTEGER},
+			#{iscommon,jdbcType=INTEGER},
+			#{isbill,jdbcType=INTEGER},
+			#{islast,jdbcType=INTEGER},
+			#{isoverdraft,jdbcType=INTEGER},
+			#{iscount,jdbcType=INTEGER},
+			#{iscash,jdbcType=INTEGER},
+			#{isadjust,jdbcType=INTEGER},
+			#{adjusttypes,jdbcType=VARCHAR},
+			#{pushstate,jdbcType=INTEGER},
+			#{enablestate,jdbcType=INTEGER},
+			#{parentid,jdbcType=INTEGER},
+			#{remark,jdbcType=VARCHAR},
+			#{applier,jdbcType=INTEGER},
+			#{apptime,jdbcType=DATE},
+			#{appdesc,jdbcType=VARCHAR},
+			#{appstate,jdbcType=INTEGER},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.finance.model.SubjectItem">
+		
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.finance.model.SubjectItem">
+		
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.finance.model.SubjectItem" parameterType="com.hexin.pettyLoan.finance.model.SubjectItem">
+		
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.finance.model.SubjectItem" parameterType="com.hexin.pettyLoan.finance.model.SubjectItem">
+		
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.finance.model.SubjectItem">
+		
+	</select>
+	
+	<select id="getTreeNode" resultType="com.hexin.pettyLoan.finance.model.SubjectItem" parameterType="com.hexin.pettyLoan.finance.model.SubjectItem">
+		SELECT id,orgid,subcode,subcode1,subcode2,subcode3,subcode4,subcode5,subcode6,
+		subcode7,subname,subtype,level,balance,debitorloan,iscontrol,iscommon,isbill,islast,isoverdraft,
+		iscount,iscash,isadjust,adjusttypes,pushstate,enablestate,parentid,remark,applier,apptime,appdesc,
+		appstate,ctime,mtime,creater FROM fa_subject_info 
+		<where>
+			isvalid=1 AND enablestate=1 AND orgid=#{orgid}
+			<choose>
+				<when test="id !=0 and id != null">
+					AND parentid=#{id}
+				</when>
+				<otherwise>
+					AND parentid=null
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+</mapper>
