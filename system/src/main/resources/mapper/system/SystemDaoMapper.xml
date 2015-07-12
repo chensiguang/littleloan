@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_system">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.SystemItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_system')
+		</selectKey>
+		insert into sys_system(id,systemName,shortName,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{systemName,jdbcType=VARCHAR},
+			#{shortName,jdbcType=VARCHAR},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.SystemItem">
+		update sys_system 
+		<set>
+			systemName = #{systemName},
+			shortName = #{shortName},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.SystemItem" parameterType="com.hexin.pettyLoan.system.model.SystemItem">
+		select * from sys_system
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="systemName != null and systemName != '' ">  
+	            <![CDATA[  
+	              AND systemName= #{systemName}
+	            ]]> 
+	        </if>
+	        <if test="shortName != null and shortName != '' ">  
+	            <![CDATA[  
+	              AND shortName= #{shortName}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.SystemItem" parameterType="com.hexin.pettyLoan.system.model.SystemItem">
+		select *
+		from sys_system
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="systemName != null and systemName != '' ">  
+	            <![CDATA[  
+	              AND systemName like concat('%', #{systemName}, '%')
+	            ]]> 
+	        </if>
+	        <if test="shortName != null and shortName != '' ">  
+	            <![CDATA[  
+	              AND shortName like concat('%', #{shortName}, '%')
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	
+	<select id="getFunctioSystem" resultType="com.hexin.pettyLoan.system.model.SystemItem" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		select distinct s.* from sys_system s 
+		inner join sys_function f on s.id = f.systemid
+		inner join sys_role_function rf on f.id = rf.functionId
+		inner join sys_user_role ur on ur.roleId= rf.roleid
+		where ur.userid = #{id}
+	</select>
+</mapper>

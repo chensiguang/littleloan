@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_department">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.DepartmentItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_department')
+		</selectKey>
+		insert into sys_department(id,
+							 departmentname,
+							 departmenttype,
+							 pid,
+							 orgnizationid,
+							 idpath,namepath,
+							 ctime,mtime,creater,isvalid)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{departmentName,jdbcType=VARCHAR},
+			#{departmentType,jdbcType=VARCHAR},
+			#{pid,jdbcType=INTEGER},
+			#{orgnizationId,jdbcType=INTEGER},
+			case when #{pid,jdbcType=INTEGER} = 0 then concat('/',#{id,jdbcType=INTEGER},'/') 
+			else  concat(#{idPath,jdbcType=VARCHAR},#{id,jdbcType=INTEGER},'/') end,
+			#{namePath,jdbcType=VARCHAR},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER},
+			1
+		)
+	</insert>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.DepartmentItem">
+		update sys_department set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.DepartmentItem">
+		update sys_department 
+		<set>
+			departmentname = #{departmentName},
+			departmenttype = #{departmentType},
+			namepath = #{namePath}
+		</set>
+		where id = #{id} 
+	</update>
+	<update id="updateChilePath" parameterType="com.hexin.pettyLoan.system.model.DepartmentItem">
+		update sys_department 
+		<set>
+			namepath = '${pname}'||substring(namepath from length('${namePath}')+1 for (length(namepath)-length('${namePath}')))
+		</set>
+		where orgnizationid = #{orgnizationId}
+		AND idpath LIKE concat(#{idPath},'%')
+	</update>
+	
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.DepartmentItem" parameterType="com.hexin.pettyLoan.system.model.DepartmentItem">
+		select 
+			 id,
+			 departmentname,
+			 departmenttype,
+			 pid,
+			 orgnizationid,
+			 idpath,namepath
+ 		from sys_department 
+ 		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationId = #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="parentDepartmentId != null and parentDepartmentId != 0 ">  
+	            <![CDATA[  
+	              AND idPath like concat('%/',#{parentDepartmentId},'/%')
+	            ]]> 
+	        </if>
+	    </where>
+	    order by id
+	</select>
+<select id="getone" resultType="com.hexin.pettyLoan.system.model.DepartmentItem" parameterType="com.hexin.pettyLoan.system.model.DepartmentItem">
+		select 
+			 id,
+			 departmentname,
+			 departmenttype,
+			 pid,
+			 orgnizationid,
+			 idpath,namepath
+ 		from sys_department 
+ 		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationId = #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="parentDepartmentId != null and parentDepartmentId != 0 ">  
+	            <![CDATA[  
+	              AND idPath like concat('%/',#{parentDepartmentId},'/%')
+	            ]]> 
+	        </if>
+	    </where>
+	</select>
+</mapper>

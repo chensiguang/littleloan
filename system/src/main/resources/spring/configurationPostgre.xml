@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+	<typeAliases>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/system/FlexkeyDaoMapper.xml" />
+		<mapper resource="mapper/system/SimpleWorkflowConfigDaoMapper.xml" />
+		<mapper resource="mapper/system/SimpleWorkflowExecuteDaoMapper.xml" />
+		<mapper resource="mapper/system/SystemAuthorityDaoMapper.xml" />
+		<mapper resource="mapper/system/UserinfoDaoMapper.xml" />
+		<mapper resource="mapper/system/DepartmentDaoMapper.xml" />
+		<mapper resource="mapper/system/MenuDaoMapper.xml" />
+		<mapper resource="mapper/system/OrgnizationDaoMapper.xml" />
+		<mapper resource="mapper/system/RoleDaoMapper.xml" />
+		<mapper resource="mapper/system/UserRoleDaoMapper.xml" />
+		<mapper resource="mapper/system/RoleFunctionDaoMapper.xml" />
+		<mapper resource="mapper/system/FunctionDaoMapper.xml" />
+		<mapper resource="mapper/system/PageItemDaoMapper.xml" />
+		<mapper resource="mapper/system/PageItemDaoMapper.xml" />
+		<mapper resource="mapper/system/SystemDaoMapper.xml" />
+	</mappers>
+</configuration>

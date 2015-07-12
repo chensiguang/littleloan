@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_simple_workflow_config">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_simple_workflow_config')
+		</selectKey>
+		insert into sys_simple_workflow_config(id,orgnizationid,workflowname,workflowDescription,result,params,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{orgnizationId,jdbcType=INTEGER},
+			#{workflowName,jdbcType=VARCHAR},
+			#{workflowDescription,jdbcType=VARCHAR},
+			#{result,jdbcType=VARCHAR},
+			#{params,jdbcType=VARCHAR},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		update sys_simple_workflow_config 
+		<set>
+			orgnizationid=#{orgnizationId},
+			workflowname=#{workflowName},
+			workflowDescription=#{workflowDescription},
+			result=#{result},
+			params=#{params},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		update sys_simple_workflow_config set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		select id,orgnizationid,workflowname,workflowDescription,result,params,ctime,mtime,creater,isvalid,rtime from sys_simple_workflow_config
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationid= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="workflowName != null and workflowName != '' ">  
+	            <![CDATA[  
+	              AND workflowname= #{workflowName}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		select id,orgnizationid,workflowname,workflowDescription,result,params,ctime,mtime,creater,isvalid,rtime from sys_simple_workflow_config
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationid= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="workflowName != null and workflowName != '' ">  
+	            <![CDATA[  
+	              AND workflowname= #{workflowName}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		select count(*) from sys_simple_workflow_config
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationid= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="workflowName != null and workflowName != '' ">  
+	            <![CDATA[  
+	              AND workflowname= #{workflowName}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="page" resultType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		select id,orgnizationid,workflowname,workflowDescription,result,params,ctime,mtime,creater,isvalid,rtime from sys_simple_workflow_config
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationId= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="workflowName != null and workflowName != '' ">  
+	            <![CDATA[  
+	              AND workflowname= #{workflowName}
+	            ]]> 
+	        </if>
+		</where>
+		limit #{pageSize} offset #{start}
+	</select>
+	
+	<select id="queryByOrgnizationId" resultType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowConfigItem">
+		select c.id,c.orgnizationId,f.flexvalue workflowname,f.valueDescription workflowDescription,c.result,c.params,c.ctime,c.mtime,c.rtime,c.creater,c.isvalid from sys_flexkey f 
+		left join (select * from sys_simple_workflow_config where orgnizationId= #{orgnizationId}) c on f.flexvalue = c.workflowname 
+		where f.flexkey='simpleWorkflowName'
+	</select>
+</mapper>

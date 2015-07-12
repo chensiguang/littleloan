@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_flexkey">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.FlexkeyItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_flexkey')
+		</selectKey>
+		insert into sys_flexkey(id,flexkey,keyDescription,flexvalue,valueDescription,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{flexkey,jdbcType=VARCHAR},
+			#{keyDescription,jdbcType=VARCHAR},
+			#{flexvalue,jdbcType=VARCHAR},
+			#{valueDescription,jdbcType=VARCHAR},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.FlexkeyItem">
+		update sys_flexkey 
+		<set>
+			flexkey=#{flexkey},
+			keyDescription=#{keyDescription},
+			flexvalue=#{flexvalue},
+			valueDescription=#{valueDescription},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.FlexkeyItem">
+		update sys_flexkey set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.FlexkeyItem" parameterType="com.hexin.pettyLoan.system.model.FlexkeyItem">
+		select id,flexkey,keyDescription,flexvalue,valueDescription,ctime,mtime,creater,isvalid,rtime from sys_flexkey
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="flexkey != null and flexkey != '' ">  
+	            <![CDATA[  
+	              AND flexkey= #{flexkey}
+	            ]]> 
+	        </if>
+	        <if test="flexvalue != null and flexvalue != '' ">  
+	            <![CDATA[  
+	              AND flexvalue= #{flexvalue}
+	            ]]> 
+	        </if>
+	        <if test="keyDescription != null and keyDescription != '' ">  
+	            <![CDATA[  
+	              AND keyDescription like concat('%',#{keyDescription},'%') 
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.FlexkeyItem" parameterType="com.hexin.pettyLoan.system.model.FlexkeyItem">
+		select id,flexkey,keyDescription,flexvalue,valueDescription,ctime,mtime,creater,isvalid,rtime from sys_flexkey
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[ 
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="flexkey != null and flexkey != '' ">  
+	            <![CDATA[  
+	              AND flexkey like concat('%',#{flexkey},'%') 
+	            ]]> 
+	        </if>
+	        <if test="keyDescription != null and keyDescription != '' ">  
+	            <![CDATA[  
+	              AND keyDescription like concat('%',#{keyDescription},'%') 
+	            ]]> 
+	        </if>
+	        <if test="flexvalue != null and flexvalue != '' ">  
+	            <![CDATA[  
+	              AND flexvalue like concat('%',#{flexvalue},'%') 
+	            ]]> 
+	        </if>
+		</where>
+		order by id desc
+	</select>
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.FlexkeyItem">
+		select count(*) from sys_flexkey
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="flexkey != null and flexkey != '' ">  
+	            <![CDATA[  
+	              AND flexkey like concat('%',#{flexkey},'%') 
+	            ]]> 
+	        </if>
+	        <if test="flexvalue != null and flexvalue != '' ">  
+	            <![CDATA[  
+	              AND flexvalue like concat('%',#{flexvalue},'%') 
+	            ]]> 
+	        </if>
+	        <if test="keyDescription != null and keyDescription != '' ">  
+	            <![CDATA[  
+	              AND keyDescription like concat('%',#{keyDescription},'%') 
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="page" resultType="com.hexin.pettyLoan.system.model.FlexkeyItem" parameterType="com.hexin.pettyLoan.system.model.FlexkeyItem">
+		select id,flexkey,keyDescription,flexvalue,valueDescription,ctime,mtime,creater,isvalid,rtime from sys_flexkey
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="flexkey != null and flexkey != '' ">  
+	            <![CDATA[  
+	              AND flexkey like concat('%',#{flexkey},'%') 
+	            ]]> 
+	        </if>
+	        <if test="flexvalue != null and flexvalue != '' ">  
+	            <![CDATA[  
+	              AND flexvalue like concat('%',#{flexvalue},'%') 
+	            ]]> 
+	        </if>
+	        <if test="keyDescription != null and keyDescription != '' ">  
+	            <![CDATA[  
+	              AND keyDescription like concat('%',#{keyDescription},'%') 
+	            ]]> 
+	        </if>
+		</where>
+		order by id desc
+		limit #{rows} offset #{start}
+	</select>
+</mapper>

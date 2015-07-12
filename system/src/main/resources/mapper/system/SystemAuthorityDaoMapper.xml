@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_system_authority">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache" /> -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.SystemAuthorityItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_system_authority')
+		</selectKey>
+		insert into sys_system_authority(id,orgnizationId,systemId,validateDate,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{orgnizationId,jdbcType=INTEGER},
+			#{systemId,jdbcType=INTEGER},
+			#{validateDate,jdbcType=TIMESTAMP},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.SystemAuthorityItem">
+		update sys_system_authority 
+		<set>
+			orgnizationId = #{orgnizationId},
+			systemId = #{systemId},
+			validateDate = #{validateDate},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.SystemAuthorityItem" parameterType="com.hexin.pettyLoan.system.model.SystemAuthorityItem">
+		select sa.id,sa.orgnizationid,s.id systemid,s.systemname,sa.validatedate,sa.ctime,sa.mtime,sa.rtime,sa.creater,sa.isvalid from sys_system s
+		inner join sys_system_authority sa on s.id = sa.systemid
+		<where>
+			sa.isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND sa.id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND sa.orgnizationId= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="systemId != null and systemId != 0 ">  
+	            <![CDATA[  
+	              AND sa.systemId= #{systemId}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.SystemAuthorityItem" parameterType="com.hexin.pettyLoan.system.model.SystemAuthorityItem">
+		select sa.id,sa.orgnizationid,s.id systemid,s.systemname,sa.validatedate,sa.ctime,sa.mtime,sa.rtime,sa.creater,sa.isvalid from sys_system s
+		inner join sys_system_authority sa on s.id = sa.systemid
+		<where>
+			sa.isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND sa.id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND sa.orgnizationId = #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="systemId != null and systemId != '' ">  
+	            <![CDATA[  
+	              AND sa.systemId= #{systemId}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="getSystemAuthorityListByOrgnizationId" resultType="com.hexin.pettyLoan.system.model.SystemAuthorityItem" parameterType="com.hexin.pettyLoan.system.model.SystemAuthorityItem">
+		select sa.id,sa.orgnizationid,s.id systemid,s.systemname,sa.validatedate,sa.ctime,sa.mtime,sa.rtime,sa.creater,sa.isvalid from sys_system s 
+		left join (select * from sys_system_authority where orgnizationId = #{orgnizationId})  sa on s.id = sa.systemid  
+	</select>
+	
+	<select id="getAuthoritySystemByUserId" resultType="com.hexin.pettyLoan.system.model.SystemItem" parameterType="com.hexin.pettyLoan.system.model.SystemAuthorityItem">
+		select s.* from sys_system s
+		left join (select * from sys_system_authority where orgnizationId = #{orgnizationId}) sa on s.id = sa.systemId
+		where sa.validatedate is null or sa.validatedate >=now()
+	</select>
+</mapper>

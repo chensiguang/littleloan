@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_simple_workflow_execute">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<!--<cache type="org.mybatis.caches.ehcache.EhcacheCache" />-->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_simple_workflow_execute')
+		</selectKey>
+		insert into sys_simple_workflow_execute(id,configid,description,dealuser,status,invokeclass,invokemethod,invokeparams,invokeParamTypes,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{configId,jdbcType=INTEGER},
+			#{description,jdbcType=VARCHAR},
+			#{dealUser,jdbcType=VARCHAR},
+			#{status,jdbcType=VARCHAR},
+			#{invokeClass,jdbcType=VARCHAR},
+			#{invokeMethod,jdbcType=VARCHAR},
+			#{invokeParams,jdbcType=VARCHAR},
+			#{invokeParamTypes,jdbcType=VARCHAR},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem">
+		update sys_simple_workflow_execute 
+		<set>
+			configid=#{configId},
+			description=#{description},
+			dealuser=#{dealUser},
+			status=#{status},
+			invokeclass=#{invokeClass},
+			invokemethod=#{invokeMethod},
+			invokeparams=#{invokeParams},
+			approveuserid = #{approveUserId},
+			invokeparamtypes = #{invokeParamTypes},
+			approveDescription = #{approveDescription},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem">
+		update sys_simple_workflow_execute set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem">
+		select e.id,e.configid,c.workflowName, c.workflowDescription,e.description,e.dealuser,e.status,e.invokeclass,e.invokemethod,e.invokeparams,e.invokeparamtypes,e.approveUserId,e.approvedescription,e.ctime,e.mtime,e.creater,e.isvalid,e.rtime from sys_simple_workflow_execute e
+		inner join sys_simple_workflow_config c on c.id = e.configid
+		<where>
+			e.isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND e.id= #{id}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem">
+		select e.id,e.configid,c.workflowName, c.workflowDescription,e.description,e.dealuser,e.status,e.invokeclass,e.invokemethod,e.invokeparams,e.invokeparamtypes,e.approveUserId,e.approvedescription,e.ctime,e.mtime,e.creater,e.isvalid,e.rtime from sys_simple_workflow_execute e
+		inner join sys_simple_workflow_config c on c.id = e.configid
+		<where>
+			e.isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND e.id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="configId != null and configId != 0 ">  
+	            <![CDATA[  
+	              AND e.configId= #{configId}
+	            ]]> 
+	        </if>
+	        <if test="status != null and status != '' ">  
+	            <![CDATA[  
+	              AND e.status= #{status}
+	            ]]> 
+	        </if>
+	        <if test="dealUser != null and dealUser != '' ">  
+	            <![CDATA[  
+	              AND e.dealuser like concat('%,',#{dealUser},',%') 
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem">
+		select count(*) from sys_simple_workflow_execute e
+		<where>
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND e.id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="configId != null and configId != 0 ">  
+	            <![CDATA[  
+	              AND e.configId= #{configId}
+	            ]]> 
+	        </if>
+	        <if test="status != null and status != '' ">  
+	            <![CDATA[  
+	              AND e.status= #{status}
+	            ]]> 
+	        </if>
+	        <if test="dealUser != null and dealUser != '' ">  
+	            <![CDATA[  
+	              AND e.dealuser like concat('%,',#{dealUser},',%') 
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="page" resultType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem" parameterType="com.hexin.pettyLoan.system.model.SimpleWorkflowExecuteItem">
+		select e.id,e.configid,c.workflowName, c.workflowDescription,e.description,e.dealuser,e.status,e.invokeclass,e.invokemethod,e.invokeparams,e.invokeparamtypes,e.approveUserId,e.approvedescription,e.ctime,e.mtime,e.creater,e.isvalid,e.rtime from sys_simple_workflow_execute e
+		inner join sys_simple_workflow_config c on c.id = e.configid
+		<where>
+			
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND e.id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="configId != null and configId != 0 ">  
+	            <![CDATA[  
+	              AND e.configId= #{configId}
+	            ]]> 
+	        </if>
+	        <if test="status != null and status != '' ">  
+	            <![CDATA[  
+	              AND e.status= #{status}
+	            ]]> 
+	        </if>
+	        <if test="dealUser != null and dealUser != '' ">  
+	            <![CDATA[  
+	              AND e.dealuser like concat('%,',#{dealUser},',%') 
+	            ]]> 
+	        </if>
+		</where>
+		limit #{rows} offset #{start}
+	</select>
+</mapper>

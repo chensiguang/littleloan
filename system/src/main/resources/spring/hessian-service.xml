@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-4.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName">
+	
+	<bean name="/DepartmentService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="departmentService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.DepartmentService" />
+	</bean>
+	<bean name="/FlexkeyService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="flexkeyService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.FlexkeyService" />
+	</bean>
+	<bean name="/FunctionService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="functionService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.FunctionService" />
+	</bean>
+	
+	<bean name="/MenuService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="menuService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.MenuService" />
+	</bean>
+	<bean name="/OrgnizationService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="orgnizationService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.OrgnizationService" />
+	</bean>
+
+	<bean name="/PageService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="pageService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.PageService" />
+	</bean>
+
+	<bean name="/RoleFunctionService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="roleFunctionService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.RoleFunctionService" />
+	</bean>
+
+	<bean name="/RoleService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="roleService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.RoleService" />
+	</bean>
+
+	<bean name="/SimpleWorkflowService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="simpleWorkflowService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.SimpleWorkflowService" />
+	</bean>
+	<bean name="/SystemAuthorityService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="systemAuthorityService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.SystemAuthorityService" />
+	</bean>
+	
+	<bean name="/UserinfoService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="userinfoService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.UserinfoService" />
+	</bean>
+
+	<bean name="/UserRoleService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="userRoleService" />
+		<property name="serviceInterface" value="com.hexin.pettyLoan.system.service.UserRoleService" />
+	</bean>
+</beans>

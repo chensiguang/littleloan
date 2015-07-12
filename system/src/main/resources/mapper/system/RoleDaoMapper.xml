@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_role">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_sys_role')
+		</selectKey>
+		insert into sys_role(id,rolename,roledescription,orgnizationid,issystemrole,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{roleName,jdbcType=VARCHAR},
+			#{roleDescription,jdbcType=VARCHAR},
+			#{orgnizationId,jdbcType=INTEGER},
+			#{isSystemRole,jdbcType=INTEGER},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		update sys_role 
+		<set>
+			rolename=#{roleName},
+			roledescription=#{roleDescription},
+			orgnizationid=#{orgnizationId},
+			issystemrole=#{isSystemRole},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		update sys_role set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.RoleItem" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select id,rolename,roledescription,orgnizationid,issystemrole,ctime,mtime,rtime,creater,isvalid from sys_role
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="roleName != null and roleName != '' ">  
+	            <![CDATA[  
+	              AND rolename= #{roleName}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.RoleItem" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select id,rolename,roledescription,orgnizationid,issystemrole,ctime,mtime,rtime,creater,isvalid from sys_role
+		<where>
+			isvalid=1 AND ((orgnizationid= #{orgnizationId} AND issystemrole !=2)
+			<if test="listType=='server'">
+				<![CDATA[
+	              OR issystemrole=1)
+	            ]]>
+			</if>
+			<if test="listType=='loan'">
+				<![CDATA[
+	              )
+	            ]]>
+			</if>
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="roleName != null and roleName != '' ">  
+	            <![CDATA[  
+	              AND rolename like concat('%',#{roleName},'%') 
+	            ]]> 
+	        </if>
+		</where>
+		order by id 
+		<if test="rows != null and start != null">
+			<![CDATA[
+				limit #{rows} offset #{start}
+			]]>
+		</if>
+	</select>
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select COUNT(*) from sys_role
+		<where>
+			isvalid=1 AND ((orgnizationid= #{orgnizationId} AND issystemrole !=2)
+			<if test="listType=='server'">
+				<![CDATA[
+	              OR issystemrole=1)
+	            ]]>
+			</if>
+			<if test="listType=='loan'">
+				<![CDATA[
+	              )
+	            ]]>
+			</if>
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="roleName != null and roleName != '' ">  
+	            <![CDATA[  
+	              AND rolename like concat('%',#{roleName},'%') 
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="queryRoleFunction" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select T3.systemname as systemName,T2.id as roleFunctionId,T1.id,T1.functionname,T1.functiondescription,T1.type,T1.url,T1.fgroup,T1.systemid,T1.module,T1.ctime,T1.mtime,T1.rtime,T1.creater,T1.isvalid
+		 from sys_function T1,sys_role_function T2,sys_system T3
+		<where>
+			T1.isvalid=1 and T2.isvalid=1 and T3.isvalid=1 and T1.id=T2.functionid and T1.systemId=T3.id
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND T2.roleid= #{id}
+	            ]]> 
+	        </if>
+	        order by T1.systemId,T1.fgroup
+	        <if test="rows != null and start != null">
+				<![CDATA[
+					limit #{rows} offset #{start}
+				]]>
+			</if>
+		</where>
+	</select>
+	<select id="queryFunctionNeeded" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select T2.systemname as systemName,T1.id,T1.functionname,T1.functiondescription,T1.type,T1.url,T1.fgroup,T1.systemid,T1.module,T1.ctime,T1.mtime,T1.rtime,T1.creater,T1.isvalid
+		 from sys_function T1,sys_system T2,sys_orgnization_function t4
+		<where>
+			T1.isvalid=1 AND T2.isvalid=1 AND T1.systemid=T2.id and t1.id = t4.functionid and t4.orgnizationType = #{orgnizationType}
+			<if test="id != null and id !=0 ">
+		  	  <![CDATA[  
+			    and not exists (SELECT 1 from sys_role_function t3 where t3.functionid= t1.id and t3.roleid=#{id})
+			     ]]>
+		  	</if>
+		</where>
+		order by T1.systemId,T1.fgroup
+        <if test="rows != null and start != null">
+			<![CDATA[
+				limit #{rows} offset #{start}
+			]]>
+		</if>
+	</select>
+	<select id="queryFunctionNeededCount" resultType="int" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select count(*)
+		 from sys_function T1,sys_system T2,sys_orgnization_function t4
+		<where>
+			T1.isvalid=1 AND T2.isvalid=1 AND T1.systemid=T2.id and t1.id = t4.functionid and t4.orgnizationType = #{orgnizationType}
+			<if test="id != null and id !=0 ">
+		  	  <![CDATA[  
+			    and not exists (SELECT 1 from sys_role_function t3 where t3.functionid= t1.id and t3.roleid=#{id})
+			     ]]>
+		  	</if>
+		</where>
+	</select>
+	<select id="countRoleFunction" resultType="int" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select count(*) from sys_function T1,sys_role_function T2,sys_system T3
+		<where>
+			T1.isvalid=1 and T2.isvalid=1 and T1.id=T2.functionid and T1.systemId=T3.id
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND T2.roleid= #{id}
+	            ]]> 
+	        </if>
+	        
+		</where>
+	</select>
+	
+	<select id="getOrgnizationRole" resultType="com.hexin.pettyLoan.system.model.RoleItem" parameterType="com.hexin.pettyLoan.system.model.RoleItem">
+		select id,rolename,roledescription,orgnizationid,issystemrole,ctime,mtime,rtime,creater,isvalid 
+		from sys_role
+		where isvalid = 1 and orgnizationId = #{orgnizationId}
+		union
+		select id,rolename,roledescription,orgnizationid,issystemrole,ctime,mtime,rtime,creater,isvalid 
+		from sys_role
+		where isvalid = 1 and issystemrole =  1
+	</select>
+</mapper>

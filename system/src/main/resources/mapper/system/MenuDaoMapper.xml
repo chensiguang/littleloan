@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_menu">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<sql id="queryByUserSql">
+		SELECT functionid FROM v_user_function t1
+			<where>
+			 isvalid=1
+				<if test="authorityUserId != null and authorityUserId != 0 ">  
+			           <![CDATA[  
+			            AND  id= #{authorityUserId}
+			          ]]> 
+			      </if>
+			      <if test="systemId != null and systemId != 0 ">  
+			          <![CDATA[  
+			             AND systemid = #{systemId}
+			          ]]> 
+			       </if>
+			</where>
+	</sql>
+	<select id="getMenuListByUser" resultType="com.hexin.pettyLoan.system.model.MenuItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		SELECT DISTINCT T1.id,T1.title,T1.description,T1.module,T1.icon,T1.order
+ 			FROM sys_menu T1 
+ 			 JOIN sys_menu_function T2
+				  on T1.id = T2.menuid
+			   where T2.functionid IN (<include refid="queryByUserSql" />)
+			   AND  t1.isvalid =1 order by t1.order;
+	</select>
+   	<select id="queryFunctionByMenu" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		SELECT T3.id,T3.functionname,T3.functiondescription,T3.type,T3.url,T3.systemid,T3.module,T3.fgroup as group,T2.title,t2.icon,t2."order"
+		 FROM  sys_menu_function T2
+				JOIN sys_function T3
+				ON T2.functionid = T3.ID
+				where T2.functionid IN (<include refid="queryByUserSql" />)
+				<if test="id != null and id != 0 ">  
+		            <![CDATA[  
+		              AND T2.menuid= #{id}
+		            ]]> 
+			    </if>	 
+			    AND t3.isvalid =1    		
+				order by t2.order;
+	</select>
+	<select id="queryFunctionByUser" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		SELECT T4.functionid as id,T4.functionname,T4.functiondescription,T4.type,T4.url,T4.systemid,T4.module,T4.fgroup as group
+		 FROM v_user_function t4
+			<where>
+			  isvalid=1
+				<if test="authorityUserId != null and authorityUserId != 0 ">  
+			           <![CDATA[  
+			            AND id= #{authorityUserId}
+			          ]]> 
+			      </if>
+			</where>
+	</select>
+	<!-- 菜单 分配功能  -->
+	<insert id="insertFunMenu" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		INSERT INTO sys_menu_function(id,menuid,functionid,title,"order",ctime,mtime,creater)
+		SELECT nextval('seq_sys_menu_function'),
+			   #{menuId},
+			   id,
+			   functionname,
+			   1,
+		 	   now(),
+		 	   now(),
+		 	  #{creater} from sys_function
+		 	  <where>
+		 	  	id in 
+		 	  	<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+		 	  		#{item}
+		 	  	</foreach>
+		 	  </where> 
+	</insert>
+	<update id="updateFunMenu" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		update sys_menu_function   
+		set title=#{title},
+			"order" = #{order},
+			icon = #{icon}
+			WHERE menuid=#{menuId} and functionid=#{id}
+	</update>
+	<delete id="deleteFunMenu" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		delete from sys_menu_function   
+		<where>
+			menuId = #{menuId}
+		 	and functionId in 
+		 	  	<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+		 	  		#{item}
+		 	  	</foreach>
+		</where> 
+	</delete>
+	<select id="queryAllFunMenuIn" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+	 SELECT id,functionname,functiondescription,type,
+	 	  url,systemid,"module",fgroup as group,"order",menuid,
+	 	  title,icon
+	 from
+		(SELECT T3.id,T3.functionname,T3.functiondescription,T3.type,T3.url,T3.systemid,T3."module",T3.fgroup,T2."order",T2.menuid,t2.title,t2.icon
+		 FROM  sys_function T3
+			left JOIN  sys_menu_function T2
+			on T2.functionid = t3.id
+		  WHERE t3.isvalid=1 AND T3.type='html页面') t1 
+		  <where>
+		  	<if test="id != null and id !=0 ">
+		  		menuid= #{id}
+		  	</if>
+		  </where>
+		  <if test="functionName != null and functionName !='' ">
+		  	  <![CDATA[  
+			    and functionname like concat('%', #{functionName}, '%')
+			     ]]>
+		  	</if> 
+		  order by "order"
+		  limit #{rows} offset #{start}	
+	</select>
+	<select id="queryAllFunMenuInCount" resultType="int" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+	 SELECT count(1)
+	 from
+		(SELECT T3.id,T3.functionname,T3.functiondescription,T3.type,T3.url,T3.systemid,T3."module",T3.fgroup,T2."order",T2.menuid,t2.title,t2.icon
+		 FROM  sys_function T3
+			left JOIN  sys_menu_function T2
+			on T2.functionid = t3.id
+		  WHERE t3.isvalid=1 AND T3.type='html页面') t1 
+		  <where>
+		  	<if test="id != null and id !=0 ">
+		  		menuid= #{id}
+		  	</if>
+		  </where>
+		   <if test="functionName != null and functionName !='' ">
+		  	  <![CDATA[  
+			    and functionname like concat('%', #{functionName}, '%')
+			     ]]>
+		  	</if> 
+		  	
+	</select>
+	<select id="queryAllFunMenuOut" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+	 SELECT id,functionname,functiondescription,type,
+	 	  url,systemid,"module",fgroup as group
+	 from
+		sys_function t1  
+		<where> 
+		 isvalid =1
+		  	<if test="id != null and id !=0 ">
+		  	  <![CDATA[  
+			    and not exists (SELECT 1 from sys_menu_function tt2 where tt2.functionid= t1.id and tt2.menuid=#{id})
+			     ]]>
+		  	</if>
+		  	<if test="functionName != null and functionName !='' ">
+		  	  <![CDATA[  
+			    and functionname like concat('%', #{functionName}, '%')
+			     ]]>
+		  	</if>
+		  	<if test="systemId != null and systemId !=0 ">
+		  	  <![CDATA[  
+			    and systemid=#{systemId}
+			     ]]>
+		  	</if>
+		  </where>
+		  order by systemid,functionname
+		  limit #{rows} offset #{start}
+	</select>
+	<select id="queryAllFunMenuOutCount" resultType="int" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+	 SELECT count(1)
+	 from
+		sys_function t1  
+		<where> 
+		 isvalid =1
+		  	<if test="id != null and id !=0 ">
+		  	  <![CDATA[  
+			    and not exists (SELECT 1 from sys_menu_function tt2 where tt2.functionid= t1.id and tt2.menuid=#{id})
+			     ]]>
+		  	</if>
+		  	<if test="functionName != null and functionName !='' ">
+		  	  <![CDATA[  
+			    and functionname like concat('%', #{functionName}, '%')
+			     ]]>
+		  	</if>
+		  	<if test="systemId != null and systemId !=0 ">
+		  	  <![CDATA[  
+			    and systemid=#{systemId}
+			     ]]>
+		  	</if>
+		  </where>
+	</select>
+	<!-- 菜单管理 ↓ -->
+	<!-- 菜单管理 》查询 -->
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.MenuItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		SELECT T1.id,T1.title,T1.description,T1.module,T1.icon,T1.systemid,T1.order,t2.systemname
+ 			FROM sys_menu T1 
+ 			 JOIN sys_system T2
+				  on T1.systemid = T2.id
+			 <where>
+			  T1.isvalid=1
+				 <if test="systemName != null and systemName != '' "> 
+			           <![CDATA[  
+			            AND t2.systemname  like concat('%',#{systemName},'%') 
+			          ]]> 
+			      </if>
+			      <if test="systemName != null and systemName != '' "> 
+			           <![CDATA[  
+			            AND t1.title  like concat('%',#{title},'%') 
+			          ]]> 
+			      </if>
+			</where>
+			order by t1.systemid,t1.order
+	</select>
+	<!-- 菜单管理 》修改 -->
+	<update id="update"  parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+	update sys_menu
+		<set>
+			title=#{title},
+			description=#{description},
+			module=#{module},
+			icon=#{icon},
+			"order"=#{order},
+			systemid=#{systemId},
+			mtime=now()
+		</set>
+		where id = #{id} 	  
+	</update>
+	<!-- 菜单管理 》修改 -->
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		update sys_menu set isvalid = 0 where id = #{id}
+	</delete>
+	<!-- 菜单管理 》新增 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_menu')
+		</selectKey>
+		insert into sys_menu(id,title,description,module,icon,systemid,"order",ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{title,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR},
+			#{module,jdbcType=VARCHAR},
+			#{icon,jdbcType=VARCHAR},
+			#{systemId,jdbcType=INTEGER},
+			#{order,jdbcType=INTEGER},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.MenuItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		SELECT T1.id,T1.title,T1.description,T1.module,T1.icon,T1.systemid,T1.order,t2.systemname
+ 			FROM sys_menu T1 
+ 			 JOIN sys_system T2
+				  on T1.systemid = T2.id
+			 <where>
+			  T1.isvalid=1
+				 <if test="id != null and id != 0 ">  
+			           <![CDATA[  
+			            AND t1.id=#{id}
+			          ]]> 
+			      </if>
+			</where>
+	</select>
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		SELECT count(*)
+ 			FROM sys_menu T1 
+ 			 JOIN sys_system T2
+				  on T1.systemid = T2.id
+			 <where>
+			  T1.isvalid=1
+				 <if test="systemName != null and systemName != '' "> 
+			           <![CDATA[  
+			            AND t2.systemname  like concat('%',#{systemName},'%') 
+			          ]]> 
+			      </if>
+			      <if test="title != null and title != '' "> 
+			           <![CDATA[  
+			            AND t1.title  like concat('%',#{title},'%') 
+			          ]]> 
+			      </if>
+			</where>
+	</select>
+	<select id="page" resultType="com.hexin.pettyLoan.system.model.MenuItem" parameterType="com.hexin.pettyLoan.system.model.MenuItem">
+		SELECT T1.id,T1.title,T1.description,T1.module,T1.icon,T1.systemid,T1.order,t2.systemname
+ 			FROM sys_menu T1 
+ 			 JOIN sys_system T2
+				  on T1.systemid = T2.id
+			 <where>
+			  T1.isvalid=1
+				 <if test="systemName != null and systemName != '' "> 
+			           <![CDATA[  
+			            AND t2.systemname  like concat('%',#{systemName},'%') 
+			          ]]> 
+			      </if>
+			      <if test="title != null and title != '' "> 
+			           <![CDATA[  
+			            AND t1.title  like concat('%',#{title},'%') 
+			          ]]> 
+			      </if>
+			</where>
+			order by t1.systemid,t1.order
+			limit #{rows} offset #{start}
+	</select>
+</mapper>

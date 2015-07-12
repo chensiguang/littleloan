@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_role_function">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.RoleFunctionItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_sys_role_function')
+		</selectKey>
+		insert into sys_role_function(id,roleid,functionid,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{roleId,jdbcType=INTEGER},
+			#{functionId,jdbcType=INTEGER},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.RoleFunctionItem">
+		delete from sys_role_function where id = #{id}
+	</delete>
+	<select id="query" parameterType="com.hexin.pettyLoan.system.model.RoleFunctionItem" 
+	resultType="com.hexin.pettyLoan.system.model.UserRoleItem">
+		select id,userid,roleid,ctime,mtime,rtime,creater from sys_role_function
+		<where>
+			isvalid = 1 AND roleid = #{roleId}
+		</where>
+	</select>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.RoleFunctionItem" parameterType="com.hexin.pettyLoan.system.model.RoleFunctionItem">
+		select * from sys_role_function where id = #{id}
+	</select>
+</mapper>

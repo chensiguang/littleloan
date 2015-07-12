@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_page_item">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.PageAuthorityItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_sys_page_item_authority')
+		</selectKey>
+		insert into sys_page_item_authority(id,userid,functionid,pageitemid,pageitemvalue,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{userId,jdbcType=INTEGER},
+			#{functionId,jdbcType=INTEGER},
+			#{pageItemId,jdbcType=INTEGER},
+			#{pageitemValue,jdbcType=VARCHAR},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.PageAuthorityItem">
+			update sys_page_item_authority 
+			set  pageitemvalue = #{pageitemValue}
+			where userid=#{userId} AND functionid = #{functionId} and pageitemid=#{pageItemId}
+	</update>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.PageItem">
+		delete FROM sys_page_item_authority t3
+		where EXISTS(select 1 from sys_page_item_authority T1
+		JOIN sys_page_item T2 ON T1.pageitemid = T2. ID
+		WHERE userid=#{userId} AND T1.functionid = #{functionId} and type='字段' and t1.id=t3.id)
+	</delete>
+	<select id="getPageListAll" resultType="com.hexin.pettyLoan.system.model.PageItem" parameterType="com.hexin.pettyLoan.system.model.PageItem">
+		select 
+			id,type,functionid,itemname,itemdescription
+ 		from sys_page_item
+		<where>
+			isvalid=1
+			<if test="functionId != null and functionId != 0 ">  
+	            <![CDATA[  
+	              AND functionid= #{functionId}
+	            ]]> 
+	        </if>
+	        <if test="type != null and type != '' ">  
+	            <![CDATA[  
+	              AND type= #{type}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	
+	<select id="getPageListAllByUser" resultType="com.hexin.pettyLoan.system.model.PageItem" parameterType="com.hexin.pettyLoan.system.model.PageItem">
+		SELECT
+			t2.ID,
+			t2.TYPE,
+			t2.functionid,
+			t2.itemname,
+			t2.itemdescription,
+			t1.pageitemvalue,
+		    CASE WHEN T1.userid IS NULL THEN false ELSE true END AS checked
+		FROM
+			sys_page_item t2
+		left JOIN  (select id,pageItemId,pageitemvalue,userid from sys_page_item_authority 
+					<where>
+						isvalid = 1
+						<if test="userId != null and userId != 0 ">  
+				            <![CDATA[  
+				              AND userid = #{userId}
+				            ]]> 
+				        </if>
+	        		</where>) t1
+		ON t1.pageItemId = t2. ID
+		<where>
+			t2.isvalid = 1
+			<if test="functionId != null and functionId != 0 ">  
+	            <![CDATA[  
+	              AND t2.functionid =#{functionId} 
+	            ]]> 
+	        </if>
+	        <if test="type != null and type != '' ">  
+	            <![CDATA[  
+	              AND t2.TYPE = #{type}
+	            ]]> 
+	        </if>
+     	</where>
+     	order by t2.id
+	</select>	
+
+	<select id="getPageListByUser" resultType="com.hexin.pettyLoan.system.model.PageItem" parameterType="com.hexin.pettyLoan.system.model.PageItem">
+		select 
+			t2.id,t2.type,t2.functionid,t2.itemname,t2.itemdescription,t1.pageitemvalue
+ 		from sys_page_item_authority t1
+ 			join sys_page_item t2 
+ 			on t1.pageItemId = t2.id
+		<where>
+			t1.isvalid=1
+			<if test="functionId != null and functionId != 0 ">  
+	            <![CDATA[  
+	              AND t1.functionid= #{functionId}
+	            ]]> 
+	        </if>
+	        <if test="userId != null and userId != 0 ">  
+	            <![CDATA[  
+	              AND t1.userid= #{userId}
+	            ]]> 
+	        </if>
+	        <if test="type != null and type != '' ">  
+	            <![CDATA[  
+	              AND t2.type= #{type}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	
+</mapper>

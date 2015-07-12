@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_log">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.LogItem">
+		<selectKey keyProperty="id" resultType="java.lang.Long" order="BEFORE">
+		    select nextval('seq_sys_log')
+		</selectKey>
+		insert into sys_log(id,source,type,createuser,createDate,classPath,message,operate,ctime,mtime,creater,url, version)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{source,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{createUser,jdbcType=INTEGER},
+			now(),
+			#{classPath,jdbcType=VARCHAR},
+			#{message,jdbcType=VARCHAR},
+			#{operate,jdbcType=INTEGER},
+			now(),
+			now(),
+			#{createUser,jdbcType=INTEGER},
+			#{url,jdbcType=VARCHAR},
+			#{version,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.LogItem" parameterType="com.hexin.pettyLoan.system.model.LogItem">
+		select id,source,type,creater,createDate,classPath,message,operate,ctime,mtime,creater,rtime,isvalid,url,version from sys_log
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="source != null and source != '' ">  
+	            <![CDATA[  
+	              AND source= #{source}
+	            ]]> 
+	        </if>
+	        <if test="type != null and type != '' ">  
+	            <![CDATA[  
+	              AND type= #{type}
+	            ]]> 
+	        </if>
+	        <if test="creater != null ">  
+	            <![CDATA[  
+	              AND creater= #{creater}
+	            ]]> 
+	        </if>
+	        <if test="classPath != null and classPath != '' ">  
+	            <![CDATA[  
+	              AND classpath= #{classPath}
+	            ]]> 
+	        </if>
+	        <if test="operate != null ">  
+	            <![CDATA[  
+	              AND operate= #{operate}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.LogItem" parameterType="com.hexin.pettyLoan.system.model.LogItem">
+		select id,source,type,creater,createDate,classPath,message,operate,ctime,mtime,creater,rtime,isvalid,url,version from sys_log
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="source != null and source != '' ">  
+	            <![CDATA[  
+	              AND source= #{source}
+	            ]]> 
+	        </if>
+	        <if test="type != null and type != '' ">  
+	            <![CDATA[  
+	              AND type= #{type}
+	            ]]> 
+	        </if>
+	        <if test="creater != null ">  
+	            <![CDATA[  
+	              AND creater= #{creater}
+	            ]]> 
+	        </if>
+	        <if test="message != null and message != '' ">  
+	            <![CDATA[  
+	              AND message like concat('%', #{message}, '%')
+	            ]]> 
+	        </if>
+	        <if test="classPath != null and classPath != '' ">  
+	            <![CDATA[  
+	              AND classpath like concat('%', #{classPath}, '%')
+	            ]]> 
+	        </if>
+	        <if test="operate != null ">  
+	            <![CDATA[  
+	              AND operate= #{operate}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.LogItem">
+		select count(*)
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="source != null and source != '' ">  
+	            <![CDATA[  
+	              AND source= #{source}
+	            ]]> 
+	        </if>
+	        <if test="type != null and type != '' ">  
+	            <![CDATA[  
+	              AND type= #{type}
+	            ]]> 
+	        </if>
+	        <if test="creater != null ">  
+	            <![CDATA[  
+	              AND creater= #{creater}
+	            ]]> 
+	        </if>
+	        <if test="message != null and message != '' ">  
+	            <![CDATA[  
+	              AND message like concat('%', #{message}, '%')
+	            ]]> 
+	        </if>
+	        <if test="classPath != null and classPath != '' ">  
+	            <![CDATA[  
+	              AND classpath like concat('%', #{classPath}, '%')
+	            ]]> 
+	        </if>
+	        <if test="operate != null ">  
+	            <![CDATA[  
+	              AND operate= #{operate}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="page" resultType="com.hexin.pettyLoan.system.model.LogItem" parameterType="com.hexin.pettyLoan.system.model.LogItem">
+		select id,source,type,creater,createDate,classPath,message,operate,ctime,mtime,creater,rtime,isvalid,url,version from sys_log
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="source != null and source != '' ">  
+	            <![CDATA[  
+	              AND source= #{source}
+	            ]]> 
+	        </if>
+	        <if test="type != null and type != '' ">  
+	            <![CDATA[  
+	              AND type= #{type}
+	            ]]> 
+	        </if>
+	        <if test="creater != null ">  
+	            <![CDATA[  
+	              AND creater= #{creater}
+	            ]]> 
+	        </if>
+	        <if test="message != null and message != '' ">  
+	            <![CDATA[  
+	              AND message like concat('%', #{message}, '%')
+	            ]]> 
+	        </if>
+	        <if test="classPath != null and classPath != '' ">  
+	            <![CDATA[  
+	              AND classpath like concat('%', #{classPath}, '%')
+	            ]]> 
+	        </if>
+	        <if test="operate != null ">  
+	            <![CDATA[  
+	              AND operate= #{operate}
+	            ]]> 
+	        </if>
+		</where>
+		limit #{pageSize} offset #{start}
+	</select>
+</mapper>

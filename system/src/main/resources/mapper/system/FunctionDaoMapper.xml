@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="sys_function">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_sys_function')
+		</selectKey>
+		insert into sys_function(id,functionname,functiondescription,type,url,systemid,module,fgroup,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{functionName,jdbcType=VARCHAR},
+			#{functionDescription,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{url,jdbcType=VARCHAR},
+			#{systemId,jdbcType=INTEGER},
+			#{module,jdbcType=VARCHAR},
+			#{fgroup,jdbcType=VARCHAR},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		update sys_function 
+		<set>
+			functionname=#{functionName},
+			functiondescription=#{functionDescription},
+			type=#{type},
+			url=#{url},
+			systemid=#{systemId},
+			module=#{module},
+			fgroup=#{fgroup},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		update sys_function set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		select id,functionname,functiondescription,type,url,systemid,module,fgroup,ctime,mtime,rtime,creater,isvalid from sys_function
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="functionName != null and functionName != '' ">  
+	            <![CDATA[  
+	              AND functionname= #{functionName}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		select T2.systemname as systemName,T1.id,T1.functionname,T1.functiondescription,T1.type,T1.url,T1.fgroup,T1.systemid,T1.module,T1.ctime,T1.mtime,T1.rtime,T1.creater,T1.isvalid
+		 from sys_function T1,sys_system T2
+		<where>
+			T1.isvalid=1 AND T2.isvalid=1 AND T1.systemid=T2.id
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND T1.id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="functionName != null and functionName != '' ">  
+	            <![CDATA[  
+	              AND T1.functionname like concat('%',#{functionName},'%') 
+	            ]]> 
+	        </if>
+	        <if test="module !=null and module != '' ">
+	        	<![CDATA[  
+	              AND T1.module= #{module}
+	            ]]> 
+	        </if>
+	        <if test="fgroup != null and fgroup != '' ">
+	        	<![CDATA[  
+	              AND T1.group= #{group}
+	            ]]> 
+	        </if>
+			</where>
+			order by fgroup
+			<if test="rows != null and start != null">
+				<![CDATA[
+					limit #{rows} offset #{start}
+				]]>
+			</if>
+		
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.FunctionItem">
+		select count(*) from sys_function
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="functionName != null and functionName != '' ">  
+	            <![CDATA[  
+	              AND functionname like concat('%',#{functionName},'%') 
+	            ]]> 
+	        </if>
+	        <if test="module !=null and module != '' ">
+	        	<![CDATA[  
+	              AND module= #{module})
+	            ]]> 
+	        </if>
+	        <if test="fgroup != null and fgroup != '' ">
+	        	<![CDATA[  
+	              AND group= #{group})
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	
+	<select id="queryOrgnizationFunction" resultType="com.hexin.pettyLoan.system.model.FunctionItem" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		select f.* from sys_function f
+		inner join sys_orgnization_function of on f.id = of.functionid
+		where of.orgnizationtype = #{orgnizationType}
+	</select>
+</mapper>

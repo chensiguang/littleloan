@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sys_orgnization">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_sys_orgnization')
+		</selectKey>
+		insert into sys_orgnization(id,orgnizationname,shortname,orgnizationcode,legalrepresentative,orgnizationtype,
+		registeredaddress,cityid,cityname,url,telephone,fax,email,bak,status,pid,idpath,namepath,ctime,mtime,creater,spell) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{orgnizationName,jdbcType=VARCHAR},
+		#{shortname,jdbcType=VARCHAR},
+		#{orgnizationCode,jdbcType=VARCHAR},
+		#{legalRepresentative,jdbcType=VARCHAR},
+		#{orgnizationType,jdbcType=VARCHAR},
+		#{registeredAddress,jdbcType=VARCHAR},
+		#{cityId,jdbcType=INTEGER},
+		#{cityName,jdbcType=VARCHAR}, 
+		#{url,jdbcType=VARCHAR},
+		#{telephone,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{bak,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{pid,jdbcType=INTEGER},
+		concat('/',#{id,jdbcType=INTEGER},'/'),
+		concat('/',#{orgnizationName,jdbcType=VARCHAR},'/'),
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER},
+		#{spell,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertChild" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_sys_orgnization')
+		</selectKey>
+		insert into sys_orgnization(id,orgnizationname,shortname,orgnizationcode,legalrepresentative,orgnizationtype,
+		registeredaddress,cityid,cityname,url,telephone,fax,email,bak,status,pid,idpath,namepath,ctime,mtime,creater,spell) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{orgnizationName,jdbcType=VARCHAR},
+		#{shortname,jdbcType=VARCHAR},
+		#{orgnizationCode,jdbcType=VARCHAR},
+		#{legalRepresentative,jdbcType=VARCHAR},
+		#{orgnizationType,jdbcType=VARCHAR},
+		#{registeredAddress,jdbcType=VARCHAR},
+		#{cityId,jdbcType=INTEGER},
+		#{cityName,jdbcType=VARCHAR}, 
+		#{url,jdbcType=VARCHAR},
+		#{telephone,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{bak,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{pid,jdbcType=INTEGER},
+		concat(#{idPath},#{id},'/'),
+		concat(#{namePath},#{orgnizationName},'/'),
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER},
+		#{spell,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		update sys_orgnization
+		<set>
+			orgnizationname=#{orgnizationName},
+			shortname=#{shortname},
+			orgnizationcode=#{orgnizationCode},
+			legalrepresentative=#{legalRepresentative},
+			orgnizationtype=#{orgnizationType},
+			registeredaddress=#{registeredAddress},
+			cityid=#{cityId},
+			cityname=#{cityName},
+			url=#{url},
+			telephone=#{telephone},
+			fax=#{fax},
+			email=#{email},
+			bak=#{bak},
+			status=#{status},
+			mtime=now(),
+			spell=#{spell}
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateNamePath" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		update sys_orgnization
+		<set>
+		<choose>
+			<when test=" pid!=null and pid!=0">
+				namepath=#{pNamePath}||#{orgnizationName}||substr(namepath,length(#{pNamePath}||#{text})+1)
+			</when>
+			<otherwise>
+				namepath='/'||#{orgnizationName}||substr(namepath,length(#{text})+2)
+			</otherwise>
+		</choose>
+		</set>
+		WHERE idpath LIKE concat(#{idPath},'%')
+	</update>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		update sys_orgnization set isvalid=0 where id=#{id}
+	</delete>
+	<select id="getone" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem" resultType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		select id,orgnizationname,shortname,orgnizationcode,legalrepresentative,orgnizationtype,registeredaddress,
+		cityid,cityname,url,telephone,fax,email,bak,status,pid,idpath,namepath,ctime,mtime,rtime,creater,isvalid,spell
+		from sys_orgnization 
+		<where>
+			isvalid = 1
+			<if test="id != null and id != 0 ">
+				<![CDATA[
+					AND id = #{id} 
+				]]>
+			</if>
+		</where>
+	</select>
+	<select id="query" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem" resultType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		select id,orgnizationname,shortname,orgnizationcode,legalrepresentative,orgnizationtype,registeredaddress,
+		cityid,cityname,url,telephone,fax,email,bak,status,pid,idpath,namepath,ctime,mtime,rtime,creater,isvalid,spell 
+		from sys_orgnization
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="orgnizationName != null and orgnizationName != '' ">
+					<![CDATA[
+						AND orgnizationname like concat('%',#{orgnizationName},'%')
+					]]>
+				</if>
+				<if test="shortname != null and shortname != '' ">
+					<![CDATA[
+						AND shortname like concat('%',#{shortname},'%')
+					]]>
+				</if>
+				<if test="spell != null and spell != '' ">
+					<![CDATA[
+						AND spell like concat('%',#{spell},'%')
+					]]>
+				</if>
+		</where>
+		ORDER BY id
+			<if test="rows != null and start != null ">
+				<![CDATA[
+					limit #{rows} offset #{start}
+				]]>
+			</if>
+			
+	</select>
+	<select id="count" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem" resultType="int" >
+		select count(*) from sys_orgnization
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="orgnizationName != null and orgnizationName != '' ">
+					<![CDATA[
+						AND orgnizationname like concat('%',#{orgnizationName},'%')
+					]]>
+				</if>
+				<if test="shortname != null and shortname != '' ">
+					<![CDATA[
+						AND shortname like concat('%',#{shortname},'%')
+					]]>
+				</if>
+				<if test="spell != null and spell != '' ">
+					<![CDATA[
+						AND spell like concat('%',#{spell},'%')
+					]]>
+				</if>
+		</where>
+	</select>
+	<select id="getChildren" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem" resultType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		SELECT orgnizationname as text,id,orgnizationname,shortname,orgnizationcode,legalrepresentative,orgnizationtype,registeredaddress,
+		cityid,cityname,url,telephone,fax,email,bak,status,pid,idpath,namepath,ctime,mtime,rtime,creater,isvalid,spell 
+		FROM sys_orgnization 
+		<where> 
+			isvalid = 1 AND pid = #{id}
+		</where>
+		ORDER BY id
+	</select>
+	<select id="getFirst" parameterType="com.hexin.pettyLoan.system.model.OrgnizationItem" resultType="com.hexin.pettyLoan.system.model.OrgnizationItem">
+		SELECT orgnizationname as text,id,orgnizationname,shortname,orgnizationcode,legalrepresentative,orgnizationtype,registeredaddress,
+		cityid,cityname,url,telephone,fax,email,bak,status,pid,idpath,namepath,ctime,mtime,rtime,creater,isvalid,spell 
+		FROM sys_orgnization 
+		<where> 
+			isvalid = 1 AND idpath = concat('/',id,'/')
+		</where>
+		ORDER BY id
+	</select>
+</mapper>
