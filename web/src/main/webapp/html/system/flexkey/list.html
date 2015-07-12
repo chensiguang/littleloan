@@ -1,0 +1,46 @@
+<script type="text/javascript" src="../js/system/flexkey/list.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<table id="flexkey-mainGrid"></table>
+	        <div id="flexkey-gridToolbar">
+	        	<div class="row bar-row">
+		        	<span>值集名称:</span>
+		            <input type="text" id="flexkey-search-name"/>
+		            <span>值集说明:</span>
+		            <input type="text" id="flexkey-search-description"/>
+		            <a href="#" class="search-button">搜索</a>
+	            </div>
+	            <div class="row cc">
+		            <div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true" authority="FlexkeyAdd">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true" authority="FlexkeyEdit">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true" authority="FlexkeyDelete">删除</a>
+			        </div>  
+			        <div class="fr">
+		            	<a href="#" class="easyui-linkbutton setting-button" iconCls="icon-add" plain="true">配置</a>
+	        		</div>
+		        </div>
+        	</div>
+
+
+        	<div id="flexkey-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+            title="创建">
+            	<form id="flexkey-form">
+            		<input type="hidden" id="flexkey-id" name="id" />
+		            <div class="form-row">
+		                <label for="name">值集名称：</label>
+		                <input class="easyui-validatebox" id="flexkey-flexkey" type="text" name="flexkey" data-options="required:true" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">值集说明：</label>
+		                <input class="easyui-validatebox" id="flexkey-keyDescription" type="text" name="keyDescription" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">值的名称:</label>
+		                <input class="easyui-validatebox" id="flexkey-flexvalue" type="text" name="flexvalue" data-options="required:true"  />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">值的说明:</label>
+		                <input class="easyui-validatebox" id="flexkey-valueDescription" type="text" name="valueDescription" />
+		            </div>
+	            </form>
+		    </div>

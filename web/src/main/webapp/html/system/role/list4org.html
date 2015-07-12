@@ -1,0 +1,49 @@
+<script type="text/javascript" src="../js/system/role/list4org.js"></script>
+		<input type="hidden" id="role4org-orgnizationId"/>
+		<table id="role4org-mainGrid"></table>
+		<div id="role4org-gridToolbar">
+			<div class="row bar-row">
+				<span>名称:</span>
+		        <input type="text" id="role-name"/>
+		        <a href="#" class="search-button">搜索</a>
+            </div>
+        	<div class="row cc">
+	        	<div class="fl">
+	        		<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+					<a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+					<a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+        			<a href="#" class="easyui-linkbutton function-button" iconCls="icon-add" plain="true">功能分配</a>
+        		</div>
+        	</div>
+        </div>
+        <div id="role4org-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:300px;"
+            title="创建">
+            	<form id="role4org-form">
+	            		<input type="hidden" id="role4org-id" name="id" />
+			            <div class="form-row">
+			                <label for="name">角色名称：</label>
+			                <input class="easyui-validatebox" id="role4org-roleName" type="text" name="roleName" data-options="required:true" missingMessage="必填" />
+			            </div>
+			            <div class="form-row">
+			                <label for="name">角色说明：</label>
+			                <input class="easyui-validatebox" id="role4org-roleDescription" type="text" name="roleDescription"/>
+			            </div>
+	            </form>
+		    </div>
+		    <div id="role4org-function-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:800px;"
+            title="功能分配">
+            	<table id="role4org-functionGrid" style="height:400px;"></table>
+            	<div id="role4org-functionGridToolbar">
+		        		<a href="#" class="easyui-linkbutton add-function-button" iconCls="icon-add" plain="true">添加</a>
+						<a href="#" class="easyui-linkbutton remove-function-button" iconCls="icon-remove" plain="true">删除</a>
+	        	</div>
+		    </div>
+		    <div id="role4org-allFunction-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:650px;"
+            title="功能分配">
+            	<table id="role4org-allFunctionGrid" style="height:350px;"></table>
+            	<input type="hidden" id="role4org-functionId" name="id" />
+            	<div id="role4org-allFunctionToolbar">
+		        		<a href="#" class="easyui-linkbutton sure-button" iconCls="icon-add" plain="true" >确定</a>
+						<a href="#" class="easyui-linkbutton cancel-button" iconCls="icon-remove" plain="true">取消</a>
+	        	</div>
+		    </div>

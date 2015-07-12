@@ -1,0 +1,62 @@
+<script type="text/javascript" src="../js/finance/cashier/bankAccount/bankStatement.js"></script>		
+			<table id="bankStatement-mainGrid" class="easyui-datagrid"
+				data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#bankStatement-gridToolbar'">
+				<thead>
+                     <tr>
+                         <th field="name1" width="80">月份</th>
+                         <th field="name2" width="100">银行名称</th>
+                         <th field="name3" width="100">银行帐号</th>
+                         <th field="name4" width="60">银行日记账余额</th>
+                         <th field="name5" width="100">科目余额</th>
+                         <th field="name6" width="100">差额</th>
+                         <th field="name7" width="80">对账标识</th>
+                     </tr>                          
+                 </thead>                           
+                 <tbody>                            
+                     <tr>                           
+                         <td>2015-02-06</td>             
+                         <td>中国建设银行</td>            
+                         <td>622202000121212</td> 
+                         <td>200,262,265.00</td> 
+                         <td>262,265.00</td>         
+                         <td>2000000.00</td> 
+					     <td>未对账</td>                        
+                     </tr>                          
+                     <tr>                           
+                         <td>2015-05-06</td>             
+                         <td>中国工商银行</td>            
+                         <td>622123000121212</td> 
+                         <td>144,262,265.00</td> 
+                         <td>65.00</td>
+                         <td>15151.20</td>           
+                         <td>已对平</td>                   
+                     </tr>                          
+                       
+                 </tbody>
+		    </table>
+	        <div id="bankStatement-gridToolbar">
+	       		 <div class="row bar-row">
+		        	<span>起始时间:</span>
+		            <input type="text"  class="easyui-datebox" style="width:100px;"/>
+		            <span>结束时间:</span>
+		            <input type="text"  class="easyui-datebox" style="width:100px;"/>
+		            <span>银行账户:</span>
+		            <input type="text"/>
+		            <span>银行名称:</span>
+		            <input type="text"/>
+		             <label for="name"> 对账标识:</label>
+		            <select class="easyui-combobox" editable="false"  style="width:100px;">
+	                	<option>未对账</option>
+	                	<option>已对平</option>
+	                	<option>未对平</option>
+	                </select>
+		            <a href="#" class="search-button">搜索</a>
+	            </div>
+	        	<div class="row cc">
+	        		<div class="fl">
+	        		</div>
+	        		<div class="fr">
+		            	<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">打印预览</a>
+	        		</div>
+	        	</div>
+        	</div>

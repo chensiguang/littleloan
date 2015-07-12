@@ -1,0 +1,54 @@
+<script type="text/javascript" src="../js/finance/cashier/bankAccount/bankJournalReport.js"></script>		
+			<table id="bankJournalReport-mainGrid" class="easyui-datagrid"
+				data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#bankJournalReport-gridToolbar'">
+				<thead>
+                     <tr>
+                         <th field="name1" width="80">日期</th>
+                         <th field="name2" width="100">银行名称</th>
+                         <th field="name3" width="100">银行帐号</th>
+                         <th field="name4" width="60">昨日余额</th>
+                         <th field="name5" width="100">今日借方</th>
+                         <th field="name6" width="100">今日贷方</th>
+                         <th field="name7" width="80">今日余额</th>
+                     </tr>                          
+                 </thead>                           
+                 <tbody>                            
+                     <tr>                           
+                         <td>2015-02-06</td>             
+                         <td>中国建设银行</td>            
+                         <td>622202000121212</td> 
+                         <td>200,262,265.00</td> 
+                         <td></td>
+                         <td>XX养殖场</td>           
+                         <td>2000000.00</td>                              
+                     </tr>                          
+                     <tr>                           
+                         <td>2015-05-06</td>             
+                         <td>中国工商银行</td>            
+                         <td>622123000121212</td> 
+                         <td></td> 
+                         <td>144,262,265.00</td>
+                         <td>XX养殖场</td>           
+                         <td>2000000.00</td>                   
+                     </tr>                          
+                       
+                 </tbody>
+		    </table>
+	        <div id="bankJournalReport-gridToolbar">
+	       		 <div class="row bar-row">
+		        	<span>查询时间:</span>
+		            <input type="text"  class="easyui-datebox"/>
+		            <span>银行账户:</span>
+		            <input type="text"/>
+		            <span>银行名称:</span>
+		            <input type="text"/>
+		            <a href="#" class="search-button">搜索</a>
+	            </div>
+	        	<div class="row cc">
+	        		<div class="fl">
+	        		</div>
+	        		<div class="fr">
+		            	<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">打印预览</a>
+	        		</div>
+	        	</div>
+        	</div>

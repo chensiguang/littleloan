@@ -1,0 +1,48 @@
+<script type="text/javascript" src="../js/archives/entityArchives/list.js"></script>
+	<table id="entityArchives-mainGrid"></table>
+       <div id="entityArchives-gridToolbar">
+     		<div class="row bar-row">
+	        	<span>档案名称：</span>
+	            <input type="text" id="entityArchives-search-arcName"/>
+	            <span>档案编号:</span>
+	            <input type="text" id="entityArchives-search-arcNo"/>
+	            <span>档案类别:</span>
+	            <input class="easyui-combobox" id="entityArchives-search-arcCategoryName"/>
+	            <span>档案状态:</span>
+	            <input class="easyui-combobox" id="entityArchives-search-lendStatusName"/>
+	            <a href="#" class="search-button">查询</a>
+            </div>
+            <div class="row cc">
+	           <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">录入</a>
+	           <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">变更</a>
+	           <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+            </div>
+      	</div>
+      	
+      	<div id="entityArchives-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+            title="录入">
+            	<form id="entityArchives-form">
+            		<input type="hidden" id="entityArchives-id" name="id" />
+		            <div class="form-row">
+		                <label for="name">档案名称：</label>
+		                <input class="easyui-validatebox" id="entityArchives-arcName" type="text" name="arcName" data-options="required:true" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">档案编号：</label>
+		                <input class="easyui-validatebox" id="entityArchives-arcNo" type="text" name="arcNo" data-options="required:true"/>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">档案类别:</label>
+		                <input class="easyui-combobox" id="entityArchives-arcCategoryName"  name="arcCategoryName" data-options="required:true" style="width:170x;" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">档案位置:</label>
+		                <input class="easyui-validatebox" id="entityArchives-arcLocation" type="text" name="arcLocation" data-options="required:true" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">电子档案编号:</label>
+		                <input class="easyui-validatebox" id="entityArchives-arcNoElec" type="text" name="arcNoElec" data-options="required:true" style="width:170x;" />
+		            </div>
+	            </form>
+		    </div>
+		    

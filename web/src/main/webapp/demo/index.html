@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+ <title>浙江小额信贷</title>
+ <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/bootstrap/easyui.css">
+ <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/icon.css">
+ <link rel="stylesheet" type="text/css" href="styles/main.css">
+ <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.min.js"></script>
+ <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+ <script type="text/javascript" src="js/ui.js"></script>
+</head>
+<body class="easyui-layout">
+    <div class="header" data-options="region:'north',border:false">
+        <div class="header-top-bar">
+            <div class="fl">
+                <span class="label">公司名称：</span>
+                <span class="value">阜阳叉叉叉小贷公司</span>
+                <span class="label">当前员工：</span>
+                <span class="value">其他</span>
+                <span class="label">会计周期：</span>
+                <span class="value">201457</span>
+                <span class="label">最新记账日期：</span>
+                <span class="value">2014/01/01</span>
+            </div>
+            <div class="fr">
+                <a href="#">消息</a>
+                <a href="#">注销</a>
+                <a href="#">门户网</a>
+                <a href="#">修改密码</a>
+            </div>
+        </div>
+        <div class="header-top-menu">
+            <div class="header-logo"></div>
+            <div class="header-menu">
+                <ul>
+                    <li>
+                        <a href="index.html" class="selected">导航栏目</a>
+                    </li>
+                    <li>
+                        <a href="index2.html">导航栏目</a>
+                    </li>
+                    <li>
+                        <a href="index2.html">导航栏目</a>
+                    </li>
+                    <li>
+                        <a href="index2.html">导航栏目</a>
+                    </li>
+                    <li>
+                        <a href="index2.html">导航栏目</a>
+                    </li>
+                    <li>
+                        <a href="index2.html">导航栏目</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-left" data-options="region:'west',split:true,title:'组织机构管理'">
+        <div class="easyui-layout page-layout">
+            <div data-options="region:'north',border:false">
+                <div class="menu-list">
+                    <ul class="left-menu">
+                        <li><a class="page-menu-item" href="#" data-href="page-1.html">菜单一</a></li>
+                        <li><a class="page-menu-item" href="#" data-href="page-1.html">菜单二</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false">
+                <div class="easyui-accordion" data-options="fit:true,border:false">
+                    <div title="管理菜单" data-options="selected:true">
+                        <ul class="left-menu">
+                            <li><a class="page-menu-item" href="#" data-href="page-1.html">菜单一</a></li>
+                            <li><a class="page-menu-item" href="#" data-href="page-2.html">菜单二</a></li>
+                        </ul>
+                    </div>
+                    <div title="管理菜单">
+                        <ul class="left-menu">
+                            <li><a class="page-menu-item" href="#" data-href="page-3.html">菜单六</a></li>
+                        </ul>
+                    </div>
+                    <div title="管理菜单">
+                        <ul class="left-menu">
+                            <li><a class="page-menu-item" href="#" data-href="page-4.html">菜单七</a></li>
+                            <li><a class="page-menu-item" href="#" data-href="page-5.html">菜单八</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content" data-options="region:'center'">
+        <div id="page-tabs" class="easyui-tabs page-tabs" data-options="fit:true,border:false,plain:true">
+            <div title="机构管理">
+                <div class="easyui-layout page-layout" data-options="fit:true">
+                    <div class="h-65 tab-page-header" data-options="region:'north'">
+                        <div class="tab-page-title">机构列表</div>
+                        <div class="cc">
+                            <div class="fl">
+                                <a href="#" class="action-button">添加机构</a><a href="#" class="action-button">批量删除</a><a href="#" class="action-button">导出到excel</a>
+                            </div>
+                            <div class="fr">
+                                <input type="text" placeholder="ID/名称/简称" class="search-input"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-300 tab-page-left" data-options="region:'west',border:false">
+                            <ul id="tt" class="easyui-tree">
+                                <li>
+                                    <span>Folder</span>
+                                    <ul>
+                                        <li>
+                                            <span>Sub Folder 1</span>
+                                            <ul>
+                                                <li><span><a href="#">File 11</a></span></li>
+                                                <li><span>File 12</span></li>
+                                                <li><span>File 13</span></li>
+                                            </ul>
+                                        </li>
+                                        <li><span>File 2</span></li>
+                                        <li><span>File 3</span></li>
+                                    </ul>
+                                </li>
+                                <li><span>File21</span></li>
+                            </ul>
+                    </div>
+                    <div class="tab-page-content" data-options="region:'center'">
+                        <form class="cc" method="post">
+                            <div class="ui-w-2-1">
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="email">Email:</label>
+                                    <input class="easyui-validatebox" type="text" name="email" data-options="validType:'email'" />
+                                </div>
+                                <div class="form-row">
+                                    <div class="ui-w-2-1">
+                                        <label for="name">用户类型:</label>
+                                        <input class="easyui-validatebox w-100" type="text" name="name" data-options="required:true" />
+                                    </div>
+                                    <div class="ui-w-2-1">
+                                        <label for="name">用户类型:</label>
+                                        <input class="easyui-validatebox w-100" type="text" name="name" data-options="required:true" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox w-80" type="text" name="name" data-options="required:true" />
+                                    <span class="split">年</span>
+                                    <input class="easyui-validatebox w-80" type="text" name="name" data-options="required:true" />
+                                    <span class="split">月</span>
+                                    <input class="easyui-validatebox w-80" type="text" name="name" data-options="required:true" />
+                                    <span class="split">日</span>
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-datebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <select class="w-100" name="dept">
+                                        <option value="aa">aitem1</option>
+                                        <option>bitem2</option>
+                                        <option>bitem3</option>
+                                        <option>ditem4</option>
+                                        <option>eitem5</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="email">Email:</label>
+                                    <input class="easyui-validatebox" type="text" name="email" data-options="validType:'email'" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                            </div>
+                            <div class="ui-w-2-1">
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="email">Email:</label>
+                                    <input class="easyui-validatebox" type="text" name="email" data-options="validType:'email'" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="email">Email:</label>
+                                    <input class="easyui-validatebox" type="text" name="email" data-options="validType:'email'" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                                <div class="form-row">
+                                    <label for="name">Name:</label>
+                                    <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+                                </div>
+                            </div>
+                        </form>
+                        <div class="ui-w-1">
+                            <div class="form-bottom tac">
+                                <a href="#" class="button button-sure">确定</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

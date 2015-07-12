@@ -1,0 +1,70 @@
+<script type="text/javascript" src="../js/portals/knowledge/list.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<table id="knowledge-mainGrid"></table>
+	        <div id="knowledge-gridToolbar">
+	        	<div class="row bar-row">
+		            <span>关键字:</span>
+		            <input type="text" id="knowledge-kwords"/>
+		            <a href="#" class="search-button">搜索</a>
+				</div>
+				<div class="row cc">
+					<div class="fl">
+						 <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			             <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			             <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+			             <a href="#" class="easyui-linkbutton approve-button" iconCls="icon-edit" plain="true">提交</a>
+					</div>
+					<div class="fr">
+				    	
+					</div>
+				</div>
+        	</div>
+
+
+        	<div id="knowledge-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:680px;"
+            title="创建">
+            	<form id="knowledge-form">
+            		<input type="hidden" id="knowledge-id" name="id" value="-1"/>
+		            <div class="form-row">
+		                <label for="title">标题：</label>
+		                <input class="easyui-validatebox" id="knowledge-title" type="text" name="title" data-options="required:true" />
+		            </div>
+		            <div class="form-row">
+		                <label for="type">类别：</label>
+		                <input class="easyui-validatebox" id="knowledge-type" type="text" name="type" />
+		            </div>
+		            <div class="form-row">
+		                <label for="kwords">关键字:</label>
+		                <input class="easyui-validatebox" id="knowledge-keywords" type="text" name="keywords" data-options="required:true" />
+		            </div>
+		            <div class="form-row form-auto">
+		                <label for="content">正文:</label>
+			            <div class="form-wrapper">
+						    <textarea id="knowledge-content" name="content" style="width:550px;height:150px;visibility:hidden;"></textarea>
+						</div>
+		            </div>
+		            <div class="form-row form-auto">
+		            	<label for="file">附件:</label>
+		            	<div class="form-wrapper cc">
+		            		<div class="fl">
+								<a href="javascript:void(0);" class="btn-img-upload">
+									<input type="file" name="upFileName" id="knowledge-file" />
+								</a>
+		            		</div>
+		            		<div class="fr">
+								<div class="file-list" id="knowledge-filelist">
+									<!-- <p><span>名称1</span><a href="#" class="download">下载</a><a href="#">删除</a></p>
+		            				<p><span>名称2</span><a href="#" class="download">下载</a><a href="#">删除</a></p> -->
+								</div>
+		            		</div>
+		            	</div>
+		            </div>
+		            <div class="form-row">
+		                <label for="isall">发布范围:</label>
+		            	<select id="knowledge-isall" class="easyui-combobox" name="isall" >   
+						    <option value="">请选择发布范围...</option>
+						    <option value="1">全员</option>   
+						</select>
+		            </div>
+	            </form>
+		    </div>

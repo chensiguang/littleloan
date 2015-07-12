@@ -1,0 +1,148 @@
+<script type="text/javascript" src="../js/system/orgnization/list.js"></script>
+    <div class="easyui-layout page-layout" data-options="fit:true">
+        <div id="orgnization-treeToolbar" class="h-32 tab-page-header" data-options="region:'north'">
+            <div class="cc">
+                <div class="fl">
+                    <a href="#" class="action-button add-button">创建组织</a>
+                    <a href="#" class="action-button addChild-button">创建子组织</a>
+                    <a href="#" class="action-button edit-button">更改组织</a>
+                    <a href="#" class="action-button remove-button">删除组织</a>
+                </div>
+            </div>
+        </div>
+        <div class="w-300 tab-page-left" data-options="region:'west',border:false">
+              <ul id="orgnization-tree" class="easyui-tree"></ul>
+        </div>
+        <div id="orgnization-treeForm" class="tab-page-content" data-options="region:'center'">
+            <form class="cc" method="post">
+                <div class="ui-w-2-1">
+                    <div class="form-row">
+                        <label for="name">组织名称:</label>
+		                <input type="text"  name="orgnizationName" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">组织简称:</label>
+		                <input type="text"  name="shortname" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">机构编码:</label>
+		                <input type="text"  name="orgnizationCode" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">法人代表:</label>
+		                <input type="text"  name="legalRepresentative" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">组织类型:</label>
+                        <input type="text"  name="orgnizationType" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">注册地址:</label>
+		                <input type="text"  name="registeredAddress" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">归属地市:</label>
+		                <input type="text"  name="cityName" class="easyui-textbox" />
+                    </div>
+                </div>
+                <div class="ui-w-2-1">
+                    
+                    <div class="form-row">
+                        <label for="name">网站地址:</label>
+		                <input type="text"  name="url" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">联系电话:</label>
+		                <input type="text"  name="telephone" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">传真:</label>
+		                <input type="text"  name="fax" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">电子邮箱:</label>
+		                <input type="text"  name="email" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">备注:</label>
+		                <input type="text"  name="bak" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">状态:</label>
+		                <input type="text"  name="status" class="easyui-textbox" />
+                    </div>
+                </div>
+                <div class="ui-w-2-1">
+                	<input type="button" value="准入规则" id="btn-orgnization-system-authority" />
+                	<input type="button" value="定义角色" id="btn-orgnization-role" style="display:none;" />
+                	<input type="button" value="创建部门" id="btn-orgnization-department" />
+                	<input type="button" value="创建用户" id="btn-orgnization-userinfo" />
+                </div>
+            </form>
+        </div>
+        <div id="orgnization-create-treeDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:600px;"
+            title="创建">
+            	<form class="cc" method="post" id="orgnization-form">
+                <div class="ui-w-2-1">
+                    <div class="form-row">
+                        <label for="name">组织名称:</label>
+		                <input type="text" id="orgnization-orgnizationName" name="orgnizationName" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">组织简称:</label>
+		                <input type="text" id="orgnization-shortname" name="shortname" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">机构编码:</label>
+		                <input type="text" id="orgnization-orgnizationCode" name="orgnizationCode" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">法人代表:</label>
+		                <input type="text" id="orgnization-legalRepresentative" name="legalRepresentative" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">组织类型:</label>
+		                <input class="easyui-combobox" id="orgnization-orgnizationType" name="orgnizationType" required="true" data-options="valueField:'flexvalue',textField:'valueDescription'"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">注册地址:</label>
+		                <input type="text" id="orgnization-registeredAddress" name="registeredAddress" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">归属地市:</label>
+		                <input type="text" id="orgnization-cityName" name="cityName" class="easyui-textbox" />
+                    </div>
+                </div>
+                <div class="ui-w-2-1">
+                    
+                    <div class="form-row">
+                        <label for="name">网站地址:</label>
+		                <input type="text" id="orgnization-url" name="url" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">联系电话:</label>
+		                <input type="text" id="orgnization-telephone" name="telephone" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">传真:</label>
+		                <input type="text" id="orgnization-fax" name="fax" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">电子邮箱:</label>
+		                <input type="text" id="orgnization-email" name="email" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">备注:</label>
+		                <input type="text" id="orgnization-bak" name="bak" class="easyui-textbox" />
+                    </div>
+                    <div class="form-row">
+                        <label for="name">状态:</label>
+		                <select class="easyui-validatebox" id="orgnization-status" name="status" >
+		                	<option>正常</option>
+		                	<option>失效</option>
+		                </select>
+                    </div>
+                </div>
+            </form>
+		    </div>
+    </div>

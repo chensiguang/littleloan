@@ -1,0 +1,54 @@
+<script type="text/javascript" src="../js/system/function/list.js"></script>
+		<table id="function-mainGrid"></table>
+		<div id="function-gridToolbar">
+			<div class="row bar-row">
+				<span>名称:</span>
+		        <input type="text" id="function-name"/>
+		        <a href="#" class="search-button">搜索</a>
+			</div>
+			<div class="row cc">
+				<div class="fl">
+					<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true" authority="FunctionAdd">添加</a>
+					<a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true" authority="FunctionEdit">修改</a>
+					<a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true" authority="FunctionDelete">删除</a>
+				</div>
+				<div class="fr">
+			    	
+				</div>
+			</div>
+        </div>
+        <div id="function-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:300px;"
+            title="创建">
+            	<form id="function-form">
+            	
+	            		<input type="hidden" id="function-id" name="id" />
+			            <div class="form-row">
+			                <label for="name">功能名称：</label>
+			                <input class="easyui-validatebox" id="function-functionName" type="text" name="functionName" data-options="required:true" missingMessage="必填" />
+			            </div>
+			            <div class="form-row">
+			                <label for="name">功能说明：</label>
+			                <input class="easyui-validatebox" id="function-functionDescription" type="text" name="functionDescription"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">类型：</label>
+			                <input class="easyui-combobox" id="function-type" type="text" name="type" data-options="valueField:'flexvalue',textField:'valueDescription',required:true"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">url地址：</label>
+			                <input class="easyui-validatebox" id="function-url" type="text" name="url"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">模块名称：</label>
+			                <input class="easyui-validatebox" id="function-module" type="text" name="module" data-options="required:true" missingMessage="必填"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">分组：</label>
+			                <input class="easyui-validatebox" id="function-fgroup" type="text" name="fgroup" data-options="required:true" missingMessage="必填"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">所属系统：</label>
+			                <input class="easyui-combobox" id="function-systemId" type="text" name="systemId" data-options="valueField:'systemId',textField:'systemName',required:true"/>
+			            </div>
+	            </form>
+		    </div>

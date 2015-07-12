@@ -1,0 +1,60 @@
+<script type="text/javascript" src="../js/portals/content/list.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<table id="content-mainGrid"></table>
+      <div id="content-gridToolbar">
+          <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">新增</a>
+          <a href="#" class="easyui-linkbutton update-button" iconCls="icon-edit" plain="true">修改</a>
+          <a href="#" class="easyui-linkbutton submit-button" iconCls="icon-edit" plain="true">提交审核</a>
+          <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+          <a href="#" class="easyui-linkbutton marquee-button" iconCls="icon-edit" plain="true">推送到跑马灯</a>
+     	</div>
+
+     	<div id="content-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:680px;"
+         title="创建">
+         	<form id="content-form">
+         		<input type="hidden" id="content-id" name="id" />
+         		<input type="hidden"  name="approveUserId" />
+         		<input type="hidden"  name="status" />
+	           <div class="form-row">
+	               <label for="name">标题：</label>
+	               <input class="easyui-validatebox" id="content-title" type="text" name="title" data-options="required:true" missingMessage="必填" />
+	           </div>
+	           <div class="form-row">
+	               <label for="name">类型：</label>
+	               <input id="content-type" name="type"  class="easyui-combobox" required="true" editable="false"/>
+	           </div>
+           
+           <div class="form-row form-auto">
+                <label for="content">内容:</label>
+	            <div class="form-wrapper">
+				    <textarea id="content-con"  name="content"  style="width:550px;height:150px;visibility:hidden;"></textarea>
+				</div>
+            </div>
+  		    <div class="form-row form-auto">
+	           	<label for="upFileName">附件:</label>
+	           	<div class="form-wrapper cc">
+	           		<div class="fl">
+						<a href="javascript:void(0);" class="btn-img-upload">
+							<input type="file" name="upFileName" id="upFileName" />
+						</a>
+	           		</div>
+	           		<div class="fr">
+	           			<div class="file-list" id="content-filelist">
+	           				<!-- 
+	           				<p><span>名称</span><a href="#">删除</a></p>
+	           				<p><span>名称</span><a href="#">删除</a></p>
+	           				<p><span>名称</span><a href="#">删除</a></p>
+	           				 -->
+	           			</div>
+	           		</div>
+	           	</div>
+           </div>
+                 
+           <div class="form-row">
+               <label for="isAll">发布范围:</label>
+           	<select id="content-isAll" name="isAll"  class="easyui-combobox" required="true" editable="false" >   
+			    <option value="1">全员</option>   
+			</select>
+           </div>
+          </form>
+   </div>

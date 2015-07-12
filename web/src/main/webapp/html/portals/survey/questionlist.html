@@ -1,0 +1,108 @@
+<script type="text/javascript" src="../js/portals/survey/common.js"></script>
+<script type="text/javascript" src="../js/portals/survey/questionlist.js"></script>
+<!-- 列表展示 -->
+<table id="survey-questionMainGrid"></table>
+<div id="survey-question-gridToolbar">
+	<div class="row cc">
+		<div class="fl">
+			<a id="addQuestionBtn" href="##" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			<a id="modityQuestionBtn" href="##" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			<a id="deletQuestioneBtn" href="##" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+			<span>&nbsp;&nbsp;&nbsp;&nbsp;当前问卷：<input type="text" style="margin-top:2px;padding: 0 2px; height:22px;" id="survey-select-for-question"/></span>
+		</div>
+	</div>
+</div>
+
+<!-- 添加或修改（问题） -->
+<div id="survey-addSurveyQuestion-window" class="easyui-window" style="display:none;width:560px;padding:10px 5px 5px 5px;">
+	<div style="padding:10px 10px 0px 10px">
+		<form id="survey-question-form">
+			<div class="form-row" style="height:auto;">
+				<input id="survey-question-add-id" type="hidden" name="id"/>
+				<input id="survey-question-add-surveyid" type="hidden" name="surveyid"/>
+				<label for="name">当前问卷：</label>
+				<span id="survey-question-add-survey-name"></span>				
+			</div>
+			<div class="form-row" style="height:auto;line-height:normal;">
+				<label for="name">问题类型：</label>
+				<div id="survey-question-add-type-wrap" class="">
+					<input type="radio" checked="checked" name="type" value="1">单选
+					<input type="radio" name="type" value="2">多选
+					<input type="radio" name="type" value="3">问题
+				</div>
+			</div>
+			<div class="form-row" style="height:auto;">
+				<label for="name">问题描述：</label>
+				<input id="survey-question-add-name" class="easyui-validatebox" maxlength="2" style="line-height:22px;padding:0px 2px;" type="text" name="content"/>
+			</div>
+			<div id="survey-question-options-wrap" class="survey-question-options">
+				<div class="form-row" style="height:auto; line-height:none;">
+					<label for="name">选项A:</label>
+					<input id="survey-question-add-option-A" class="easyui-validatebox" name="options"/>
+				</div>
+				<div class="form-row" style="height:auto;line-height:none;">
+					<label for="name">选项B:</label>
+					<input id="survey-question-add-option-B" class="easyui-validatebox" name="options"/>
+				</div>
+				<div class="form-row" style="height:auto;line-height:none;">
+					<label for="name">选项C:</label>
+					<input id="survey-question-add-option-C" class="easyui-validatebox" name="options"/>
+				</div>
+				<div class="form-row" style="height:auto;line-height:none;">
+					<label for="name">选项D:</label>
+					<input id="survey-question-add-option-D" class="easyui-validatebox" name="options"/>
+				</div>
+			</div>
+		</form>
+		<div class="form-row" style="height:auto;line-height:normal; text-align:center; margin:40px 0px 5px;">
+			<a id="survey-addQuestionBtn" class="easyui-linkbutton">保存</a>
+			<a id="survey-cancelQuestionBtn" class="easyui-splitbutton">取消</a>
+		</div>
+	</div>
+</div>
+
+
+<!-- 详情查看 -->
+<div id="survey-questionDetailSurvey-window" class="easyui-window" style="display:none;width:680px;padding:10px 5px 0px 5px;">
+	<div style="padding:10px 10px 0px 10px">
+		<form id="survey-question-detail-form">
+			<div class="form-row" style="height:auto;">
+				<label for="name">当前问卷：</label>
+				<span id="survey-question-detail-survey-name"></span>
+			</div>
+			<div class="form-row" style="height:auto;line-height:normal;">
+				<label for="name">问题类型：</label>
+				<div id="survey-question-detail-type-wrap" class="">
+					<input type="radio" checked="checked" name="type" value="1">单选
+					<input type="radio" name="type" value="2">多选
+					<input type="radio" name="type" value="3">问题
+				</div>
+			</div>
+			<div class="form-row" style="height:auto;">
+				<label for="name">问题描述：</label>
+				<input id="survey-question-detail-content" class="easyui-validatebox" readonly="true" maxlength="2" style="line-height:22px;padding:0px 2px;" type="text" name="content"/>
+			</div>
+			<div id="survey-question-detail-options-wrap" class="survey-question-options">
+				<div class="form-row" style="height:auto; line-height:none;">
+					<label for="name">选项A:</label>
+					<input id="survey-question-detail-option-A" readonly="true" class="easyui-validatebox" name="options"/>
+				</div>
+				<div class="form-row" style="height:auto;line-height:none;">
+					<label for="name">选项B:</label>
+					<input id="survey-question-detail-option-B" readonly="true" class="easyui-validatebox" name="options"/>
+				</div>
+				<div class="form-row" style="height:auto;line-height:none;">
+					<label for="name">选项C:</label>
+					<input id="survey-question-detail-option-C" readonly="true" class="easyui-validatebox" name="options"/>
+				</div>
+				<div class="form-row" style="height:auto;line-height:none;">
+					<label for="name">选项D:</label>
+					<input id="survey-question-detail-option-D" readonly="true" class="easyui-validatebox" name="options"/>
+				</div>
+			</div>
+		</form>
+		<div class="form-row" style="height:auto;line-height:normal; text-align:center; margin:40px 0px 5px;">
+			<a id="survey-question-detail-cancelBtn" class="easyui-splitbutton">取消</a>
+		</div>
+	</div>
+</div>

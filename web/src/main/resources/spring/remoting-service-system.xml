@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:p="http://www.springframework.org/schema/aop" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-4.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName">
+	
+	<bean id="departmentService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/DepartmentService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.DepartmentService" />
+    </bean>
+    <bean id="flexkeyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/FlexkeyService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.FlexkeyService" />
+    </bean>
+    
+    <bean id="functionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/FunctionService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.FunctionService" />
+    </bean>
+    <bean id="menuService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/MenuService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.MenuService" />
+    </bean>
+    
+    <bean id="orgnizationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/OrgnizationService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.OrgnizationService" />
+    </bean>
+      <bean id="pageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/PageService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.PageService" />
+    </bean>
+      <bean id="roleFunctionService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/RoleFunctionService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.RoleFunctionService" />
+    </bean>
+      <bean id="roleService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/RoleService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.RoleService" />
+    </bean>
+      <bean id="simpleWorkflowService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/SimpleWorkflowService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.SimpleWorkflowService" />
+    </bean>
+
+     <bean id="systemAuthorityService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/SystemAuthorityService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.SystemAuthorityService" />
+    </bean>
+
+    <bean id="userinfoService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/UserinfoService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.UserinfoService" />
+    </bean>
+    
+     <bean id="userRoleService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${system-addr}/remoting/UserRoleService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.system.service.UserRoleService" />
+    </bean>
+</beans>

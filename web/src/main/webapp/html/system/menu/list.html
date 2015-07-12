@@ -1,0 +1,111 @@
+<script type="text/javascript" src="../js/system/menu/list.js"></script>
+			<table id="menu-mainGrid"></table>
+	        <div id="menu-gridToolbar">
+	        	<div class="row bar-row">
+		        	<span>系统名称:</span>
+		            <input type="text" id="menu-search-systemName"/>
+		            <span>菜单名称:</span>
+		            <input type="text" id="menu-search-title"/>
+		            <a href="#" class="search-button">搜索</a>
+	            </div>
+	        	<div class="row cc">
+	        		<div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+			            <a href="#" class="easyui-linkbutton allot-button" iconCls="icon-add" plain="true">功能分配</a>
+	        		</div>
+	        		<div class="fr">
+		            	<a href="#" class="easyui-linkbutton setting-button" iconCls="icon-add" plain="true">配置</a>
+	        		</div>
+	        	</div>
+        	</div>
+
+
+        	<div id="menu-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+            title="创建">
+            	<form id="menu-form">
+            		<input type="hidden" id="menu-id" name="id" />
+            		 <div class="form-row">
+		                <label for="name">所属系统：</label>
+		                <select class="easyui-combobox" id="menu-system" name="systemid"  data-options="valueField:'systemId',textField:'systemName'"  missingMessage="必填" >
+		                </select>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">菜单标题：</label>
+		                <input class="easyui-validatebox" id="menu-title" type="text" name="title" data-options="required:true" missingMessage="必填" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">菜单说明：</label>
+		                <input class="easyui-validatebox" id="menu-description" type="text" name="description" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">菜单图标:</label>
+		                <input class="easyui-validatebox" id="menu-icon" type="text" name="icon" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">显示顺序:</label>
+		                <input class="easyui-numberbox" id="menu-order" type="text" name="order" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">URL:</label>
+		                <input class="easyui-validatebox" id="menu-url" type="text" name="url" />
+		            </div>
+	            </form>
+		    </div>
+		    
+		    <div id="allot-function-gridDialog" class="easyui-dialog" closed="true" style="width:800px;height:400px;">
+		    	<table id="menu-allot-mainGrid"></table>
+		        <div id="menu-allot-gridToolbar">
+		            <a href="#" class="easyui-linkbutton" id="allot-add-button" iconCls="icon-add" plain="true">添加</a>
+		            <a href="#" class="easyui-linkbutton" id="allot-edit-button" iconCls="icon-add" plain="true">修改</a>
+	            	<a href="#" class="easyui-linkbutton" id="allot-remove-button" iconCls="icon-remove" plain="true">删除</a>
+	            	<span>功能名称:</span>
+		            <input type="text" id="allot-search-function"/>
+		            <a href="#" id="allot-search-title" class="search-button">搜索</a>
+        		</div> 
+		    </div>
+		    
+		    <div id="allot-func-add-gridDialog" class="easyui-dialog" closed="true" style="width:700px;height:400px;">
+		    	<table id="menu-allotAdd-mainGrid"></table>
+		        <div id="menu-allotAdd-gridToolbar">
+		            <a href="#" class="easyui-linkbutton" id="allotAdd-add-button" iconCls="icon-add" plain="true">确定</a>
+	            	<a href="#" class="easyui-linkbutton" id="allotAdd-remove-button" iconCls="icon-remove" plain="true">取消</a>
+	            	<span>功能名称:</span>
+		            <input type="text" id="allotAdd-search-function"/>
+		            <a href="#" id="allotAdd-search-title" class="search-button">搜索</a>
+        		</div> 
+		    </div> 
+		   
+		    <div id="allot-func-edit-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+            title="修改">
+            	<form id="allot-func-edit-form">
+            		<input type="hidden" id="allot-func-id" name="id" />
+		            <div class="form-row">
+		                <label for="name">显示名称：</label>
+		                <input class="easyui-validatebox" id="allot-func-title" type="text" name="title" data-options="required:true" missingMessage="必填" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">功能名称：</label>
+		                <input class="easyui-validatebox" id="allot-func-functionName" type="text" name="functionName" readonly="readonly" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">显示图标:</label>
+		                <input class="easyui-validatebox" id="allot-func-icon" type="text" name="icon" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">显示顺序:</label>
+		                <input class="easyui-numberbox" id="allot-func-order" type="text" name="order" />
+		            </div>
+	            </form>
+		    </div>
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    

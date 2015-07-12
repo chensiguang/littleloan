@@ -1,0 +1,124 @@
+<script type="text/javascript" src="../js/finance/cashier/bankAccount/bankJournal.js"></script>		
+			<table id="bankJournal-mainGrid" class="easyui-datagrid"
+				data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#bankJournal-gridToolbar'">
+				<thead>
+                     <tr>
+                         <th field="name1" width="80">日期</th>
+                         <th field="name2" width="50">摘要</th>
+                         <th field="name3" width="100">银行名称</th>
+                         <th field="name4" width="100">银行帐号</th>
+                         <th field="name5" width="60">结算方式</th>
+                         <th field="name6" width="60">结算号</th>
+                         <th field="name7" width="100">对方单位名称</th>
+                         <th field="name8" width="60">借方金额</th>
+                         <th field="name9" width="60">贷方金额</th>
+                         <th field="name10" width="60">余额</th>
+                     </tr>                          
+                 </thead>                           
+                 <tbody>                            
+                     <tr>                           
+                         <td>2015-02-06</td>            
+                         <td>22</td>  
+                         <td>中国建设银行</td>            
+                         <td>622202000121212</td> 
+                         <td>现金</td> 
+                         <td>20150706</td>
+                         <td>XX养殖场</td>           
+                         <td>100000.00</td>            
+                         <td>0.00</td> 
+                         <td>2000000.00</td>                     
+                     </tr>                          
+                     <tr>                           
+                         <td>2015-02-06</td>            
+                         <td>12</td>  
+                         <td>中国工设银行</td>            
+                         <td>622202000121212</td> 
+                         <td>支票</td> 
+                         <td>20150706</td>
+                         <td>XX化工厂</td>           
+                         <td>0.00</td>            
+                         <td>200000.00.00</td> 
+                         <td>2200000.00</td>                   
+                     </tr>                          
+                       
+                 </tbody>
+		    </table>
+	        <div id="bankJournal-gridToolbar">
+	        	<div class="row bar-row">
+		        	<span>起始时间:</span>
+		            <input type="text"  class="easyui-datebox"/>
+		            <span>结束时间:</span>
+		            <input type="text"  class="easyui-datebox"/>
+		            <span>单据编号:</span>
+		            <input type="text"  style="width:50px;"/>
+		            <span>到:</span>
+		            <input type="text"  style="width:50px;"/>
+		            <label for="name"> 银行列表:</label>
+	                <select class="easyui-combobox" editable="false"  style="width:250px;">
+	                	<option>建设银行-62220202020202</option>
+	                	<option>工商银行-62221202020202</option>
+	                	<option>农业银行-62227820207202</option>
+	                </select>
+		            <a href="#" class="search-button">搜索</a>
+	            </div>
+	        	<div class="row cc">
+	        		<div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	        		</div>
+	        		<div class="fr">
+		            	
+	        		</div>
+	        	</div>
+        	</div>
+
+
+        	<div id="bankJournal-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:350px;">
+		         <form class="cc" method="post" id="bankJournal-form">
+		         <input type="hidden"  name="id" />
+		             <div class="form-row">
+		                <label for="name">银行帐号:</label>
+		                <select class="easyui-combobox"   style="width:150px;" required="true"  missingMessage="必填"  editable="false">
+		                	<option>建设银行-62220202020202</option>
+		                	<option>工商银行-62221202020202</option>
+		                	<option>农业银行-62227820207202</option>
+		                </select>
+		            </div>
+		             <div class="form-row">
+		                <label for="name">发生日期:</label>
+		                <input type="text" class="easyui-datebox"/>
+		            </div>
+		             <div class="form-row">
+				        <label>摘要:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+				    <div class="form-row">
+				        <label>单据编号:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		            <div class="form-row">
+		                <label for="name">结算方式:</label>
+		                <select class="easyui-combobox"  data-options="valueField:'flexvalue',textField:'valueDescription'" style="width:150px;" required="true"  missingMessage="必填"  editable="false">
+		                	<option>支票</option>
+		                	<option>现金</option>
+		                </select>
+		            </div>
+		            <div class="form-row">
+				        <label>结算号:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		            <div class="form-row">
+		                <label for="name">对方单位名称:</label>
+		                <input type="text" class="easyui-textbox"/>
+		            </div>
+		            <div class="form-row">
+				        <label>借方金额:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+				    <div class="form-row">
+				        <label>贷方金额:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		        </form>
+		    </div>

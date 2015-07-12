@@ -1,0 +1,39 @@
+<script type="text/javascript" src="../js/system/simpleWorkflow/approve.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<table id="simpleWorkflow-mainGrid"></table>
+	        <div id="simpleWorkflow-gridToolbar">
+	            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">审批</a>
+	            <span>状态：</span>
+	            <select id="simpleWorkflow-status-search">
+	            	<option value="待审批">待审批</option>
+	            	<option value="审批通过">审批通过</option>
+	            	<option value="审批不通过">审批不通过</option>
+	            </select>
+        	</div>
+
+
+        	<div id="simpleWorkflow-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+            title="工作审批">
+            	<form id="simpleWorkflow-form">
+            		<input type="hidden" id="simpleWorkflow-id" name="id" />
+		            <div class="form-row">
+		                <label for="name">标题：</label>
+		                <lable for="workflowDescription" id="simpleWorkflow-workflowDescription" name="workflowDescription"></lable>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">内容：</label>
+		                <lable for="description" id="simpleWorkflow-description" name="description"></lable>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">审批：</label>
+		                <select id="simpleWorkflow-status" name="status">
+		                	<option value="审批通过">审批通过</option>
+		                	<option value="审批不通过">审批不通过</option>
+		                </select>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">审批说明：</label>
+		                <textarea id="simpleWorkflow-approveDescription" name="approveDescription"></textarea>
+		            </div>
+	            </form>
+		    </div>

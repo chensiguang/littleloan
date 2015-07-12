@@ -1,0 +1,76 @@
+<script type="text/javascript" src="../js/finance/cashier/cashRegister/cashInstall.js"></script>		
+			<table id="cashInstall-mainGrid" class="easyui-datagrid"
+				data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#cashInstall-gridToolbar'">
+				<thead>
+                     <tr>
+                         <th field="name1" width="150">现金池名称</th>
+                         <th field="name2" width="100">科目名称</th>
+                         <th field="name3" width="150">现金余额</th>
+                         <th field="name4" width="80">创建日期</th>
+                         <th field="name5" width="80">销户日期</th>
+                     </tr>                          
+                 </thead>                           
+                 <tbody>                            
+                     <tr>                           
+                         <td>储备现金</td>            
+                         <td>库存现金</td>            
+                         <td>2544412.12</td>            
+                         <td>2015-02-06</td>            
+                         <td>2015-05-06</td>                      
+                     </tr>                          
+                     <tr>                           
+                         <td>操作现金</td>            
+                         <td>库存现金</td>            
+                         <td>988,232,323.00</td>            
+                         <td>2015-02-06</td>            
+                         <td></td>                  
+                     </tr>                          
+                       
+                 </tbody>
+		    </table>
+	        <div id="cashInstall-gridToolbar">
+	        	<div class="row bar-row">
+		            <span>现金池名称:</span>
+		            <input type="text"/>
+		            <span>科目代码:</span>
+		            <input type="text"/>
+		            <a href="#" class="search-button">搜索</a>
+	            </div>
+	        	<div class="row cc">
+	        		<div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	        		</div>
+	        		<div class="fr">
+		            	<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">打印预览</a>
+	        		</div>
+	        	</div>
+        	</div>
+
+
+        	<div id="cashInstall-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:350px;">
+		         <form class="cc" method="post" id="bankInstall-form">
+		         <input type="hidden"  name="id" />
+		            <div class="form-row">
+		                <label for="name">科目代码:</label>
+		                <input type="text" name="departmentName" class="easyui-textbox" required="true"  missingMessage="必填" />
+		            </div>
+		            <div class="form-row">
+				        <label>现金池名称:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		            <div class="form-row">
+				        <label>库存现金余额:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		            <div class="form-row">
+		                <label for="name">创建日期:</label>
+		                <input type="text" class="easyui-datebox"/>
+		            </div>
+				    <div class="form-row">
+				        <label>备注:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		        </form>
+		    </div>

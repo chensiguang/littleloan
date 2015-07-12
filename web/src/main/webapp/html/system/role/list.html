@@ -1,0 +1,57 @@
+<script type="text/javascript" src="../js/system/role/list.js"></script>
+	<input type="hidden" id="role-orgnizationId" />
+		<table id="role-mainGrid"></table>
+		<div id="role-gridToolbar">
+			<div class="row bar-row">
+				<span>名称:</span>
+		        <input type="text" id="role-name"/>
+		        <a href="#" class="search-button">搜索</a>
+            </div>
+        	<div class="row cc">
+	        	<div class="fl">
+	        		<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+					<a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+					<a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+        			<a href="#" class="easyui-linkbutton function-button" iconCls="icon-add" plain="true">功能分配</a>
+        		</div>
+        	</div>
+        </div>
+        <div id="role-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:300px;"
+            title="创建">
+            	<form id="role-form">
+	            		<input type="hidden" id="role-id" name="id" />
+			            <div class="form-row">
+			                <label for="name">角色名称：</label>
+			                <input class="easyui-validatebox" id="role-roleName" type="text" name="roleName" data-options="required:true" missingMessage="必填" />
+			            </div>
+			            <div class="form-row">
+			                <label for="name">角色说明：</label>
+			                <input class="easyui-validatebox" id="role-roleDescription" type="text" name="roleDescription"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">系统角色：</label>
+			                <!-- <input class="easyui-validatebox" id="role-isSystemRole" type="text" name="isSystemRole"/> -->
+			                <select class="easyui-validatebox" id="role-isSystemRole" name="isSystemRole">
+			                	<option value="1">是</option>
+			                	<option value="0">否</option>
+			                </select>
+			            </div>
+	            </form>
+		    </div>
+		    <div id="role-function-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:800px;"
+            title="功能分配">
+            	<table id="role-functionGrid" style="height:400px;"></table>
+            	<div id="role-functionGridToolbar">
+		        		<a href="#" class="easyui-linkbutton add-function-button" iconCls="icon-add" plain="true">添加</a>
+						<a href="#" class="easyui-linkbutton remove-function-button" iconCls="icon-remove" plain="true">删除</a>
+	        	</div>
+		    </div>
+		    <div id="role-allFunction-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:650px;"
+            title="功能分配">
+            	<table id="role-allFunctionGrid" style="height:350px;"></table>
+            	<input type="hidden" id="role-functionId" name="id" />
+            	<div id="role-allFunctionToolbar">
+		        		<a href="#" class="easyui-linkbutton sure-button" iconCls="icon-add" plain="true" >确定</a>
+						<a href="#" class="easyui-linkbutton cancel-button" iconCls="icon-remove" plain="true">取消</a>
+	        	</div>
+		    </div>

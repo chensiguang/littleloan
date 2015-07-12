@@ -1,0 +1,89 @@
+<script type="text/javascript" src="../js/finance/cashier/bankAccount/bankInstall.js"></script>		
+			<table id="bankInstall-mainGrid" class="easyui-datagrid"
+				data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#bankInstall-gridToolbar'">
+				<thead>
+                     <tr>
+                         <th field="name1" width="150">银行名称</th>
+                         <th field="name2" width="80">帐号类别</th>
+                         <th field="name3" width="150">银行帐号</th>
+                         <th field="name4" width="60">开户日期</th>
+                         <th field="name5" width="60">销户日期</th>
+                     </tr>                          
+                 </thead>                           
+                 <tbody>                            
+                     <tr>                           
+                         <td>中国建设银行</td>            
+                         <td>银行</td>            
+                         <td>622202000121212</td>            
+                         <td>2015-02-06</td>            
+                         <td></td>                      
+                     </tr>                          
+                     <tr>                           
+                         <td>中国工商银行</td>            
+                         <td>银行</td>            
+                         <td>622202000121212</td>            
+                         <td>2015-07-06</td>            
+                         <td></td>                   
+                     </tr>                          
+                       
+                 </tbody>
+		    </table>
+	        <div id="bankInstall-gridToolbar">
+	        	<div class="row bar-row">
+		        	<span>银行账户:</span>
+		            <input type="text"/>
+		            <span>银行名称:</span>
+		            <input type="text"/>
+		            <span>科目代码:</span>
+		            <input type="text"/>
+		            <a href="#" class="search-button">搜索</a>
+	            </div>
+	        	<div class="row cc">
+	        		<div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	        		</div>
+	        		<div class="fr">
+		            	<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">打印预览</a>
+	        		</div>
+	        	</div>
+        	</div>
+
+
+        	<div id="bankInstall-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:350px;">
+		         <form class="cc" method="post" id="bankInstall-form">
+		         <input type="hidden"  name="id" />
+		            <div class="form-row">
+		                <label for="name">科目代码:</label>
+		                <input type="text" name="departmentName" class="easyui-textbox" required="true"  missingMessage="必填" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">银行名称:</label>
+		                <select class="easyui-combobox"  data-options="valueField:'flexvalue',textField:'valueDescription'" style="width:150px;" required="true"  missingMessage="必填"  editable="false">
+		                	<option>建设银行</option>
+		                	<option>工商银行</option>
+		                	<option>农业银行</option>
+		                </select>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">账户类别1:</label>
+		                <select class="easyui-combobox"  data-options="valueField:'flexvalue',textField:'valueDescription'" style="width:150px;" required="true"  missingMessage="必填"  editable="false">
+		                	<option>公司账户</option>
+		                	<option>个人账户</option>
+		                </select>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">开户日期:</label>
+		                <input type="text" class="easyui-datebox"/>
+		            </div>
+		            <div class="form-row">
+				        <label>使用印签:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+				    <div class="form-row">
+				        <label>备注:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		        </form>
+		    </div>

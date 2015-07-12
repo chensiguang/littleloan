@@ -1,0 +1,143 @@
+<script type="text/javascript" src="../js/finance/subject/subjectTransform.js"></script>
+	<div class="ui-w-1">
+		 <div class="ui-w-2-1">
+		 	<div class="form-row">
+                <label for="name">源科目名称:</label>
+         		<input type="text"  name="orgnizationName" class="easyui-textbox" />
+         		<a href="#" class="action-button ">浏览</a>
+            </div>
+            <div class="form-row">
+                <label for="name">源科目代码:</label>
+         		<input type="text"  name="orgnizationName" class="easyui-textbox" />
+         		<a href="#" class="action-button ">浏览</a>
+            </div>
+             <div class="form-row">
+             	<label for="name">备注:</label>
+             	<input type="text"  name="orgnizationName" class="easyui-textbox" />
+             </div>
+		</div>
+		<div class="ui-w-2-1">
+		 	<div class="form-row">
+                <label for="name">目标科目名称:</label>
+         		<input type="text"  name="orgnizationName" class="easyui-textbox" />
+         		<a href="#" class="action-button ">浏览</a>
+            </div>
+            <div class="form-row">
+                <label for="name">目标科目代码:</label>
+         		<input type="text"  name="orgnizationName" class="easyui-textbox" />
+         		<a href="#" class="action-button ">浏览</a>
+            </div>
+             <div class="form-row">
+             	<a href="#" class="action-button ">新建</a>
+             </div>
+		</div>
+	</div>
+		<table id="mainGrid" class="easyui-datagrid" data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#function-gridToolbar'">
+                    <thead>
+                        <tr>
+                            <th field="name1" width="50">源科目</th>
+                            <th field="name2" width="50">源科目名称</th>
+                            <th field="name3" width="50">目标科目</th>
+                            <th field="name4" width="50">目标科目名称</th>
+                            <th field="name5" width="50">转换状态</th>
+                            <th field="name6" width="50">录入人</th>
+                            <th field="name6" width="50">录入时间</th>
+                            <th field="name6" width="50">转换人</th>
+                            <th field="name6" width="50">转换时间</th>
+                            <th field="name6" width="50">备注</th>
+                        </tr>                          
+                    </thead>                           
+                    <tbody>                            
+                        <tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>
+                            <td>Data 7</td>
+                            <td>Data 8</td>
+                            <td>Data 9</td>
+                            <td>Data 10</td>            
+                        </tr>                          
+                        <tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>
+                            <td>Data 7</td>
+                            <td>Data 8</td>
+                            <td>Data 9</td>
+                            <td>Data 10</td>            
+                        </tr>                          
+                        <tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>
+                            <td>Data 7</td>
+                            <td>Data 8</td>
+                            <td>Data 9</td>
+                            <td>Data 10</td>            
+                        </tr><tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>
+                            <td>Data 7</td>
+                            <td>Data 8</td>
+                            <td>Data 9</td>
+                            <td>Data 10</td>            
+                        </tr>                         
+                    </tbody> 
+                </table>
+		<div id="function-gridToolbar">
+			<div class="row cc">
+				<div class="fl">
+					<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true" authority="FunctionAdd">查询</a>
+					<a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true" authority="FunctionEdit">删除</a>
+					<a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true" authority="FunctionDelete">转换</a>
+				</div>
+			</div>
+        </div>
+        <div id="function-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:300px;"
+            title="创建">
+            	<form id="function-form">
+            	
+	            		<input type="hidden" id="function-id" name="id" />
+			            <div class="form-row">
+			                <label for="name">功能名称：</label>
+			                <input class="easyui-validatebox" id="function-functionName" type="text" name="functionName" data-options="required:true" missingMessage="必填" />
+			            </div>
+			            <div class="form-row">
+			                <label for="name">功能说明：</label>
+			                <input class="easyui-validatebox" id="function-functionDescription" type="text" name="functionDescription"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">类型：</label>
+			                <input class="easyui-combobox" id="function-type" type="text" name="type" data-options="valueField:'flexvalue',textField:'valueDescription',required:true"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">url地址：</label>
+			                <input class="easyui-validatebox" id="function-url" type="text" name="url"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">模块名称：</label>
+			                <input class="easyui-validatebox" id="function-module" type="text" name="module" data-options="required:true" missingMessage="必填"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">分组：</label>
+			                <input class="easyui-validatebox" id="function-fgroup" type="text" name="fgroup" data-options="required:true" missingMessage="必填"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">所属系统：</label>
+			                <input class="easyui-combobox" id="function-systemId" type="text" name="systemId" data-options="valueField:'systemId',textField:'systemName',required:true"/>
+			            </div>
+	            </form>
+		    </div>

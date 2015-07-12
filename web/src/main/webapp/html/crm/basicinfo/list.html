@@ -1,0 +1,58 @@
+<script type="text/javascript" src="../js/crm/customer/list.js"></script>
+<script type="text/javascript" src="../js/crm/customer/roleList.js"></script>
+	<input type="hidden" id="customer-orgnizationId" />
+	<table id="customer-mainGrid"></table>
+       <div id="customer-gridToolbar">
+     		<div class="row bar-row">
+	        	<span>客户名称：</span>
+	            <input type="text" id="customer-search-username"/>
+	            <span>客户类型:</span>
+	            <input type="text" id="customer-search-realname"/>
+	            <a href="#" class="search-button">搜索</a>
+            </div>
+            <div class="row cc">
+	           <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+	           <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+	           <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	           <a href="#" class="easyui-linkbutton distribute-button" iconCls="icon-add" plain="true">角色分配</a>
+            </div>
+      	</div>
+
+
+      	<div id="customer-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+          title="创建">
+          	<form id="customer-form">
+          		<input type="hidden" id="customer-id" name="id" />
+            <div class="form-row">
+                <label for="name">用户名：</label>
+                <input class="easyui-validatebox" id="customer-username" type="text" name="username" data-options="required:true" />
+            </div>
+            <div class="form-row">
+                <label for="name">初始密码：</label>
+                <input class="easyui-validatebox" id="customer-password" type="password" name="password" data-options="required:true" />
+            </div>
+            <div class="form-row">
+                <label for="name">真实姓名:</label>
+                <input class="easyui-validatebox" id="customer-realname" type="text" name="realname" />
+            </div>
+            <div class="form-row">
+                <label for="name">电子邮箱:</label>
+                <input class="easyui-validatebox" id="customer-email" type="text" name="email" data-options="validType:'email'" />
+            </div>
+            <div class="form-row">
+                <label for="name">联系电话:</label>
+                <input class="easyui-validatebox" id="customer-telephone" type="text" name="telephone" />
+            </div>
+            <div class="form-row">
+                <label for="name">所处部门：</label>
+                <input class="easyui-combotree" id="customer-departmentId" name="departmentId" data-options="required:true" style="width:150px;" />
+            </div>
+            <div class="form-row">
+                <label for="name">状态：</label>
+                <input id="customer-status" class="easyui-combobox" name="status" data-options="valueField:'flexvalue',textField:'valueDescription'" />
+            </div>
+           </form>
+         </div>
+         
+         
+         

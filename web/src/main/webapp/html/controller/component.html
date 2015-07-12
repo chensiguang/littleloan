@@ -1,0 +1,198 @@
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="../../js/lib/jquery-easyui-1.4.2/themes/bootstrap/easyui.css" rel="stylesheet" type="text/css" />
+		 <link href="../../js/lib/jquery-easyui-1.4.2/themes/icon.css" rel="stylesheet" type="text/css" />
+		 <link href="../../css/main.css" rel="stylesheet" type="text/css" />
+		 <link href="../../js/lib/uploadify-v3.1/uploadify.css" rel="stylesheet"/>
+		 <script type="text/javascript" src="../../js/lib/config.js"></script>
+		 <script type="text/javascript" src="../../js/lib/jquery-1.11.3.js"></script>
+		 <script type="text/javascript" src="../../js/lib/jquery.cookie.js"></script>
+		 <script type="text/javascript" src="../../js/lib/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+		 <script type="text/javascript" src="../../js/lib/jquery-easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
+		 <script type="text/javascript" src="../../js/lib/ui.js"></script>
+		 <script type="text/javascript" src="../../js/util/UrlUtil.js"></script>
+		 <script type="text/javascript" src="../../js/util/StringUtil.js"></script>
+		 <script type="text/javascript" src="../../js/controller/Selectors.js"></script>
+		<style>
+			.roles-list li input {
+				vertical-align: top;
+			}
+		</style>
+		<script type="text/javascript">
+			
+			$(document).ready(function(){
+				OrgnizationSelector.load("orgnizationSelect1",{multiple:true, multiline:true}, {authorityUserId: $.cookie("userId")},['1','1000053']);
+				$("#test1").click(function(){
+					alert(JSON.stringify(OrgnizationSelector.getSelectedItems("orgnizationSelect1")));
+				});
+			});
+			
+			$(document).ready(function(){
+				UserSelector.load("userSelect1",{multiple:false}, {parentDepartmentId:$.cookie("departmentId"), authorityUserId: $.cookie("userId")}, []);
+				$("#test3").click(function(){
+					alert(JSON.stringify(OrgnizationSelector.getSelected("userSelect1")));
+				});
+			});
+			
+			$(document).ready(function(){
+				DepartmentSelector.load("departmentSelect1",{multiple: true}, {orgnizationId:$.cookie("orgnizationId"), authorityUserId: $.cookie("userId")}, []);
+				$("#test4").click(function(){
+					alert(JSON.stringify(DepartmentSelector.getSelected("departmentSelect1")));
+				});
+			});
+			
+			$(document).ready(function(){
+				RoleSelector.load("roleSelect1",{multiple: true}, {orgnizationId:$.cookie("orgnizationId"), authorityUserId: $.cookie("userId")}, ['1']);
+				$("#test5").click(function(){
+					alert(JSON.stringify(RoleSelector.getSelectedItems("roleSelect1")));
+				});
+			});
+			
+			$(function(){
+				OrgnizationSelector2.load("orgnizationSelect2",{multiple:false }, {authorityUserId: $.cookie("userId")},['1'],'admin_common_selectuser_tree','admin_common_selectuser_unselect_datalist','admin_common_selectuser_selected_datalist');
+				$('#test6').click(function(){
+					OrgnizationSelector2.openDialog('dlg','弹框名称','admin_common_selectuser_selected_datalist','roleInput');
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div style="border:1px solid black;margin:5px;">
+			组织选择：<select name="orgnizationSelect1" id="orgnizationSelect1" class="easyui-combobox" style="width:200px;height:50px">
+			</select>
+			<input type="button" value="test" id="test1" />
+		</div>
+		<div style="border:1px solid black;margin:5px;">
+			部门选择：<select name="departmentSelect1" id="departmentSelect1" class="easyui-combobox" style="width:200px;">
+			</select>
+			<input type="button" value="test" id="test4" />
+		</div>
+		<div style="border:1px solid black;margin:5px;">
+			用户选择：<select name="userSelect1" id="userSelect1" class="easyui-combobox" style="width:200px;">
+			</select>
+			<input type="button" value="test" id="test3" />
+		</div>
+		<div style="border:1px solid black;margin:5px;">
+			角色选择：<select name="roleSelect1" id="roleSelect1" class="easyui-combobox" style="width:200px;">
+			</select>
+			<input type="button" value="test" id="test5" />
+		</div>
+		<div  style="border:1px solid black;margin:5px;">
+			用户选择<input type="text" id="roleInput" class="easyui-textbox" style="width:300px;"><input type="button" id="test6" value="选择" />
+		</div>
+		<div id="dlg" class="easyui-dialog" style="padding:10px 20px" closed="true" modal="true">
+		<!--4、用户选择控件2：（服务公司使用）（先选择组织，左边显示部门树，中间显示部门的人员，右边显示选中的人员）-->
+			<div class="combobox-box" style="margin: 5px;">
+				选择组织：<select id="orgnizationSelect2" class="easyui-combobox"  style="width: 180px;">
+				</select>
+		    </div>
+			<div style="margin:5px 0;height:350px; overflow:hidden;">
+			    <div style="float:left; width:180px; height:350px;  margin-left:5px; ">
+			        <div class="easyui-accordion" data-options="fit:true, border:true, plain:false">
+			            <div title="按部门选择">
+			                  <ul class="easyui-tree" id="admin_common_selectuser_tree">
+					            
+					        </ul>
+			            </div>
+			        </div>
+			    </div>
+			    <div style="float:left; width:160px; height:350px;  margin-left:5px;">
+			        <ul id="admin_common_selectuser_unselect_datalist" class="easyui-datalist" style="width:100%;" data-options="title:'待选用户',fit:true,border:true,plain:false,valueField: 'uid',textField: 'username',singleSelect: false">
+				        <li>aaaa</li>
+				        <li>bbbb</li>
+				        <li>cccc</li>
+				        <li>dddd</li>
+				        <li>eeee</li>
+				        <li>ffff</li>
+			        </ul>
+			    </div>
+			    <div style="float:left; width:160px; height:350px;  margin-left:5px;">
+			        <ul id="admin_common_selectuser_selected_datalist" class="easyui-datalist" style="width:100%;" data-options="title:'已选用户',fit:true,border:true,plain:false,valueField: 'uid',textField: 'username',singleSelect: false">
+			        </ul>
+			    </div>
+			</div>
+		</div>
+		<!--角色选择控件：（服务公司和小贷公司公用）（复选框选择方式，小贷公司显示系统提供的及本小贷公司的角色，服务公司只显示自己的角色）-->
+		<ul class="roles-list">
+			<li><input type="checkbox" id="role-1" name="roles[]" value="1"><label for="role-1">角色1</label></li>
+			<li><input type="checkbox" id="role-2" name="roles[]" value="2"><label for="role-2">角色2</label></li>
+			<li><input type="checkbox" id="role-3" name="roles[]" value="3"><label for="role-3">角色3</label></li>
+			<li><input type="checkbox" id="role-4" name="roles[]" value="4"><label for="role-4">角色4</label></li>
+		</ul>
+		
+		<script>
+		
+		/*checkbox*/
+		var qx = $("input[name='roles[]']:checked").map(function () {
+               return $(this).val();
+       }).get().join(',');
+ 
+ 		
+ 		//select选中的值
+ 		function formatItem(row){
+ 			 var s = '<span style="padding-right:10px;float:right;">' + row.id + '</span>'+
+ 			 		'<span>' + row.text + '</span>';
+            return s;
+ 		}
+ 		
+ 		/*var $organizationDatalist = $('#sel-organization'),
+			$selectUserTree = $('#admin_common_selectuser_tree'),
+			$selectUserUnselectDataList = $('#admin_common_selectuser_unselect_datalist'), 
+			$selectUserSelectDataList = $('#admin_common_selectuser_selected_datalist');
+		
+		 $(function() {
+			$organizationDatalist.combobox({
+				onSelect:function(row){
+					$selectUserTree.tree({
+						queryParams:{id:row.id}
+					})
+				}
+			})
+			
+		    $selectUserTree.tree({
+		        onClick: function(node) {
+		            if ($(this).tree('isLeaf', node.target) ==true) {
+		                var selected = $selectUserSelectDataList.datalist('getRows');
+		                var uids = [];
+		                $.each(selected, function() {
+		                    uids.push(this.id);
+		                });
+		                $selectUserUnselectDataList.datalist('load',{
+		                    deptid:node.id,
+		                    uids:uids,
+		                })
+		            }else{
+		                $(this).tree('toggle', node.target);
+		            }
+		        }
+		    });
+		
+		    $selectUserUnselectDataList.datalist({
+		        onClickRow:function(index,row){
+		            $selectUserSelectDataList.datalist('appendRow',row)
+		            $(this).datalist('deleteRow',index)
+		        }
+		    })
+		
+		    $selectUserSelectDataList.datalist({
+		        onClickRow:function(index,row){
+		            $selectUserUnselectDataList.datalist('appendRow',row)
+		            $(this).datalist('deleteRow',index)
+		        }
+		    })
+		})
+		function selectAll(){
+		    var data = $selectUserSelectDataList.datalist('getRows');
+		    var uids = [];
+		    $.each(data, function() {
+		        uids.push(this.uid);
+		    });
+		    $('#roleInput').textbox('setValue',uids.join(','));
+		} */
+		
+		</script>
+	</body>
+</html>

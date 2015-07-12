@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:p="http://www.springframework.org/schema/aop" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-4.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName">
+	
+	<bean id="customerBasicInformationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerBasicInformationService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerBasicInformationService" />
+    </bean>
+    <bean id="customerJobService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerJobService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerJobService" />
+    </bean>
+	<bean id="customerBankAccountService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerBankAccountService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerBankAccountService" />
+    </bean>
+ 	<bean id="customerHouseService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerHouseService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerHouseService" />
+    </bean>
+    <bean id="customerContactInformationService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerContactInformationService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerContactInformationService" />
+    </bean>
+	 <bean id="customerFamilyService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerFamilyService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerFamilyService" />
+    </bean>
+	<bean id="customerChatHistoryService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerChatHistoryService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerChatHistoryService" />
+    </bean>
+	<bean id="customerRelationCommonService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerRelationCommonService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerRelationCommonService" />
+    </bean>
+   	<bean id="customerManagerChangeHistoryService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${crm-addr}/remoting/CustomerManagerChangeHistoryService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.crm.service.CustomerManagerChangeHistoryService" />
+    </bean>
+    
+    
+    
+</beans>

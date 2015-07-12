@@ -1,0 +1,62 @@
+<script type="text/javascript" src="../js/portals/knowledge/listByApprove.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<table id="knowledgeByApprove-mainGrid"></table>
+	        <div id="knowledgeByApprove-gridToolbar">
+	        	<div class="row bar-row">
+	        		<span>关键字:</span>
+		            <input type="text" id="knowledgeByApprove-kwords"/>
+		            <a href="#" class="search-button">搜索</a>
+				</div>
+				<div class="row cc">
+					<div class="fl">
+						<a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">审核</a>					
+					</div>
+					<div class="fr">
+					</div>
+				</div>
+        	</div>
+
+
+        	<div id="knowledgeByApprove-approve-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:680px;"
+            title="审核">
+            	<form id="knowledgeByApprove-form">
+            		<input type="hidden" id="knowledgeByApprove-id" name="id" />
+		            <div class="form-row">
+		                <label for="title">标题：</label>
+		                <input class="easyui-validatebox" id="knowledgeByApprove-title" type="text" name="title" disabled="disabled"/>
+		            </div>
+		            <div class="form-row">
+		                <label for="type">类别：</label>
+		                <input class="easyui-validatebox" id="knowledgeByApprovee-type" type="text" name="type" disabled="disabled"/>
+		            </div>
+		            <div class="form-row">
+		                <label for="kwords">关键字:</label>
+		                <input class="easyui-validatebox" id="knowledgeByApprove-kwords" type="text" name="keywords" disabled="disabled"/>
+		            </div>
+		            <div class="form-row form-auto">
+		                <label for="content">正文:</label>
+			            <div class="form-wrapper">
+						    <textarea id="knowledgeByApprove-content" name="content" style="width:550px;height:150px;visibility:hidden;" disabled="disabled"></textarea>
+						</div>
+		            </div>
+		            <div class="form-row form-auto">
+		            	<label for="file">附件:</label>
+		            	<div class="form-wrapper cc">
+		            		<div class="fr">
+		            			<div class="file-list" id="knowledgeByApprove-filelist">
+		            				<!-- <p><span>名称</span><a href="#">删除</a></p>
+		            				<p><span>名称</span><a href="#">删除</a></p>
+		            				<p><span>名称</span><a href="#">删除</a></p> -->
+		            			</div>
+		            		</div>
+		            	</div>
+		            </div>
+		            <div class="form-row">
+		                <label for="isall">发布范围:</label>
+		            	<select id="knowledgeByApprove-isall" class="easyui-combobox" name="isall" disabled="disabled">   
+						    <option value="">请选择发布范围...</option>
+						    <option value="1">全员</option>   
+						</select>
+		            </div>
+	            </form>
+		    </div>

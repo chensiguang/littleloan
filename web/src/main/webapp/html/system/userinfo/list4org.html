@@ -1,0 +1,73 @@
+<script type="text/javascript" src="../js/system/userinfo/list4org.js"></script>
+<script type="text/javascript" src="../js/system/userinfo/roleList4org.js"></script>
+	<input type="hidden" id="userinfo4org-orgnizationId" />
+	<table id="userinfo4org-mainGrid"></table>
+       <div id="userinfo4org-gridToolbar">
+     		<div class="row bar-row">
+	        	<span>用户名：</span>
+	            <input type="text" id="userinfo4org-search-username"/>
+	            <span>真实姓名:</span>
+	            <input type="text" id="userinfo4org-search-realname"/>
+	            <a href="#" class="search-button">搜索</a>
+            </div>
+            <div class="row cc">
+	           <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+	           <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+	           <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	           <a href="#" class="easyui-linkbutton distribute-button" iconCls="icon-add" plain="true">角色分配</a>
+            </div>
+      	</div>
+
+
+      	<div id="userinfo4org-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+          title="创建">
+          	<form id="userinfo4org-form">
+          		<input type="hidden" id="userinfo4org-id" name="id" />
+            <div class="form-row">
+                <label for="name">用户名：</label>
+                <input class="easyui-validatebox" id="userinfo4org-username" type="text" name="username" data-options="required:true" />
+            </div>
+            <div class="form-row">
+                <label for="name">初始密码：</label>
+                <input class="easyui-validatebox" id="userinfo4org-password" type="password" name="password" data-options="required:true" />
+            </div>
+            <div class="form-row">
+                <label for="name">真实姓名:</label>
+                <input class="easyui-validatebox" id="userinfo4org-realname" type="text" name="realname" />
+            </div>
+            <div class="form-row">
+                <label for="name">电子邮箱:</label>
+                <input class="easyui-validatebox" id="userinfo4org-email" type="text" name="email" data-options="validType:'email'" />
+            </div>
+            <div class="form-row">
+                <label for="name">联系电话:</label>
+                <input class="easyui-validatebox" id="userinfo4org-telephone" type="text" name="telephone" />
+            </div>
+            <div class="form-row">
+                <label for="name">所处部门：</label>
+                <input class="easyui-combotree" id="userinfo4org-departmentId" name="departmentId" data-options="required:true" style="width:150px;" />
+            </div>
+            <div class="form-row">
+                <label for="name">状态：</label>
+                <input class="easyui-combobox" id="userinfo4org-status" name="status" data-options="valueField:'flexvalue',textField:'valueDescription'" />
+            </div>
+           </form>
+         </div>
+         <div id="userinfo4org-role-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:800px;"
+            title="功能分配">
+            	<table id="userinfo4org-roleGrid" style="height:400px;"></table>
+            	<div id="userinfo4org-roleGridToolbar">
+		        		<a href="#" class="easyui-linkbutton add-role-button" iconCls="icon-add" plain="true">添加</a>
+						<a href="#" class="easyui-linkbutton remove-role-button" iconCls="icon-remove" plain="true">删除</a>
+	        	</div>
+		    </div>
+		    <div id="userinfo4org-allRole-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:650px;"
+            title="功能分配">
+            	<table id="userinfo4org-allRoleGrid" style="height:350px;"></table>
+            	<input type="hidden" id=userinfo4org-roleId name="id" />
+            	<div id="userinfo4org-allRoleToolbar">
+		        		<a href="#" class="easyui-linkbutton sure-button" iconCls="icon-add" plain="true" >确定</a>
+						<a href="#" class="easyui-linkbutton cancel-button" iconCls="icon-remove" plain="true">取消</a>
+	        	</div>
+		    </div>
+         

@@ -1,0 +1,122 @@
+		<table id="mainGrid" class="easyui-datagrid" data-options="singleSelect:true,fit:true,fitColumns:true,pagination:true,toolbar:'#function-gridToolbar'">
+                    <thead>
+                        <tr>
+                        	<th field="name2" width="50">序号</th>
+                            <th field="name2" width="50">科目代码</th>
+                            <th field="name3" width="50">科目名称</th>
+                            <th field="name9" width="50">审核状态</th>
+                            <th field="name10" width="50">查看详细</th>
+                            <th field="name10" width="50"></th>
+                        </tr>                        
+                    </thead>                           
+                    <tbody>                            
+                        <tr>                           
+                            <td>1</td>            
+                            <td>123456</td>            
+                            <td>XXXX</td>            
+                            <td>审核中</td>            
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>         
+                        </tr>                          
+                        <tr>                           
+                            <td>&emsp;</td>            
+                            <td>序号</td>            
+                            <td>变更内容</td>            
+                            <td>变更前值</td>            
+                            <td>变更后置</td>            
+                            <td>备注</td>
+                        </tr>                          
+                        <tr>                           
+                            <td>&nbsp;</td>            
+                            <td>1</td>            
+                            <td>允许透支</td>            
+                            <td>否</td>            
+                            <td>是</td>            
+                            <td>XXXX</td>
+                        </tr>                          
+                        <tr>                           
+                            <td>&nbsp;</td>            
+                            <td>2</td>            
+                            <td>现金标识</td>            
+                            <td>否</td>            
+                            <td>是</td>            
+                            <td>XXXX</td>
+                        </tr>
+                         <tr>                           
+                            <td>2</td>            
+                            <td>654321</td>            
+                            <td>XXXX</td>            
+                            <td>审核中</td>            
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>         
+                        </tr>                          
+                        <tr>                           
+                            <td>&nbsp;</td>            
+                            <td>序号</td>            
+                            <td>变更内容</td>            
+                            <td>变更前值</td>            
+                            <td>变更后置</td>            
+                            <td>备注</td>
+                        </tr>                          
+                        <tr>                           
+                            <td>&nbsp;</td>            
+                            <td>1</td>            
+                            <td>允许透支</td>            
+                            <td>否</td>            
+                            <td>是</td>            
+                            <td>XXXX</td>
+                        </tr>                          
+                        <tr>                           
+                            <td>&nbsp;</td>            
+                            <td>2</td>            
+                            <td>现金标识</td>            
+                            <td>否</td>            
+                            <td>是</td>            
+                            <td>XXXX</td>
+                        </tr>                         
+                    </tbody> 
+                </table>
+		<div id="function-gridToolbar">
+			<div class="row cc">
+				<div class="fl">
+					<a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true" authority="FunctionAdd">查询</a>
+					<a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true" authority="FunctionEdit">审核</a>
+					<a href="#" class="easyui-linkbutton edit-button" iconCls="icon-add" plain="true" authority="FunctionEdit">启用</a>
+				</div>
+			</div>
+        </div>
+        <div id="function-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:300px;"
+            title="创建">
+            	<form id="function-form">
+            	
+	            		<input type="hidden" id="function-id" name="id" />
+			            <div class="form-row">
+			                <label for="name">功能名称：</label>
+			                <input class="easyui-validatebox" id="function-functionName" type="text" name="functionName" data-options="required:true" missingMessage="必填" />
+			            </div>
+			            <div class="form-row">
+			                <label for="name">功能说明：</label>
+			                <input class="easyui-validatebox" id="function-functionDescription" type="text" name="functionDescription"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">类型：</label>
+			                <input class="easyui-combobox" id="function-type" type="text" name="type" data-options="valueField:'flexvalue',textField:'valueDescription',required:true"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">url地址：</label>
+			                <input class="easyui-validatebox" id="function-url" type="text" name="url"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">模块名称：</label>
+			                <input class="easyui-validatebox" id="function-module" type="text" name="module" data-options="required:true" missingMessage="必填"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">分组：</label>
+			                <input class="easyui-validatebox" id="function-fgroup" type="text" name="fgroup" data-options="required:true" missingMessage="必填"/>
+			            </div>
+			            <div class="form-row">
+			                <label for="name">所属系统：</label>
+			                <input class="easyui-combobox" id="function-systemId" type="text" name="systemId" data-options="valueField:'systemId',textField:'systemName',required:true"/>
+			            </div>
+	            </form>
+		    </div>

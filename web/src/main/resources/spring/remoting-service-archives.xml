@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:p="http://www.springframework.org/schema/aop" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-4.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName">
+	
+	<bean id="electronicArchivesService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${archives-addr}/remoting/ElectronicArchivesService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.archives.service.ElectronicArchivesService" />
+    </bean>
+    <!-- 
+    <bean id="archivesDataStorageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${archives-addr}/remoting/ArchivesDataStorageService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.archives.service.ArchivesDataStorageService" />
+    </bean>
+     -->
+    <bean id="archivesCategoryService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${archives-addr}/remoting/ArchivesCategoryService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.archives.service.ArchivesCategoryService" />
+    </bean>
+    <bean id="userArchivesAuthorityService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${archives-addr}/remoting/UserArchivesAuthorityService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.archives.service.UserArchivesAuthorityService" />
+    </bean>
+    <bean id="archivesCommonService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${archives-addr}/remoting/ArchivesCommonService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.archives.service.ArchivesCommonService" />
+    </bean>
+    <bean id="entityArchivesService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${archives-addr}/remoting/EntityArchivesService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.archives.service.EntityArchivesService" />
+    </bean>
+    <!-- 
+    <bean id="userOperationHistoryService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${archives-addr}/remoting/UserOperationHistoryService" />
+        <property name="serviceInterface" value="com.hexin.pettyLoan.archives.service.UserOperationHistoryService" />
+    </bean>
+     -->
+</beans>

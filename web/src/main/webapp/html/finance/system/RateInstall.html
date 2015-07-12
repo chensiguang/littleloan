@@ -1,0 +1,35 @@
+<script type="text/javascript" src="../js/finance/system/RateInstall.js"></script>		
+			<table id="RateInstall-mainGrid" class="easyui-datagrid">
+
+		    </table>
+	        <div id="RateInstall-gridToolbar">
+	        	<div class="row cc">
+	        		<div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	        		</div>
+	        		<div class="fr">
+		            	
+	        		</div>
+	        	</div>
+        	</div>
+
+
+        	<div id="RateInstall-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:350px;">
+		         <form class="cc" method="post" id="RateInstall-form">
+		         <input type="hidden"  name="id" />
+		            <div class="form-row">
+		                <label for="name">费率代码:</label>
+		                <input type="text" name="departmentName" class="easyui-textbox" required="true"  missingMessage="必填" />
+		            </div>
+		            <div class="form-row">
+				        <label>费率名称:</label>
+				        <input type="text" name="" class="easyui-textbox" required="true"  missingMessage="必填"/>
+				    </div>
+				    <div class="form-row">
+				        <label>费率值:</label>
+				        <input type="text" name="" class="easyui-numberbox" required="true"  missingMessage="必填"/>
+				    </div>
+		        </form>
+		    </div>

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>内容</title>
+</head>
+<body>
+        	<script type="text/javascript" src="js/page2.js"></script>
+			<table id="mainGrid" class="easyui-datagrid"
+	                        data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#gridToolbar'">
+	            <thead>
+	                <tr>
+	                    <th field="name1" width="50">Col 1</th>
+	                    <th field="name2" width="50">Col 2</th>
+	                    <th field="name3" width="50">Col 3</th>
+	                    <th field="name4" width="50">Col 4</th>
+	                    <th field="name5" width="50">Col 5</th>
+	                    <th field="name6" width="50">Col 6</th>
+	                </tr>                          
+	            </thead>                           
+	            <tbody>                            
+	                <tr>                           
+	                    <td>Data 1</td>            
+	                    <td>Data 2</td>            
+	                    <td>Data 3</td>            
+	                    <td>Data 4</td>            
+	                    <td>Data 5</td>            
+	                    <td>Data 6</td>            
+	                </tr>                          
+	                <tr>                           
+	                    <td>Data 1</td>            
+	                    <td>Data 2</td>            
+	                    <td>Data 3</td>            
+	                    <td>Data 4</td>            
+	                    <td>Data 5</td>            
+	                    <td>Data 6</td>            
+	                </tr>                          
+	                <tr>                           
+	                    <td>Data 1</td>            
+	                    <td>Data 2</td>            
+	                    <td>Data 3</td>            
+	                    <td>Data 4</td>            
+	                    <td>Data 5</td>            
+	                    <td>Data 6</td>            
+	                </tr>                          
+	                <tr>                           
+	                    <td>Data 1</td>            
+	                    <td>Data 2</td>            
+	                    <td>Data 3</td>            
+	                    <td>Data 4</td>            
+	                    <td>Data 5</td>            
+	                    <td>Data 6</td>            
+	                </tr>                          
+	            </tbody> 
+	        </table>
+	        <div id="gridToolbar">
+	            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+	            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+	            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+        	</div>
+
+
+        	<div id="gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;"
+            title="创建">
+		         <form class="cc" method="post">
+		            <div class="form-row">
+		                <label for="name">Name:</label>
+		                <input class="easyui-datebox" type="text" name="name" data-options="required:true" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">Name:</label>
+		                <select class="w-100" name="dept">
+		                    <option value="aa">aitem1</option>
+		                    <option>bitem2</option>
+		                    <option>bitem3</option>
+		                    <option>ditem4</option>
+		                    <option>eitem5</option>
+		                </select>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">Name:</label>
+		                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">Name:</label>
+		                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">Name:</label>
+		                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+		            </div>
+		        </form>
+		    </div>
+			
+		    <div id="createButtons">
+		        <a href="#" class="button button-sure">创建</a>
+		        <a href="#" class="button button-cancel">取消</a>
+		    </div>
+		    <div id="EditButtons">
+		        <a href="#" class="button button-sure">保存</a>
+		        <a href="#" class="button button-cancel">取消</a>
+		    </div>
+			<!--<div id="loading" style="position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; background: #fff; text-align: center; padding-top: 20%;"></div>-->
+</body>
+</html> 

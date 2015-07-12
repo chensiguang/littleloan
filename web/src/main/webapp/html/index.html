@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>浙江小额信贷</title>
+ <link href="../js/lib/jquery-easyui-1.4.2/themes/bootstrap/easyui.css" rel="stylesheet" type="text/css" />
+ <link href="../js/lib/jquery-easyui-1.4.2/themes/icon.css" rel="stylesheet" type="text/css" />
+ <link href="../css/main.css" rel="stylesheet" type="text/css" />
+ <link href="../js/lib/uploadify-v3.1/uploadify.css" rel="stylesheet"/>
+ <script type="text/javascript" src="../js/lib/config.js"></script>
+ <script type="text/javascript" src="../js/lib/jquery-1.11.3.js"></script>
+ <script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+ <script type="text/javascript" src="../js/lib/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+ <script type="text/javascript" src="../js/lib/jquery-easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
+ <script type="text/javascript" src="../js/lib/uploadify-v3.1/jquery.uploadify-3.1.js"></script>
+ <script type="text/javascript" src="../js/lib/kindeditor-4.1.10/kindeditor-all.js"></script>
+ <script type="text/javascript" src="../js/lib/kindeditor-4.1.10/lang/zh_CN.js"></script>
+ <script type="text/javascript" src="../js/lib/ui.js"></script>
+ <script type="text/javascript" src="../js/util/UrlUtil.js"></script>
+ <script type="text/javascript" src="../js/util/StringUtil.js"></script>
+ <script type="text/javascript" src="../js/util/ControllerUtil.js"></script>
+ <script type="text/javascript" src="../js/controller/Selectors.js"></script>
+  
+ <script type="text/javascript">
+ 	if($.cookie("userId")==null){
+	 	$.cookie("userId", 1);
+		$.cookie("orgnizationId", 1);
+		$.cookie("departmentId", 1);
+ 	}
+ 	//$.cookie("userId", 1000021);
+ 	//$.cookie("orgnizationId", 1000055);
+ 	//$.cookie("departmentId", 1000003);
+ 	$(document).ready(function(){
+ 		$("#btnAdmin").click(function(){
+ 			$.cookie("userId", 1);
+ 			$.cookie("orgnizationId", 1);
+ 			$.cookie("departmentId", 1);
+ 			window.location.reload();
+ 		});
+ 		$("#btnXdgly").click(function(){
+ 			$.cookie("userId", 1000021);
+ 		 	$.cookie("orgnizationId", 1000055);
+ 		 	$.cookie("departmentId", 1000003);
+ 		 	window.location.reload();
+ 		});
+ 	});
+ </script>
+ <script type="text/javascript" src="../js/index.js"></script>
+
+ 
+ 
+</head>
+<body class="easyui-layout">
+    <div class="header" data-options="region:'north',border:false">
+        <div class="header-top-bar">
+            <div class="fl">
+                <span class="label">公司名称：</span>
+                <span class="value">阜阳叉叉叉小贷公司</span>
+                <span class="label">当前员工：</span>
+                <span class="value">其他</span>
+                <span class="label">会计周期：</span>
+                <span class="value">201457</span>
+                <span class="label">最新记账日期：</span>
+                <span class="value">2014/01/01</span>
+            </div>
+            <div class="fr">
+                <a href="#">消息</a>
+                <a href="#">注销</a>
+                <a href="#">门户网</a>
+                <a href="#">修改密码</a>
+            </div>
+        </div>
+        <div class="header-top-menu">
+            <div class="header-logo">
+	            
+	    	</div>
+            <div class="header-menu">
+                <ul>
+                	<li>
+                        <a href="index.html" class="selected">工作台</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-left" data-options="region:'west',split:true,title:'统一用户管理系统'">
+    		
+        <div id="index-menu">
+            <div style="padding:10px">加载中……</div>
+        </div>
+    </div>
+    <div class="page-content" data-options="region:'center'">
+        <div id="page-tabs" class="easyui-tabs page-tabs" data-options="fit:true,border:false,plain:true">
+            <div title="工作台" style="padding:10px">
+            <input type="button" id="btnAdmin" value="切换超级管理员" />
+	    		<input type="button" id="btnXdgly" value="切换小贷管理员" />
+                <table id="mainGrid" class="easyui-datagrid"
+                        data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,toolbar:'#gridToolbar'">
+                    <thead>
+                        <tr>
+                            <th field="name1" width="50">Col 1</th>
+                            <th field="name2" width="50">Col 2</th>
+                            <th field="name3" width="50">Col 3</th>
+                            <th field="name4" width="50">Col 4</th>
+                            <th field="name5" width="50">Col 5</th>
+                            <th field="name6" width="50">Col 6</th>
+                        </tr>                          
+                    </thead>                           
+                    <tbody>                            
+                        <tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>            
+                        </tr>                          
+                        <tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>            
+                        </tr>                          
+                        <tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>            
+                        </tr>                          
+                        <tr>                           
+                            <td>Data 1</td>            
+                            <td>Data 2</td>            
+                            <td>Data 3</td>            
+                            <td>Data 4</td>            
+                            <td>Data 5</td>            
+                            <td>Data 6</td>            
+                        </tr>                          
+                    </tbody> 
+                </table>
+                <div id="gridToolbar">
+                    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:Grid.action('add')">添加</a>
+                    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="javascript:Grid.action('edit')">修改</a>
+                    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:Grid.action('remove')">删除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="createItem" data-options="modal:true,buttons:'#bb',closed:true" class="easyui-dialog" style="width:400px;"
+            title="创建">
+         <form class="cc" method="post">
+            <div class="form-row">
+                <label for="name">Name:</label>
+                <input class="easyui-datebox" type="text" name="name" data-options="required:true" />
+            </div>
+            <div class="form-row">
+                <label for="name">Name:</label>
+                <select class="w-100" name="dept">
+                    <option value="aa">aitem1</option>
+                    <option>bitem2</option>
+                    <option>bitem3</option>
+                    <option>ditem4</option>
+                    <option>eitem5</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="name">Name:</label>
+                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+            </div>
+            <div class="form-row">
+                <label for="name">Name:</label>
+                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+            </div>
+            <div class="form-row">
+                <label for="name">Name:</label>
+                <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+            </div>
+        </form>
+    </div>
+    <div id="bb">
+        <a href="#" class="button button-sure">确定</a>
+        <a href="#" class="button button-cancel" onclick="$('#createItem').dialog('close');">取消</a>
+    </div>
+    <div id="setting-list-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:400px;" title="列表设置"></div>
+    
+</body>
+</html>

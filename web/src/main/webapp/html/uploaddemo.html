@@ -1,0 +1,67 @@
+<script type="text/javascript" src="../js/lib/uploadify-v3.1/jquery.uploadify-3.1.js"></script>
+<link rel="stylesheet" href="../js/lib/kindeditor-4.1.10/themes/default/default.css" />
+<style type="text/css">
+    .row{
+        margin:10px;
+    }
+    .container{
+        margin:20px;
+    }
+</style>
+<script type="text/javascript" src="../js/lib/kindeditor-4.1.10/kindeditor-all.js"></script>
+<script type="text/javascript" src="../js/lib/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script type="text/javascript">
+   		
+// 上传图片
+$(document).ready(function(){ 
+	var swf = "../js/lib/uploadify-v3.1/uploadify.swf";
+	var uploader = SiteUrl.System_API + "file/fileupload.do";
+       $("#upFileName").uploadify({  
+          'swf'  :   swf,  
+          'uploader'    :   uploader,
+          'buttonText':"上传",
+          'queueId'   :   "fileQueue",  
+          'queueSizeLimit'    :   9,//限制上传文件的数量  
+          'fileTypeExts'   :   "*.jpg;*.png;*.bmp;*.gif;",  
+          'auto'      :   true,  
+          'multi'     :   true,//是否允许多文件上传  
+          'simUploadLimit':   2,//同时运行上传的进程数量
+          'fileObjName' : 'upFileName',
+          'method'    :   "POST" ,
+          'formData'  : {'authorityUserId' : $.cookie("userId")},
+          'onUploadStart':function(){
+       	    $("#upFileName").uploadify("settings","formData",{'authorityUserId' : $.cookie("userId")});
+       	},
+          'onUploadSuccess' : function(file, data, response){
+       	   alert(data);
+     		 }     
+      }); 
+       
+       
+       var editor = KindEditor.create('#textarea1', {
+       		resizeType : 1,
+       		uploadJson: SiteUrl.System_API + 'file/fileupload4kindedit.do?domain=http://web.pettyloan.com:8081/pettyLoan-web/&authorityUserId='+$.cookie("userId"),
+       		items : [
+       			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+       			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+       			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+       	});
+
+  });
+
+
+</script>
+<a href="javascript:void(0);" class="btn-img-upload">
+	<input type="file" name="upFileName" id="upFileName" />
+</a>
+
+
+<div class="container">
+    <textarea id="textarea1" name="content" style="width:700px;height:200px;visibility:hidden;">KindEditor</textarea>
+</div>
+
+ <!-- 
+ <form action="http://localhost:8080/pettyLoan/file/fileupload.do?authorityUserId=1" method="post" enctype="multipart/form-data">
+ 	<input type="file" name="upFileName"/><input type="submit" value="上传" name="uploadbtn" />
+ </form>
+ -->

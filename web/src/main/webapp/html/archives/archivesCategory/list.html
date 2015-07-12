@@ -1,0 +1,73 @@
+<script type="text/javascript" src="../js/archives/archivesCategory/list.js"></script>
+	<div class="easyui-layout page-layout" data-options="fit:true">
+		 <div id="archivesCategory-treeToolbar" class="h-32 tab-page-header" data-options="region:'north'">
+            <div class="cc">
+                <div class="fl">
+                    <a href="#" class="action-button add-button">创建根类别</a>
+                    <a href="#" class="action-button addChild-button">创建子类别</a>
+                    <a href="#" class="action-button edit-button">更改类别</a>
+                    <a href="#" class="action-button remove-button">删除类别</a>
+                </div>
+            </div>
+        </div>
+		<div class="w-300 tab-page-left" data-options="region:'west',border:false">
+              <ul id="archivesCategory-tree" class="easyui-tree"></ul>
+        </div>
+        <div id="archivesCategory-treeForm" class="tab-page-content" data-options="region:'center'">
+            <form class="cc" method="post">
+                <div class="ui-w-2-1">
+                    <div class="form-row">
+                        <label for="name">类别名称:</label>
+		                <input type="text"  name="name" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="notes">备注:</label>
+		                <input type="text"  name="notes" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="parentName">父类别名称:</label>
+		                <input type="text"  name="parentName" class="easyui-textbox" required="true" disabled="disabled"/>
+                    </div>
+                </div>
+                <div class="ui-w-2-1">
+                    <div class="form-row">
+                        <label for="insUser">创建者:</label>
+		                <input type="text"  name="createrName" class="easyui-textbox" disabled="disabled"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="insDtime">创建时间:</label>
+		                <input type="text"  name="ctime" class="easyui-textbox" disabled="disabled"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="updUser">修改者:</label>
+		                <input type="text"  name="menderName" class="easyui-textbox" disabled="disabled"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="updDtime">修改时间:</label>
+		                <input type="text"  name="mtime" class="easyui-textbox" disabled="disabled"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div id="archivesCategory-create-treeDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:600px;"
+            title="创建">
+           	<form class="cc" method="post" id="archivesCategory-form">
+               <div class="ui-w-2-1">
+                    <div class="form-row">
+                        <label for="name">类别名称:</label>
+		                <input type="text" id="archives-archivesCategoryName" name="name" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="notes">备注:</label>
+		                <input type="text" id="archives-archivesCategoryNotes" name="notes" class="easyui-textbox" required="true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="parentName">父类别:</label>
+		                <input type="text" id="archives-archivesCategoryParentName" name="parentName" class="easyui-textbox" required="false" disabled="disabled"/>
+                    </div>
+                </div>
+           </form>
+	    </div>
+        
+	</div>

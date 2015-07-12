@@ -1,0 +1,48 @@
+<style type="text/css">
+    .row{
+        margin:10px;
+    }
+    .container{
+        margin:20px;
+    }
+</style>
+<script type="text/javascript" src="../js/portals/content/listCheck.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<table id="contentCheck-mainGrid"></table>
+
+
+      <div id="contentCheck-gridToolbar">
+          <a href="#" class="easyui-linkbutton check-button" iconCls="icon-edit" plain="true">审核</a>
+      </div>
+
+     	<div id="contentCheck-create-gridDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:680px;"
+         title="审核">
+         	<form id="contentCheck-form">
+         		<input type="hidden" id="contentCheck-id" name="id" />
+         		<input type="hidden"  name="approveUserId" />
+         		<input type="hidden"  name="status" />
+           <div class="form-row">
+               <label for="name">标题：</label>
+               <input class="easyui-validatebox" id="contentCheck-title" type="text" name="title"  readOnly data-options="required:true" missingMessage="必填" />
+           </div>
+           <div class="form-row">
+               <label for="name">类型：</label>
+				<input id="contentCheck-type" name="type"  class="easyui-combobox" required="true" editable="false"/>
+           </div>
+           <div class="form-row form-auto">
+               <label for="name">内容:</label>
+               <div class="form-wrapper">
+				    <textarea id="contentCheck-con"  name="content"  style="width:550px;height:150px;visibility:hidden;" disabled="disabled"></textarea>
+				</div>
+               
+           </div>
+           <div class="form-row">
+           </div>          
+           <div class="form-row">
+               <label for="isAll">发布范围:</label>
+           	<select id="contentCheck-isAll" class="easyui-combobox" name="isAll"  readOnly>   
+			    <option value="1">全员</option>   
+			</select>
+           </div>
+          </form>
+   </div>

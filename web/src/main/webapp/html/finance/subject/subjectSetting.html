@@ -1,0 +1,287 @@
+<script type="text/javascript" src="../js/finance/subject/subjectSetting.js"></script>
+    <div class="easyui-layout page-layout" data-options="fit:true">
+        <div class="w-300 tab-page-left" data-options="region:'west',border:false">
+        	<div class="search-top">
+	        	<span>名称:</span>
+		        <input type="text" id="role-name"/>
+		        <a href="#" class="search-button">搜索</a>
+        	</div>
+			<ul  class="easyui-tree" id="subjectSetting-tree">
+              <li>
+                  <span>会计科目</span>
+                  <ul>
+                      <li><span>[01-资产类]</span></li>
+                      <li><span>[02-负债类]</span></li>
+                      <li><span>[03-损益类]</span>
+                      	<ul>
+                             <li><span><a href="#">[3011-利息收入]</a></span></li>
+                             <li><span>[3012-手续费及佣金收入]</span></li>
+                             <li><span>[3013-其他业务收入]</span></li>
+                        </ul>
+                      </li>
+                  </ul>
+              </li>
+              <li><span>[04-表外类]</span></li>
+          </ul>
+          	<div id="subjectSetting-tree-menu" class="easyui-menu" style="width:120px">
+		    	<div class="add-node" data-options="iconCls:'icon-add'">新增</div>
+		    	<div class="edit-node" data-options="iconCls:'icon-edit'">编辑</div>
+		    	<div class="remove-node" data-options="iconCls:'icon-remove'">删除</div>
+			</div>
+        </div>
+        <div id="subjectSetting-treeForm" class="tab-page-content" data-options="region:'center',border:false">
+            <div class="easyui-layout" data-options="fit:true">
+	            <div class="h-330 min-w-800" data-options="region:'north',border:false">
+	            	<form method="post">
+	            		<div class="ui-w-1 cc">
+		                    <div class="ui-w-3-1">
+		                        <div class="form-row">
+		                            <label>科目代码:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>科目余额:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>是否常用:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>数量核算:</label>
+		                            <input type="checkbox" />
+		                        </div>
+		                        <div class="form-row">
+		                            <label>辅助核算类型:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>申请人:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>审核状态:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                    </div>
+		                    <div class="ui-w-3-1">
+		                        <div class="form-row">
+		                            <label>科目名称:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>借贷方向:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>是否挂账科目:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>现金标志:</label>
+		                            <input type="checkbox" />
+		                        </div>
+		                        <div class="form-row">
+		                            <label>启用状态:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>申请时间:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                    </div>
+		                    <div class="ui-w-3-1">
+		                    	<div class="form-row">
+		                            <label>科目类别:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>是否管控:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>允许透支:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>辅助核算:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>备注:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>申请理由:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                    </div>
+	                    </div>
+	                </form>
+	            </div>
+	             <div data-options="region:'center',border:false">
+	                  <table id="subjectSetting-grid" class="easyui-datagrid m-10"
+	                        data-options="singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true">
+		                    <thead>
+		                        <tr>
+		                            <th field="name2" width="50">科目代码</th>
+		                            <th field="name3" width="50">科目名称</th>
+		                            <th field="name4" width="50">科目类别</th>
+		                            <th field="name5" width="50">科目余额</th>
+		                            <th field="name6" width="50">借贷方向</th>
+		                            <th field="name7" width="50">是否常用</th>
+		                            <th field="name8" width="50">是否挂账科目</th>
+		                            <th field="name9" width="50">允许透支</th>
+		                            <th field="name10" width="50">数量核算</th>
+		                            <th field="name11" width="50">现金核算</th>
+		                            <th field="name12" width="50">辅助核算</th>
+		                        </tr>                          
+		                    </thead>                           
+		                    <tbody>                            
+		                        <tr>                           
+		                            <td>Data 1</td>            
+		                            <td>Data 2</td>            
+		                            <td>Data 3</td>            
+		                            <td>Data 4</td>            
+		                            <td>Data 5</td>            
+		                            <td>Data 6</td>
+		                            <td>Data 7</td>
+		                            <td>Data 8</td>
+		                            <td>Data 9</td>
+		                            <td>Data 10</td>
+		                            <td>Data 11</td>
+		                        </tr>                          
+		                        <tr>                           
+		                            <td>Data 1</td>            
+		                            <td>Data 2</td>            
+		                            <td>Data 3</td>            
+		                            <td>Data 4</td>            
+		                            <td>Data 5</td>            
+		                            <td>Data 6</td>
+		                            <td>Data 7</td>
+		                            <td>Data 8</td>
+		                            <td>Data 9</td>
+		                            <td>Data 10</td>
+		                            <td>Data 11</td>
+		                        </tr>                          
+		                        <tr>                           
+		                            <td>Data 1</td>            
+		                            <td>Data 2</td>            
+		                            <td>Data 3</td>            
+		                            <td>Data 4</td>            
+		                            <td>Data 5</td>            
+		                            <td>Data 6</td>
+		                            <td>Data 7</td>
+		                            <td>Data 8</td>
+		                            <td>Data 9</td>
+		                            <td>Data 10</td>
+		                            <td>Data 11</td>
+		                        </tr>                          
+		                        <tr>                           
+		                            <td>Data 1</td>            
+		                            <td>Data 2</td>            
+		                            <td>Data 3</td>            
+		                            <td>Data 4</td>            
+		                            <td>Data 5</td>            
+		                            <td>Data 6</td>
+		                            <td>Data 7</td>
+		                            <td>Data 8</td>
+		                            <td>Data 9</td>
+		                            <td>Data 10</td>
+		                            <td>Data 11</td>
+		                        </tr>                          
+		                    </tbody> 
+	                </table>
+	             </div>
+             </div>
+        </div>
+        <div id="subjectSetting-create-treeDialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:800px;"
+            title="创建">
+            	<form class="cc" method="post" id="subjectSetting-form">
+            	<div class="ui-w-1 cc">
+		                    <div class="ui-w-3-1">
+		                        <div class="form-row">
+		                            <label>科目代码:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>科目余额:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>是否常用:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>数量核算:</label>
+		                            <input type="checkbox" />
+		                        </div>
+		                        <div class="form-row">
+		                            <label>辅助核算类型:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>申请人:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>审核状态:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                    </div>
+		                    <div class="ui-w-3-1">
+		                        <div class="form-row">
+		                            <label>科目名称:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>借款方向:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>是否挂账科目:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>现金标志:</label>
+		                            <input type="checkbox" />
+		                        </div>
+		                        <div class="form-row">
+		                            <label>启用状态:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>申请时间:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                    </div>
+		                    <div class="ui-w-3-1">
+		                    	<div class="form-row">
+		                            <label>科目类别:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>是否管控:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>允许透支:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>辅助核算:</label>
+		                            <input type="checkbox"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>科目说明:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                        <div class="form-row">
+		                            <label>申请说明:</label>
+		                            <input type="text" class="easyui-textbox w-150"/>
+		                        </div>
+		                    </div>
+	                    </div>
+            </form>
+		    </div>
+    </div>

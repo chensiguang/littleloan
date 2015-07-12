@@ -1,0 +1,51 @@
+<script type="text/javascript" src="../js/archives/userArchivesAuthority/list.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<table id="userArchivesAuthority-mainGrid"></table>
+	<div id="userArchivesAuthority-gridToolbar">
+       	<div class="row bar-row">
+		      <span>用户:</span>
+              <input class="easyui-combobox" id="userArchivesAuthority-name" name="userArchivesAuthority-name" data-options="required:false,editable:true" />
+	          <a href="#" class="search-button">查询</a>
+         </div>
+         <div class="row cc">
+         	<div class="fl">
+         		<a href="#" class="easyui-linkbutton insert-button" iconCls="icon-add" plain="true">添加/更改</a>
+         	</div>
+         </div>
+    </div>
+    
+    <div id="userArchivesAuthority-edit-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:600px;"
+            title="创建">
+           	<form class="cc" method="post" id="userArchivesAuthority-form">
+               <div class="ui-w-2-1">
+                    <div class="form-row">
+                        <label for="name">用户:</label>
+		                <input type="text" id="userArchivesAuthorityName" name="userId" class="easyui-combobox" required="true" data-options="required:true,editable:true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="notes">权限级别:</label>
+		                <select type="text" id="userArchivesAuthorityLevel" name="level" class="easyui-combobox" required="true" data-options="required:true,editable:true">
+		                	<option value="1">用户</option>
+						    <option value="2">档案类别</option>
+						    <option value="3">档案</option>
+		                </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="parentName">对象用户:</label>
+		                <input type="text" id="userArchivesAuthorityTargetUserName" name="targetUserId" class="easyui-combobox" required="true" data-options="required:true,editable:true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="parentName">档案类别:</label>
+		                <input type="text" id="userArchivesAuthorityArcCategoryName" name="arcCategoryId" class="easyui-combobox" required="true" data-options="required:true,editable:true"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="parentName">档案名称:</label>
+		                <input type="text" id="userArchivesAuthorityArcName" name="arcName" class="easyui-textbox" required="true" disabled="disabled"/>
+                    </div>
+                    <div class="form-row">
+                        <label for="parentName">档案编号:</label>
+		                <input type="text" id="userArchivesAuthorityArcNo" name="arcNo" class="easyui-combobox" required="true" data-options="required:true,editable:true"/>
+                    </div>
+                </div>
+           </form>
+	</div>

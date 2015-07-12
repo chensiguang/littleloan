@@ -1,0 +1,40 @@
+<script type="text/javascript" src="../js/system/department/list.js"></script>
+			<table id="dapartment-treegrid" class="easyui-treegrid">
+		    </table>
+	        <div id="dapartment-tree-gridToolbar">
+	        	<div class="row cc">
+	        		<div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	        		</div>
+	        		<div class="fr">
+		            	<a href="#" class="easyui-linkbutton setting-button" iconCls="icon-add" plain="true">配置</a>
+	        		</div>
+	        	</div>
+        	</div>
+
+
+        	<div id="department-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:350px;"
+            title="新增部门">
+		         <form class="cc" method="post" id="department-form">
+		         <input type="hidden"  name="id" />
+		            <div class="form-row">
+		                <label for="name">上级部门名称:</label>
+		                <select id="department-departmentParentName" class="easyui-combotree"></select>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">部门名称:</label>
+		                <input type="text" id="department-departmentName" name="departmentName" class="easyui-textbox" required="true"  missingMessage="必填" />
+		            </div>
+		            <div class="form-row">
+		                <label for="name">部门类型:</label>
+		                <select class="easyui-combobox" id="department-departmentType" data-options="valueField:'flexvalue',textField:'valueDescription'"  required="true"  missingMessage="必填"  editable="false">
+		                </select>
+		            </div>
+		            <div class="form-row">
+		                <label for="name">部门路径:</label>
+		                <span id="department-namePath"></span>
+		            </div>
+		        </form>
+		    </div>

@@ -1,0 +1,35 @@
+<script type="text/javascript" src="../js/portals/survey/common.js"></script>
+<script type="text/javascript" src="../js/portals/survey/checklist.js"></script>
+<!-- 列表展示 -->
+<table id="survey-mainCheckGrid"></table>
+<div id="survey-checkDetailSurvey-window" class="easyui-window" style="display:none;width:680px;padding:10px 5px 0px 5px;">
+	<div class="detail-dialog" style="margin:10px 5px;padding: 0px 20px;">
+		<div class="clear" style="display:block;width:618px;">
+			<div class="clear detail-list">
+				<div style="height:28px; line-height:28px; width:309px; float:left; display:block;">
+					<span style="width:38px;text-align:right; color:#666;font-weight:bold;">名称:</span><span><input id="survey-check-detail-name" type="text" class="easyui-textbox" style="width:240px;height:24px;line-height:24px;padding:0px 2px;color:#666;"></span>
+				</div>
+				<div  style="height:28px; line-height:28px; width:309px; float:left; display:block;">
+					<span style="width:38px;text-align:right;color:#666;font-weight:bold;">发布范围:</span><span><input id="survey-check-detail-area" type="text" class="easyui-textbox" style="width:240px;height:24px;line-height:24px;padding:0px 2px;color:#666;"></span>
+				</div>
+				<div style="height:auto;margin-top:4px; width:618px; float:left; display:block;">
+					<div style="width:33px;text-align:right;float:left;vertical-align: top;color:#666;font-weight:bold;">描述:</div><div style="float:left;"><input id="survey-check-detail-description" type="text" class="easyui-textbox" style="width:574px;padding:0px 2px;color:#666;"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clear" style="display:block;width:618px;">
+			<div style="display:block;width:618px;padding:8px 0px;text-algin:left;">
+				<span style="width:38px;text-align:right;color:#666;font-weight:bold;">问卷预览</span>
+			</div>
+			<div id="survey-question-check-wrap" style="heigth:620px;overflow:scroll;"></div>
+		</div>
+		
+		<div class="clear" style="display:block;width:618px; margin: 20px 0px 12px 0px;text-align: right;">
+			<a id="survey-question-check-backSurveyBtn" class="easyui-splitbutton" style="display：none;">退回</a>
+			<a id="survey-question-check-goSurveyBtn" class="easyui-splitbutton" style="display：none;">通过</a>
+			<a id="survey-question-check-cancelSurveyBtn" class="easyui-splitbutton">关闭</a>
+		</div>
+	</div>
+	
+</div>

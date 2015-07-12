@@ -1,0 +1,47 @@
+<script type="text/javascript" src="../js/finance/system/cashFlowInstall.js"></script>		
+			<table id="cashFlowInstall-mainGrid" class="easyui-treegrid">
+	    
+		    </table>
+	        <div id="cashFlowInstall-gridToolbar">
+	        	<div class="row cc">
+	        		<div class="fl">
+			            <a href="#" class="easyui-linkbutton add-button" iconCls="icon-add" plain="true">添加</a>
+			            <a href="#" class="easyui-linkbutton edit-button" iconCls="icon-edit" plain="true">修改</a>
+			            <a href="#" class="easyui-linkbutton remove-button" iconCls="icon-remove" plain="true">删除</a>
+	        		</div>
+	        		<div class="fr">
+		            	
+	        		</div>
+	        	</div>
+        	</div>
+
+
+        	<div id="cashFlowInstall-dialog" data-options="modal:true,closed:true" class="easyui-dialog" style="width:350px;">
+		         <form class="cc" method="post" id="cashFlowInstall-form">
+		         <input type="hidden"  name="id" />
+		            <div class="form-row">
+				        <label>上级类别编码:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+		            <div class="form-row">
+				        <label>上级类别名称:</label>
+				        <select id="cashFlowInstall-parentName" class="easyui-combotree"></select>
+				    </div>
+				    <div class="form-row">
+				        <label>类别编码:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+				    <div class="form-row">
+				        <label>类别名称:</label>
+				        <input type="text" class="easyui-textbox"/>
+				    </div>
+				    <div class="form-row">
+				    <label for="name"> 标识:</label>
+		            <select class="easyui-combobox" editable="false"  style="width:100px;">
+	                	<option>流入</option>
+	                	<option>流出</option>
+	                	<option>其他</option>
+	                </select>
+	                </div>
+		        </form>
+		    </div>
