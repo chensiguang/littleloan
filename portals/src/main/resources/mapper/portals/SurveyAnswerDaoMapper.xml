@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ptl_survey_answer">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.portals.model.SurveyAnswerItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_ptl_survey_answer')
+		</selectKey>
+		insert into ptl_survey_answer(id,surveyid,orgizationid,userid,questionid,
+		content,optionid,ctime,mtime,rtime,creater,isvalid) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{surveyid,jdbcType=INTEGER},
+		#{orgizationid,jdbcType=INTEGER},
+		#{userid,jdbcType=INTEGER},
+		#{questionid,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR},
+		#{optionid,jdbcType=INTEGER},
+		now(),
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER},
+		1
+		)
+	</insert>
+	<update id="update" parameterType="com.hexin.pettyLoan.portals.model.SurveyAnswerItem">
+		update ptl_survey_answer
+		<set>
+			content=#{content},
+			status=#{status},
+			approveuserid=#{approveuserid},
+			mtime=now(),
+			isvalid=#{isvalid}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.portals.model.SurveyAnswerItem">
+		update ptl_survey_answer set isvalid=0, mtime=now() where id=#{id}
+	</delete>
+	
+	<select id="query" parameterType="com.hexin.pettyLoan.portals.model.SurveyAnswerItem" resultType="com.hexin.pettyLoan.portals.model.SurveyAnswerItem">
+		select 
+			id,
+			surveyid,
+			orgizationid,
+			userid,
+			questionid,
+			content,
+			optionid,
+			ctime,
+			mtime,
+			rtime,
+			creater,
+			isvalid 
+ 		from ptl_survey_answer 
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="surveyid != null and surveyid != '' ">
+					<![CDATA[
+						AND surveyid = #{surveyid} 
+					]]>
+				</if>
+				<if test="questionid != null and questionid != '' ">
+					<![CDATA[
+						AND questionid = #{questionid} 
+					]]>
+				</if>
+		</where>
+	</select>
+	<select id="count" parameterType="com.hexin.pettyLoan.portals.model.SurveyAnswerItem" resultType="int" >
+		select count(*) from ptl_survey_answer
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="surveyid != null and surveyid != '' ">
+					<![CDATA[
+						AND id = #{surveyid} 
+					]]>
+				</if>
+		</where>
+	</select>
+	 
+</mapper>

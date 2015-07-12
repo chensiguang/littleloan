@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ptl_content">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.portals.model.ContentItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_ptl_content')
+		</selectKey>
+		insert into ptl_content(id,title,type,content,file,isall,
+		ctime,rtime,creater) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR},
+		#{file,jdbcType=INTEGER},
+		#{isAll,jdbcType=INTEGER},
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update" parameterType="com.hexin.pettyLoan.portals.model.ContentItem">
+		update ptl_content
+		<set>
+			<if test="title != null and title != '' ">
+				<![CDATA[
+				title=#{title},
+				]]>
+			</if>
+			<if test="status != null and status != 0">
+				<![CDATA[
+				status=#{status},
+				]]>
+			</if>
+			<if test="type != null and type != '' ">
+				<![CDATA[
+				type=#{type},
+				]]>
+			</if>
+			<if test="content != null and content != '' ">
+				<![CDATA[
+				content=#{content},
+				]]>
+			</if>
+			<if test="file != null and file != 0">
+				<![CDATA[
+				file=#{file},
+				]]>
+			</if>
+			<if test="isAll != null and isAll != 0">
+				<![CDATA[
+				isall=#{isAll},
+				]]>
+			</if>
+			<if test="creater != null and creater != 0">
+				<![CDATA[
+				creater=#{creater},
+				]]>
+			</if>
+			<if test="approveUserId != null and approveUserId != 0">
+				<![CDATA[
+				approveuserid=#{approveUserId},
+				]]>
+			</if>
+			<if test="stime != null ">
+				<![CDATA[
+				stime=#{stime},
+				]]>
+			</if>
+			mtime=now()
+		</set>
+		where id = #{id}
+	</update>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.portals.model.ContentItem">
+		update ptl_content set isvalid=0 where id=#{id}
+	</delete>
+	<select id="getone" parameterType="com.hexin.pettyLoan.portals.model.ContentItem" resultType="com.hexin.pettyLoan.portals.model.ContentItem">
+		select 
+			id,
+			title,
+			type,
+			content,
+			file,
+			isall,
+			ctime,
+			mtime,
+			rtime,
+			stime,
+			creater,
+			approveuserid
+		from ptl_content 
+		<where>
+			isvalid = 1
+			<if test="id != null and id != 0 ">
+				<![CDATA[
+					AND id = #{id} 
+				]]>
+			</if>
+		</where>
+	</select>
+	<select id="query" parameterType="com.hexin.pettyLoan.portals.model.ContentItem" resultType="com.hexin.pettyLoan.portals.model.ContentItem">
+		select 
+			id,
+			title,
+			type,
+			content,
+			file,
+			isall,
+			status,  
+			ctime,
+			mtime,
+			rtime,
+			stime,
+			creater,
+			approveuserid
+		from ptl_content 
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="title != null and title != '' ">
+					<![CDATA[
+						AND title like concat('%',#{title},'%')
+					]]>
+				</if>
+				<if test="content != null and content != '' ">
+					<![CDATA[
+						AND content like concat('%',#{content},'%')
+					]]>
+				</if>
+				<if test="isAll != null and isAll != '' ">
+					<![CDATA[
+						AND isall like concat('%',#{isAll},'%')
+					]]>
+				</if>
+				<if test="statusArrayStr != null ">
+					<![CDATA[
+					AND status in (${statusArrayStr})
+					]]>
+					<!--  <foreach sparator=","  item="item"  index="index"  collection="statusArray" open="("   close=")">
+						#{item}
+					</foreach>-->
+				</if>
+		</where>
+		order by status
+			<if test="rows != null and start != null ">
+				<![CDATA[
+					limit #{rows} offset #{start}
+				]]>
+			</if>
+	</select>
+	<select id="count" parameterType="com.hexin.pettyLoan.portals.model.ContentItem" resultType="int" >
+		select count(*) from ptl_content
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="title != null and title != '' ">
+					<![CDATA[
+						AND title like concat('%',#{title},'%')
+					]]>
+				</if>
+				<if test="content != null and content != '' ">
+					<![CDATA[
+						AND content like concat('%',#{content},'%')
+					]]>
+				</if>
+				<if test="isAll != null and isAll != '' ">
+					<![CDATA[
+						AND isall like concat('%',#{isAll},'%')
+					]]>
+				</if>
+				<if test="statusArrayStr != null ">
+					<![CDATA[
+					AND status in (${statusArrayStr})
+					]]>
+					<!-- <foreach sparator=","  item="item"  index="index"  collection="statusArray" open="("   close=")">
+						#{item}
+					</foreach>-->
+				
+				</if>
+		</where>
+	</select>
+	<select id="queryForPortal" parameterType="java.util.Map" resultType="com.hexin.pettyLoan.portals.model.ContentItem">
+		select 
+			id,
+			title,
+			type,
+			file,
+			isall,
+			status,  
+			ctime,
+			mtime,
+			rtime,
+			stime,
+			creater,
+			approveuserid
+		from ptl_content 
+		<where>
+			type in(${types})
+			<![CDATA[
+			AND id in (SELECT id 
+				FROM (SELECT id,type,row_number() OVER (PARTITION BY type ORDER BY id) ts 
+					FROM ptl_content WHERE isvalid = 1) AS t 
+				WHERE ts <=${num})
+			]]>
+		</where>
+		ORDER BY type,id DESC
+	</select>
+</mapper>

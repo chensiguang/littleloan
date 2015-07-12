@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ptl_attachment">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.portals.model.AttachmentItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_ptl_attachment')
+		</selectKey>
+		insert into ptl_attachment(id,type,typeid,filename,filetype,filesize,server,path,ctime,mtime,rtime,creater) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{type,jdbcType=VARCHAR},
+		#{typeid,jdbcType=INTEGER},
+		#{filename,jdbcType=VARCHAR},
+		#{filetype,jdbcType=VARCHAR},
+		#{filesize,jdbcType=BIGINT},
+		#{server,jdbcType=VARCHAR},
+		#{path,jdbcType=VARCHAR},
+		now(),
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update" parameterType="com.hexin.pettyLoan.portals.model.AttachmentItem">
+		update ptl_attachment
+		<set>
+			type=#{type},
+			typeid=#{typeid},
+			filename=#{filename},
+			filetype=#{filetype},
+			filesize=#{filesize},
+			server=#{server},
+			path=#{path},
+			mtime=now()
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateByTypeid" parameterType="java.util.Map">
+		update ptl_attachment
+		<set>
+			typeid=#{typeid},
+			mtime=now()
+		</set>
+		<where>
+			isvalid = 1
+			AND id in(${ids})
+		</where>
+	</update>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.portals.model.AttachmentItem">
+		update ptl_attachment set isvalid=0, mtime=now() where id=#{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.portals.model.AttachmentItem" parameterType="com.hexin.pettyLoan.portals.model.AttachmentItem">
+		select 
+			id,type,typeid,filename,filetype,filesize,server,path,ctime,mtime,rtime,creater,isvalid
+ 		from ptl_attachment 
+ 		<where>
+			isvalid = 1
+			AND id = #{id} 
+		</where>
+	</select>
+	
+	<select id="query" parameterType="com.hexin.pettyLoan.portals.model.AttachmentItem" resultType="com.hexin.pettyLoan.portals.model.AttachmentItem">
+		select 
+			id,type,typeid,filename,filetype,filesize,server,path,ctime,mtime,rtime,creater,isvalid
+ 		from ptl_attachment 
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="type != null and type != '' ">
+					<![CDATA[
+						AND type = #{type}
+					]]>
+				</if>
+				<if test="typeid != null and typeid != '' ">
+					<![CDATA[
+						AND typeid = #{typeid}
+					]]>
+				</if>
+				<if test="filename != null and filename != '' ">
+					<![CDATA[
+						AND filename like concat('%',#{filename},'%')
+					]]>
+				</if>
+				<if test="filetype != null and filetype != '' ">
+					<![CDATA[
+						AND filetype = #{filetype}
+					]]>
+				</if>
+				<if test="server != null and server != '' ">
+					<![CDATA[
+						AND server = #{server}
+					]]>
+				</if>
+		</where>
+	</select>
+	<select id="count" parameterType="com.hexin.pettyLoan.portals.model.AttachmentItem" resultType="int" >
+		select count(*) from ptl_attachment
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="type != null and type != '' ">
+					<![CDATA[
+						AND type = #{type}
+					]]>
+				</if>
+				<if test="typeid != null and typeid != '' ">
+					<![CDATA[
+						AND typeid = #{typeid}
+					]]>
+				</if>
+				<if test="filename != null and filename != '' ">
+					<![CDATA[
+						AND filename like concat('%',#{filename},'%')
+					]]>
+				</if>
+				<if test="filetype != null and filetype != '' ">
+					<![CDATA[
+						AND filetype = #{filetype}
+					]]>
+				</if>
+				<if test="server != null and server != '' ">
+					<![CDATA[
+						AND server = #{server}
+					]]>
+				</if>
+		</where>
+	</select>
+	<select id="page" parameterType="com.hexin.pettyLoan.portals.model.AttachmentItem" resultType="com.hexin.pettyLoan.portals.model.AttachmentItem">
+		select 
+			id,type,typeid,filename,filetype,filesize,server,path,ctime,mtime,rtime,creater,isvalid
+ 		from ptl_attachment 
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="type != null and type != '' ">
+					<![CDATA[
+						AND type = #{type}
+					]]>
+				</if>
+				<if test="typeid != null and typeid != '' ">
+					<![CDATA[
+						AND typeid = #{typeid}
+					]]>
+				</if>
+				<if test="filename != null and filename != '' ">
+					<![CDATA[
+						AND filename like concat('%',#{filename},'%')
+					]]>
+				</if>
+				<if test="filetype != null and filetype != '' ">
+					<![CDATA[
+						AND filetype = #{filetype}
+					]]>
+				</if>
+				<if test="server != null and server != '' ">
+					<![CDATA[
+						AND server = #{server}
+					]]>
+				</if>
+		</where>
+		order by id desc
+		limit #{rows} offset #{start}
+	</select>
+</mapper>

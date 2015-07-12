@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ptl_marquee">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.portals.model.MarqueeItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_ptl_marquee')
+		</selectKey>
+		insert into ptl_marquee(id,title,contentid,pic,type,contentsummary,
+		ctime,rtime,creater) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{title,jdbcType=VARCHAR},
+		#{contentId,jdbcType=VARCHAR},
+		#{pic,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{contentSummary,jdbcType=VARCHAR},
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update" parameterType="com.hexin.pettyLoan.portals.model.MarqueeItem">
+		update ptl_marquee
+		<set>
+			<if test="title != null and title != '' ">
+				<![CDATA[
+				title=#{title},
+				]]>
+			</if>
+			<if test="url != null and url != ''">
+				<![CDATA[
+				url=#{url},
+				]]>
+			</if>
+			<if test="type != null and type != '' ">
+				<![CDATA[
+				type=#{type},
+				]]>
+			</if>
+			<if test="contentSummary != null and contentSummary != '' ">
+				<![CDATA[
+				contentsummary=#{contentSummary},
+				]]>
+			</if>
+			<if test="pic != null and pic != 0">
+				<![CDATA[
+				pic=#{pic},
+				]]>
+			</if>
+			<if test="sortNo != null and sortNo != 0">
+				<![CDATA[
+				sortno=#{sortNo},
+				]]>
+			</if>
+			<if test="creater != null and creater != 0">
+				<![CDATA[
+				creater=#{creater},
+				]]>
+			</if>
+			<if test="status != null">
+				<![CDATA[
+				status=#{status},
+				]]>
+			</if>
+			mtime=now()
+		</set>
+		<if test="id != -999">
+				<![CDATA[
+				where id = #{id}        
+				]]>
+			</if>
+		
+	</update>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.portals.model.MarqueeItem">
+		update ptl_marquee set isvalid=0 where id=#{id}
+	</delete>
+	<select id="getone" parameterType="com.hexin.pettyLoan.portals.model.MarqueeItem" resultType="com.hexin.pettyLoan.portals.model.MarqueeItem">
+		select 
+			id,
+			title,
+			type,
+			contentid,
+			contentsummary,
+			url,
+			ctime,
+			mtime,
+			rtime,
+			pic,
+			creater,
+			sortno,
+			status
+		from ptl_marquee
+		<where>
+			isvalid = 1
+			<if test="id != null and id != 0 ">
+				<![CDATA[
+					AND id = #{id} 
+				]]>
+			</if>
+		</where>
+	</select>
+	<select id="query" parameterType="com.hexin.pettyLoan.portals.model.MarqueeItem" resultType="com.hexin.pettyLoan.portals.model.MarqueeItem">
+		select 
+			id,
+			title,
+			type,
+			contentid,
+			contentsummary,
+			url,
+			ctime,
+			mtime,
+			rtime,
+			pic,
+			creater,
+			sortno,
+			status
+		from ptl_marquee 
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="title != null and title != '' ">
+					<![CDATA[
+						AND title like concat('%',#{title},'%')
+					]]>
+				</if>
+				<if test="contentId != null and contentId != 0">
+					<![CDATA[
+						AND contentid =#{contentId}
+					]]>
+				</if>
+				<if test="status != null">
+					<![CDATA[
+						AND status =#{status}
+					]]>
+				</if>
+		</where>
+		order by status desc,sortno,ctime desc
+			<if test="rows != null and start != null ">
+				<![CDATA[
+					limit #{rows} offset #{start}
+				]]>
+			</if>
+			
+	</select>
+	<select id="count" parameterType="com.hexin.pettyLoan.portals.model.MarqueeItem" resultType="int" >
+		select count(*) from ptl_marquee
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="title != null and title != '' ">
+					<![CDATA[
+						AND title like concat('%',#{title},'%')
+					]]>
+				</if>
+				<if test="contentId != null and contentId != 0">
+					<![CDATA[
+						AND contentid =#{contentId}
+					]]>
+				</if>
+				<if test="status != null">
+					<![CDATA[
+						AND status =#{status}
+					]]>
+				</if>
+		</where>
+	</select>
+</mapper>

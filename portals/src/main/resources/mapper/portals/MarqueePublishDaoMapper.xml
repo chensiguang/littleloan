@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ptl_marquee_publish">
+	<insert id="insert"  parameterType="com.hexin.pettyLoan.portals.model.MarqueePublishItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_ptl_marquee_publish')
+		</selectKey>
+		insert into ptl_marquee_publish(id,description,solution,status,stime,
+		ctime,rtime,creater) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{description,jdbcType=VARCHAR},
+		#{solution,jdbcType=VARCHAR},
+		0,
+		now(),
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update"  parameterType="com.hexin.pettyLoan.portals.model.MarqueePublishItem">
+		update ptl_marquee_publish
+		<set>
+			<if test="description != null and description != '' ">
+				<![CDATA[
+				description=#{description},
+				]]>
+			</if>
+			<if test="solution != null and solution != ''">
+				<![CDATA[
+				solution=#{solution},
+				]]>
+			</if>
+			<if test="status != null and status != '' ">
+				<![CDATA[
+				status=#{status},
+				]]>
+			</if>
+			<if test="approveUserId != null and approveUserId != '' ">
+				<![CDATA[
+				approveuserid=#{approveUserId},
+				]]>
+			</if>
+			mtime=now()
+		</set>
+		where id = #{id}
+	</update>
+	<delete id="delete" parameterType="com.hexin.pettyLoan.portals.model.MarqueePublishItem">
+		update ptl_marquee_publish set isvalid=0 where id=#{id}
+	</delete>
+	<select id="getone" parameterType="com.hexin.pettyLoan.portals.model.MarqueePublishItem" resultType="com.hexin.pettyLoan.portals.model.MarqueePublishItem">
+		select 
+			id,
+			description,
+			solution,
+			stime,
+			ctime,
+			mtime,
+			rtime,
+			creater,
+			status,
+			approveuserid
+		from ptl_marquee_publish
+		<where>
+			isvalid = 1
+			<if test="id != null and id != 0 ">
+				<![CDATA[
+					AND id = #{id} 
+				]]>
+			</if>
+		</where>
+	</select>
+	<select id="query" parameterType="com.hexin.pettyLoan.portals.model.MarqueePublishItem" resultType="com.hexin.pettyLoan.portals.model.MarqueePublishItem">
+		select 
+			id,
+			description,
+			solution,
+			stime,
+			ctime,
+			mtime,
+			rtime,
+			creater,
+			status,
+			approveuserid
+		from ptl_marquee_publish 
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="creater != null and creater != '' ">
+					<![CDATA[
+						AND creater like concat('%',#{creater},'%')
+					]]>
+				</if>
+		</where>
+			<if test="rows != null and start != null ">
+				<![CDATA[
+					limit #{rows} offset #{start}
+				]]>
+			</if>
+	</select>
+	<select id="count" parameterType="com.hexin.pettyLoan.portals.model.MarqueePublishItem" resultType="int" >
+		select count(*) from ptl_marquee_publish
+		<where>
+			isvalid = 1
+				<if test="id != null and id != 0 ">
+					<![CDATA[
+						AND id = #{id} 
+					]]>
+				</if>
+				<if test="creater != null and creater != '' ">
+					<![CDATA[
+						AND creater like concat('%',#{creater},'%')
+					]]>
+				</if>
+		</where>
+	</select>
+</mapper>
