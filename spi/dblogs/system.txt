@@ -1,0 +1,27 @@
+
+
+
+================下面的内容已在2015-7-2发布更新=========================
+================组织功能表 , add by huqitao 2015-7-2=================
+CREATE TABLE sys_orgnization_function
+(
+  id integer NOT NULL,
+  orgnizationtype character varying(20), -- 组织类型
+  functionid integer, -- 功能id
+  CONSTRAINT pk_sys_orgnization_function PRIMARY KEY (id),
+  CONSTRAINT "fk_sys_orgnization_function_functionId" FOREIGN KEY (functionid)
+      REFERENCES sys_function (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT uk_sys_orgnization_function UNIQUE (orgnizationtype, functionid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE sys_orgnization_function
+  OWNER TO petty;
+GRANT ALL ON TABLE sys_orgnization_function TO petty;
+GRANT ALL ON TABLE sys_orgnization_function TO petty_dev;
+COMMENT ON TABLE sys_orgnization_function
+  IS '公司类型与功能关系表，主要用于角色分配功能';
+COMMENT ON COLUMN sys_orgnization_function.orgnizationtype IS '组织类型';
+COMMENT ON COLUMN sys_orgnization_function.functionid IS '功能id';

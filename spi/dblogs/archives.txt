@@ -1,0 +1,529 @@
+/*********************************************************************/
+/********************下面的内容已在2015-07-08发布更新********************/
+/*********************************************************************/
+================sys_function的数据 =================
+INSERT INTO "sys_function" VALUES (1000027, 'AddArchives', '电子档案建档', 'html页面', 'archives/electronicArchives/addArchives.html', 12, '电子档案', '2015-7-8 16:39:28.915303', '2015-7-8 18:24:34.751624', NULL, 1, 1, '电子档案');
+INSERT INTO "sys_function" VALUES (1000029, 'ElectronicArchivesApprove', '电子档案归档、变更审核', 'html页面', 'archives/electronicArchives/approve.html', 12, '电子档案', '2015-7-8 17:19:19.102394', '2015-7-8 18:24:06.35698', NULL, 1, 1, '电子档案');
+INSERT INTO "sys_function" VALUES (1000030, 'QueryElectronicArchives', '电子档案查询', 'html页面', 'archives/electronicArchives/queryArchives.html', 12, '电子档案', '2015-7-8 17:26:23.422947', '2015-7-8 18:24:48.682064', NULL, 1, 1, '电子档案');
+INSERT INTO "sys_function" VALUES (1000031, 'EntityArchives', '实体档案管理', 'html页面', 'archives/entityArchives/list.html', 12, '电子档案', '2015-7-8 17:34:49.670073', '2015-7-8 18:24:41.451756', NULL, 1, 1, '电子档案');
+INSERT INTO "sys_function" VALUES (1000032, 'ArchivesCategory', '档案类别管理', 'html页面', 'archives/archivesCategory/list.html', 12, '电子档案', '2015-7-8 17:39:31.217299', '2015-7-8 17:39:31.217299', NULL, 1, 1, '电子档案');
+INSERT INTO "sys_function" VALUES (1000033, 'UserArchivesAuthority', '用户档案权限管理', 'html页面', 'archives/userArchivesAuthority/list.html', 12, '电子档案', '2015-7-8 17:43:07.087905', '2015-7-8 17:43:07.087905', NULL, 1, 1, '电子档案');
+INSERT INTO "sys_function" VALUES (1000034, 'UserOperationHistory', '日志管理', 'html页面', 'archives/userOperationHistory/list.html', 12, '电子档案', '2015-7-8 17:46:38.189346', '2015-7-8 17:46:38.189346', NULL, 1, 1, '电子档案');
+INSERT INTO "sys_function" VALUES (1000035, 'UserArchivesAutorityApprove', '档案权限审核', 'html页面', 'archives/userArchivesAuthority/approve.html', 12, '电子档案', '2015-7-8 18:22:52.272911', '2015-7-8 18:22:52.272911', NULL, 1, 1, '电子档案');
+
+================sys_menu_function的数据=================
+INSERT INTO "sys_menu_function" VALUES (1000031, 1000034, 1000027, '电子档案建档', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+INSERT INTO "sys_menu_function" VALUES (1000032, 1000034, 1000029, '电子档案审核', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+INSERT INTO "sys_menu_function" VALUES (1000033, 1000034, 1000030, '电子档案管理', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+INSERT INTO "sys_menu_function" VALUES (1000034, 1000034, 1000031, '实体档案管理', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+INSERT INTO "sys_menu_function" VALUES (1000035, 1000034, 1000032, '档案类别管理', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+INSERT INTO "sys_menu_function" VALUES (1000036, 1000034, 1000033, '档案权限管理', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+INSERT INTO "sys_menu_function" VALUES (1000037, 1000034, 1000034, '日志管理', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+INSERT INTO "sys_menu_function" VALUES (1000038, 1000034, 1000035, '档案权限审核', 1, '', '2015-7-8 00:00:00', NULL, '2015-7-8 00:00:00', 1, 1);
+
+================sys_role_function的数据=================
+INSERT INTO "sys_role_function" VALUES (1000081, 1, 1000027, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+INSERT INTO "sys_role_function" VALUES (1000082, 1, 1000029, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+INSERT INTO "sys_role_function" VALUES (1000083, 1, 1000030, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+INSERT INTO "sys_role_function" VALUES (1000084, 1, 1000031, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+INSERT INTO "sys_role_function" VALUES (1000085, 1, 1000032, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+INSERT INTO "sys_role_function" VALUES (1000086, 1, 1000033, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+INSERT INTO "sys_role_function" VALUES (1000087, 1, 1000034, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+INSERT INTO "sys_role_function" VALUES (1000088, 1, 1000035, '2015-7-8 00:00:00', '2015-7-8 00:00:00', NULL, 1, 1);
+
+================sys_flexkey的数据=================
+INSERT INTO "sys_flexkey" VALUES (81, 'archivestatus', '档案状态', '1', '保存', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (82, 'archivestatus', '档案状态', '2', '申请中', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (83, 'archivestatus', '档案状态', '3', '归档', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (84, 'archivestatus', '档案状态', '4', '拒绝', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (85, 'archivesourceterminal', '档案来源（终端）', '1', 'PC', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (86, 'archivesourceterminal', '档案来源（终端）', '2', 'APP', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (87, 'archiveoperationtype', '电子档案模块用户动作', '1', '归档申请', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (88, 'archiveoperationtype', '电子档案模块用户动作', '2', '同意归档', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (89, 'archiveoperationtype', '电子档案模块用户动作', '3', '拒绝归档', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (90, 'archiveoperationtype', '电子档案模块用户动作', '4', '变更申请', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (91, 'archiveoperationtype', '电子档案模块用户动作', '5', '同意变更', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (92, 'archiveoperationtype', '电子档案模块用户动作', '6', '拒绝变更', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (93, 'archiveoperationtype', '电子档案模块用户动作', '7', '电子档案查询', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (94, 'archiveoperationtype', '电子档案模块用户动作', '8', '电子档案详情表示', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (95, 'archiveoperationtype', '电子档案模块用户动作', '9', '电子档案档案预览', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (96, 'archiveoperationtype', '电子档案模块用户动作', '10', '电子档案档案下载', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (97, 'archiveoperationtype', '电子档案模块用户动作', '11', '数据统计', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (98, 'archiveoperationtype', '电子档案模块用户动作', '12', '实体档案查询', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (99, 'archiveoperationtype', '电子档案模块用户动作', '13', '实体档案录入', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (100, 'archiveoperationtype', '电子档案模块用户动作', '14', '实体档案变更', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (101, 'archiveoperationtype', '电子档案模块用户动作', '15', '实体档案借阅', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (102, 'archiveoperationtype', '电子档案模块用户动作', '16', '实体档案续借', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (103, 'archiveoperationtype', '电子档案模块用户动作', '17', '实体档案归还', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (104, 'archiveoperationtype', '电子档案模块用户动作', '18', '实体档案催还', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (105, 'archiveoperationtype', '电子档案模块用户动作', '19', '档案类别查询', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (106, 'archiveoperationtype', '电子档案模块用户动作', '20', '档案类别创建', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (107, 'archiveoperationtype', '电子档案模块用户动作', '21', '档案类别修改', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (108, 'archiveoperationtype', '电子档案模块用户动作', '22', '档案类别删除', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (109, 'archiveoperationtype', '电子档案模块用户动作', '23', '权限申请', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (110, 'archiveoperationtype', '电子档案模块用户动作', '24', '同意权限申请', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (111, 'archiveoperationtype', '电子档案模块用户动作', '25', '拒绝权限申请', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (112, 'archiveoperationtype', '电子档案模块用户动作', '26', '权限查询', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (113, 'archiveoperationtype', '电子档案模块用户动作', '27', '权限设定', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (114, 'archiveoperationtype', '电子档案模块用户动作', '28', '权限解除', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (115, 'archiveauthoritylevel', '电子档案权限级别', '1', '用户', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (116, 'archiveauthoritylevel', '电子档案权限级别', '2', '档案类别', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (117, 'archiveauthoritylevel', '电子档案权限级别', '3', '档案', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (125, 'archivelendstatus', '实体档案借阅状态', '1', '未借出', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (126, 'archivelendstatus', '实体档案借阅状态', '2', '已借出', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (127, 'archivelendstatus', '实体档案借阅状态', '3', '续借', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+INSERT INTO "sys_flexkey" VALUES (128, 'archivelendstatus', '实体档案借阅状态', '4', '归还', '2015-7-6 00:00:00', NULL, 1, 1, NULL);
+
+
+
+
+/*********************************************************************/
+/********************下面的内容已在2015-07-06发布更新********************/
+/*********************************************************************/
+================电子档案基本信息表 =================
+CREATE TABLE arc_electronic
+(
+  id integer NOT NULL, -- 主键ID
+  orgid integer NOT NULL, -- 组织ID
+  arcid integer NOT NULL, -- 档案ID
+  procno smallint NOT NULL, -- 处理序号
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  arcname character varying(256) NOT NULL, -- 档案名称
+  arcno character varying(16), -- 档案编号
+  arccategory character varying(16) NOT NULL, -- 档案类别
+  arcstatus smallint NOT NULL, -- 档案状态
+  customerid integer NOT NULL, -- 所属客户ID
+  customername character varying(8) NOT NULL, -- 所属客户姓名
+  contractno character varying(16), -- 关联合同
+  keywords character varying(32), -- 关键字
+  srcterminal smallint NOT NULL, -- 档案来源(终端)
+  srcsystem smallint NOT NULL, -- 档案来源(系统)
+  arcnoenti character varying(16), -- 实体档案编号
+  creater integer NOT NULL, -- 建档者
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mender integer, -- 变更者
+  mtime timestamp without time zone, -- 变更时间
+  approver integer, -- 审核者
+  atime timestamp without time zone, -- 审核时间
+  CONSTRAINT pk_arc_electronic PRIMARY KEY (id),
+  CONSTRAINT uq_arc_electronic UNIQUE (arcid, procno)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_electronic
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_electronic TO petty;
+GRANT ALL ON TABLE arc_electronic TO petty_dev;
+COMMENT ON TABLE arc_electronic
+  IS '电子档案基本信息表';
+COMMENT ON COLUMN arc_electronic.id IS '主键ID';
+COMMENT ON COLUMN arc_electronic.orgid IS '组织ID';
+COMMENT ON COLUMN arc_electronic.arcid IS '档案ID';
+COMMENT ON COLUMN arc_electronic.procno IS '处理序号';
+COMMENT ON COLUMN arc_electronic.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_electronic.arcname IS '档案名称';
+COMMENT ON COLUMN arc_electronic.arcno IS '档案编号';
+COMMENT ON COLUMN arc_electronic.arccategory IS '档案类别';
+COMMENT ON COLUMN arc_electronic.arcstatus IS '档案状态';
+COMMENT ON COLUMN arc_electronic.customerid IS '所属客户ID';
+COMMENT ON COLUMN arc_electronic.customername IS '所属客户姓名';
+COMMENT ON COLUMN arc_electronic.contractno IS '关联合同';
+COMMENT ON COLUMN arc_electronic.keywords IS '关键字';
+COMMENT ON COLUMN arc_electronic.srcterminal IS '档案来源(终端)';
+COMMENT ON COLUMN arc_electronic.srcsystem IS '档案来源(系统)';
+COMMENT ON COLUMN arc_electronic.arcnoenti IS '实体档案编号';
+COMMENT ON COLUMN arc_electronic.creater IS '建档者';
+COMMENT ON COLUMN arc_electronic.ctime IS '建档时间';
+COMMENT ON COLUMN arc_electronic.mender IS '变更者';
+COMMENT ON COLUMN arc_electronic.mtime IS '变更时间';
+COMMENT ON COLUMN arc_electronic.approver IS '审核者';
+COMMENT ON COLUMN arc_electronic.atime IS '审核时间';
+
+================电子档案附件信息表=================
+CREATE TABLE arc_elec_file
+(
+  id integer NOT NULL, -- 主键ID
+  orgid integer NOT NULL, -- 组织ID
+  arcid integer NOT NULL, -- 档案ID
+  procno smallint NOT NULL, -- 处理序号
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  fileno smallint NOT NULL, -- 文件序号
+  filename character varying(256) NOT NULL, -- 文件名
+  fileid character varying(1024) NOT NULL, -- 文件索引
+  filesize integer NOT NULL, -- 文件大小
+  previewtimes integer NOT NULL DEFAULT 0, -- 预览次数
+  downloadtimes integer NOT NULL DEFAULT 0, -- 下载次数
+  creater integer NOT NULL, -- 建档者
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mender integer, -- 变更者
+  mtime timestamp without time zone, -- 变更时间
+  CONSTRAINT pk_arc_elec_file PRIMARY KEY (id),
+  CONSTRAINT fk_arc_elec_file FOREIGN KEY (arcid, procno)
+      REFERENCES arc_electronic (arcid, procno) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT uq_arc_elec_file UNIQUE (arcid, procno, fileno)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_elec_file
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_elec_file TO petty;
+GRANT ALL ON TABLE arc_elec_file TO petty_dev;
+COMMENT ON TABLE arc_elec_file
+  IS '电子档案附件信息表';
+COMMENT ON COLUMN arc_elec_file.id IS '主键ID';
+COMMENT ON COLUMN arc_elec_file.orgid IS '组织ID';
+COMMENT ON COLUMN arc_elec_file.arcid IS '档案ID';
+COMMENT ON COLUMN arc_elec_file.procno IS '处理序号';
+COMMENT ON COLUMN arc_elec_file.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_elec_file.fileno IS '文件序号';
+COMMENT ON COLUMN arc_elec_file.filename IS '文件名';
+COMMENT ON COLUMN arc_elec_file.fileid IS '文件索引';
+COMMENT ON COLUMN arc_elec_file.filesize IS '文件大小';
+COMMENT ON COLUMN arc_elec_file.previewtimes IS '预览次数';
+COMMENT ON COLUMN arc_elec_file.downloadtimes IS '下载次数';
+COMMENT ON COLUMN arc_elec_file.creater IS '建档者';
+COMMENT ON COLUMN arc_elec_file.ctime IS '建档时间';
+COMMENT ON COLUMN arc_elec_file.mender IS '变更者';
+COMMENT ON COLUMN arc_elec_file.mtime IS '变更时间';
+
+================实体档案基本信息表 =================
+CREATE TABLE arc_entity
+(
+  id integer NOT NULL, -- 主键ID
+  orgid integer NOT NULL, -- 组织ID
+  arcname character varying(256) NOT NULL, -- 档案名称
+  arcno character varying(16) NOT NULL, -- 档案编号
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  arccategory smallint NOT NULL, -- 档案类别
+  arclocation character varying(64) NOT NULL, -- 档案位置
+  lendstatus smallint NOT NULL, -- 借阅状态
+  arcnoelec character varying(16), -- 电子档案编号
+  creater integer NOT NULL, -- 录入者
+  ctime timestamp without time zone NOT NULL, -- 录入时间
+  mender integer, -- 变更者
+  mtime timestamp without time zone, -- 变更时间
+  CONSTRAINT pk_arc_entity PRIMARY KEY (id),
+  CONSTRAINT uq_arc_entity UNIQUE (arcno, isvalid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_entity
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_entity TO petty;
+GRANT ALL ON TABLE arc_entity TO petty_dev;
+COMMENT ON TABLE arc_entity
+  IS '实体档案基本信息表';
+COMMENT ON COLUMN arc_entity.id IS '主键ID';
+COMMENT ON COLUMN arc_entity.orgid IS '组织ID';
+COMMENT ON COLUMN arc_entity.arcname IS '档案名称';
+COMMENT ON COLUMN arc_entity.arcno IS '档案编号';
+COMMENT ON COLUMN arc_entity.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_entity.arccategory IS '档案类别';
+COMMENT ON COLUMN arc_entity.arclocation IS '档案位置';
+COMMENT ON COLUMN arc_entity.lendstatus IS '借阅状态';
+COMMENT ON COLUMN arc_entity.arcnoelec IS '电子档案编号';
+COMMENT ON COLUMN arc_entity.creater IS '录入者';
+COMMENT ON COLUMN arc_entity.ctime IS '录入时间';
+COMMENT ON COLUMN arc_entity.mender IS '变更者';
+COMMENT ON COLUMN arc_entity.mtime IS '变更时间';
+
+================实体档案借阅信息表 =================
+CREATE TABLE arc_enti_lend
+(
+  id integer NOT NULL, -- 主键ID
+  orgid integer NOT NULL, -- 组织ID
+  arcno character varying(16) NOT NULL, -- 档案编号
+  lendno integer NOT NULL, -- 借阅序号
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  borrowerid integer, -- 借阅者ID
+  borrowername character varying(16) NOT NULL, -- 借阅者姓名
+  telno character varying(16), -- 借阅者联系方式
+  lendymd date NOT NULL, -- 借阅时间
+  renewflag smallint NOT NULL DEFAULT 0, -- 是否续借
+  returnymdsche date NOT NULL, -- 归还时间（预定）
+  returnymdreal date, -- 归还时间（实际）
+  urgetimes smallint NOT NULL DEFAULT 0, -- 催还次数
+  creater integer NOT NULL, -- 录入者
+  ctime timestamp without time zone NOT NULL, -- 录入时间
+  mender integer, -- 变更者
+  mtime timestamp without time zone, -- 变更时间
+  CONSTRAINT pk_arc_enti_lend PRIMARY KEY (id),
+  CONSTRAINT uq_arc_enti_lend UNIQUE (arcno, lendno)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_enti_lend
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_enti_lend TO petty;
+GRANT ALL ON TABLE arc_enti_lend TO petty_dev;
+COMMENT ON TABLE arc_enti_lend
+  IS '实体档案借阅信息表';
+COMMENT ON COLUMN arc_enti_lend.id IS '主键ID';
+COMMENT ON COLUMN arc_enti_lend.orgid IS '组织ID';
+COMMENT ON COLUMN arc_enti_lend.arcno IS '档案编号';
+COMMENT ON COLUMN arc_enti_lend.lendno IS '借阅序号';
+COMMENT ON COLUMN arc_enti_lend.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_enti_lend.borrowerid IS '借阅者ID';
+COMMENT ON COLUMN arc_enti_lend.borrowername IS '借阅者姓名';
+COMMENT ON COLUMN arc_enti_lend.telno IS '借阅者联系方式';
+COMMENT ON COLUMN arc_enti_lend.lendymd IS '借阅时间';
+COMMENT ON COLUMN arc_enti_lend.renewflag IS '是否续借';
+COMMENT ON COLUMN arc_enti_lend.returnymdsche IS '归还时间（预定）';
+COMMENT ON COLUMN arc_enti_lend.returnymdreal IS '归还时间（实际）';
+COMMENT ON COLUMN arc_enti_lend.urgetimes IS '催还次数';
+COMMENT ON COLUMN arc_enti_lend.creater IS '录入者';
+COMMENT ON COLUMN arc_enti_lend.ctime IS '录入时间';
+COMMENT ON COLUMN arc_enti_lend.mender IS '变更者';
+COMMENT ON COLUMN arc_enti_lend.mtime IS '变更时间';
+
+================实体档案催还记录表 =================
+CREATE TABLE arc_enti_urgereturn
+(
+  id integer NOT NULL, -- 主键ID
+  orgid integer NOT NULL, -- 组织ID
+  arcno character varying(16) NOT NULL, -- 档案编号
+  lendno integer NOT NULL, -- 借阅序号
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  urgenotes character varying(512), -- 备注
+  creater integer NOT NULL, -- 催还者
+  ctime timestamp without time zone NOT NULL, -- 催还时间
+  mender integer, -- 变更者
+  mtime timestamp without time zone, -- 变更时间
+  CONSTRAINT pk_arc_enti_urgereturn PRIMARY KEY (id),
+  CONSTRAINT fk_arc_enti_urgereturn FOREIGN KEY (arcno, lendno)
+      REFERENCES arc_enti_lend (arcno, lendno) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_enti_urgereturn
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_enti_urgereturn TO petty;
+GRANT ALL ON TABLE arc_enti_urgereturn TO petty_dev;
+COMMENT ON TABLE arc_enti_urgereturn
+  IS '实体档案催还记录表';
+COMMENT ON COLUMN arc_enti_urgereturn.id IS '主键ID';
+COMMENT ON COLUMN arc_enti_urgereturn.orgid IS '组织ID';
+COMMENT ON COLUMN arc_enti_urgereturn.arcno IS '档案编号';
+COMMENT ON COLUMN arc_enti_urgereturn.lendno IS '借阅序号';
+COMMENT ON COLUMN arc_enti_urgereturn.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_enti_urgereturn.urgenotes IS '备注';
+COMMENT ON COLUMN arc_enti_urgereturn.creater IS '催还者';
+COMMENT ON COLUMN arc_enti_urgereturn.ctime IS '催还时间';
+COMMENT ON COLUMN arc_enti_urgereturn.mender IS '变更者';
+COMMENT ON COLUMN arc_enti_urgereturn.mtime IS '变更时间';
+
+================档案类别信息表=================
+CREATE TABLE arc_category
+(
+  id integer NOT NULL, -- 类别ID
+  orgid integer NOT NULL, -- 组织ID
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  name character varying(16) NOT NULL, -- 类别名称
+  parentid smallint NOT NULL, -- 父类别ID
+  path text NOT NULL, -- 类别路径
+  depth smallint NOT NULL, -- 类别深度
+  notes character varying(512), -- 备注
+  creater integer NOT NULL, -- 创建者
+  ctime timestamp without time zone NOT NULL, -- 创建时间
+  mender integer, -- 修改者
+  mtime timestamp without time zone, -- 修改时间
+  CONSTRAINT pk_arc_category PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_category
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_category TO petty;
+GRANT ALL ON TABLE arc_category TO petty_dev;
+COMMENT ON TABLE arc_category
+  IS '档案类别信息表';
+COMMENT ON COLUMN arc_category.id IS '类别ID';
+COMMENT ON COLUMN arc_category.orgid IS '组织ID';
+COMMENT ON COLUMN arc_category.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_category.name IS '类别名称';
+COMMENT ON COLUMN arc_category.parentid IS '父类别ID';
+COMMENT ON COLUMN arc_category.path IS '类别路径';
+COMMENT ON COLUMN arc_category.depth IS '类别深度';
+COMMENT ON COLUMN arc_category.notes IS '备注';
+COMMENT ON COLUMN arc_category.creater IS '创建者';
+COMMENT ON COLUMN arc_category.ctime IS '创建时间';
+COMMENT ON COLUMN arc_category.mender IS '修改者';
+COMMENT ON COLUMN arc_category.mtime IS '修改时间';
+
+================用户档案权限表 =================
+CREATE TABLE arc_authority
+(
+  id integer NOT NULL, -- 主键ID
+  orgid integer NOT NULL, -- 组织ID
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  level smallint NOT NULL, -- 权限级别（1:用户 2:类别 3:档案）
+  type smallint NOT NULL, -- 设定/解除（1:设定 2:解除）
+  userid integer NOT NULL, -- 用户
+  targetuser integer, -- 对象用户
+  arccategory smallint, -- 档案类别
+  arcno character varying(16), -- 档案编号
+  creater integer NOT NULL, -- 设定者
+  ctime timestamp without time zone NOT NULL, -- 设定时间
+  mender integer, -- 变更者
+  mtime timestamp without time zone, -- 变更时间
+  CONSTRAINT pk_arc_authority PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_authority
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_authority TO petty;
+GRANT ALL ON TABLE arc_authority TO petty_dev;
+COMMENT ON TABLE arc_authority
+  IS '用户档案权限表';
+COMMENT ON COLUMN arc_authority.id IS '主键ID';
+COMMENT ON COLUMN arc_authority.orgid IS '组织ID';
+COMMENT ON COLUMN arc_authority.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_authority.level IS '权限级别（1:用户 2:类别 3:档案）';
+COMMENT ON COLUMN arc_authority.type IS '设定/解除（1:设定 2:解除）';
+COMMENT ON COLUMN arc_authority.userid IS '用户';
+COMMENT ON COLUMN arc_authority.targetuser IS '对象用户';
+COMMENT ON COLUMN arc_authority.arccategory IS '档案类别';
+COMMENT ON COLUMN arc_authority.arcno IS '档案编号';
+COMMENT ON COLUMN arc_authority.creater IS '设定者';
+COMMENT ON COLUMN arc_authority.ctime IS '设定时间';
+COMMENT ON COLUMN arc_authority.mender IS '变更者';
+COMMENT ON COLUMN arc_authority.mtime IS '变更时间';
+
+================用户操作记录表 =================
+CREATE TABLE arc_operation
+(
+  id integer NOT NULL, -- 主键ID
+  orgid integer NOT NULL, -- 组织ID
+  isvalid smallint NOT NULL DEFAULT 1, -- 有效标识
+  opertype smallint NOT NULL, -- 动作
+  arcno character varying(16), -- 档案编号
+  creater integer NOT NULL, -- 操作者
+  ctime timestamp without time zone NOT NULL, -- 操作时间
+  mender integer, -- 变更者
+  mtime timestamp without time zone, -- 变更时间
+  CONSTRAINT pk_arc_operation PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE arc_operation
+  OWNER TO petty;
+GRANT ALL ON TABLE arc_operation TO petty;
+GRANT ALL ON TABLE arc_operation TO petty_dev;
+COMMENT ON TABLE arc_operation
+  IS '用户操作记录表';
+COMMENT ON COLUMN arc_operation.id IS '主键ID';
+COMMENT ON COLUMN arc_operation.orgid IS '组织ID';
+COMMENT ON COLUMN arc_operation.isvalid IS '有效标识';
+COMMENT ON COLUMN arc_operation.opertype IS '动作';
+COMMENT ON COLUMN arc_operation.arcno IS '档案编号';
+COMMENT ON COLUMN arc_operation.creater IS '操作者';
+COMMENT ON COLUMN arc_operation.ctime IS '操作时间';
+COMMENT ON COLUMN arc_operation.mender IS '变更者';
+COMMENT ON COLUMN arc_operation.mtime IS '变更时间';
+
+================序列:seq_arc_authority=================
+CREATE SEQUENCE seq_arc_authority
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_authority
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_authority TO petty;
+GRANT ALL ON TABLE seq_arc_authority TO petty_dev;
+
+================序列:seq_arc_category=================
+CREATE SEQUENCE seq_arc_category
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_category
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_category TO petty;
+GRANT ALL ON TABLE seq_arc_category TO petty_dev;
+
+================序列:seq_arc_elec_file=================
+CREATE SEQUENCE seq_arc_elec_file
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_elec_file
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_elec_file TO petty;
+GRANT ALL ON TABLE seq_arc_elec_file TO petty_dev;
+
+================序列:seq_arc_electronic=================
+CREATE SEQUENCE seq_arc_electronic
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_electronic
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_electronic TO petty;
+GRANT ALL ON TABLE seq_arc_electronic TO petty_dev;
+
+================序列:seq_arc_enti_lend=================
+CREATE SEQUENCE seq_arc_enti_lend
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_enti_lend
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_enti_lend TO petty;
+GRANT ALL ON TABLE seq_arc_enti_lend TO petty_dev;
+
+================序列:seq_arc_enti_urgereturn=================
+CREATE SEQUENCE seq_arc_enti_urgereturn
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_enti_urgereturn
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_enti_urgereturn TO petty;
+GRANT ALL ON TABLE seq_arc_enti_urgereturn TO petty_dev;
+
+================序列:seq_arc_entity=================
+CREATE SEQUENCE seq_arc_entity
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_entity
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_entity TO petty;
+GRANT ALL ON TABLE seq_arc_entity TO petty_dev;
+
+================序列:seq_arc_operation=================
+CREATE SEQUENCE seq_arc_operation
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE seq_arc_operation
+  OWNER TO petty;
+GRANT ALL ON TABLE seq_arc_operation TO petty;
+GRANT ALL ON TABLE seq_arc_operation TO petty_dev;

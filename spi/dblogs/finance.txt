@@ -1,0 +1,1197 @@
+================系统开关表 =================
+CREATE TABLE sys_switch_info
+(
+  id integer NOT NULL, -- 主键ID
+  controlparam character varying(16) , -- 控制参数
+  paramname character varying(16) , -- 参数名称
+  paramvalue smallint , -- 参数值
+  editflag smallint , -- 可修改标志
+  remark character varying(256) , -- 参数说明
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_sys_switch_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE sys_switch_info
+  OWNER TO petty;
+COMMENT ON TABLE sys_switch_info
+  IS '系统开关表';
+COMMENT ON COLUMN sys_switch_info.id IS '主键ID';
+COMMENT ON COLUMN sys_switch_info.controlparam IS '控制参数';
+COMMENT ON COLUMN sys_switch_info.paramname IS '参数名称';
+COMMENT ON COLUMN sys_switch_info.paramvalue IS '参数值';
+COMMENT ON COLUMN sys_switch_info.editflag IS '可修改标志';
+COMMENT ON COLUMN sys_switch_info.remark IS '参数说明';
+COMMENT ON COLUMN sys_switch_info.orgid IS '公司ID';
+COMMENT ON COLUMN sys_switch_info.creater IS '创建人';
+COMMENT ON COLUMN sys_switch_info.ctime IS '建档时间';
+COMMENT ON COLUMN sys_switch_info.mtime IS '变更时间';
+COMMENT ON COLUMN sys_switch_info.rtime IS '同步时间';
+COMMENT ON COLUMN sys_switch_info.isvalid IS '是否有效';
+ 
+
+================现金流量与会计科目关系表 =================
+CREATE TABLE fa_cash_flow_type_sub_info
+(
+  id integer NOT NULL, -- 主键ID
+  typeid integer NOT NULL, -- 现金流量类别ID
+  typecode character varying(16) , -- 现金流量类别编码
+  typename character varying(32), -- 现金流量类别名称
+  parentid integer , -- 上级ID
+  subid integer , -- 会计科目ID
+  subcode character varying(16), -- 会计科目代码
+  subname character varying(32), -- 会计科目名称
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_cash_flow_type_sub_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_cash_flow_type_sub_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_cash_flow_type_sub_info
+  IS '现金流量与会计科目关系表';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.id IS '主键ID';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.typeid IS '现金流量类别ID';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.typecode IS '现金流量类别编码';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.typename IS '现金流量类别名称';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.parentid IS '上级ID';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.subid IS '会计科目ID';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.subcode IS '会计科目代码';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.subname IS '会计科目名称';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.creater IS '创建人';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_cash_flow_type_sub_info.isvalid IS '是否有效';
+
+
+================现金流量类别配置表 =================
+CREATE TABLE fa_cash_type_info
+(
+  id integer NOT NULL, -- 主键ID
+  typecode character varying(16), -- 类别编码
+  typecode1 character varying(16), -- 一级编码
+  typecode2 character varying(16), -- 二级编码
+  typecode3 character varying(16), -- 三级编码
+  typecode4 character varying(16), -- 四级编码
+  typecode5 character varying(16), -- 五级编码
+  typename character varying(16), -- 类别名称
+  level smallint, -- 级别
+  sign smallint , -- 流入流出标志(1流入,2流出,3其他)
+  islast smallint, -- 是否末级
+  itemflag smallint, -- 主附表(1主表项目,2附表项目)
+  parentid integer, -- 上级ID
+  parentcode character varying(16), -- 上级编码
+  parentname character varying(32), -- 上级名称
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_cash_type_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_cash_type_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_cash_type_info
+  IS '现金流量类别配置表';
+COMMENT ON COLUMN fa_cash_type_info.id IS '主键ID';
+COMMENT ON COLUMN fa_cash_type_info.typecode IS '类别编码';
+COMMENT ON COLUMN fa_cash_type_info.typecode1 IS '一级编码';
+COMMENT ON COLUMN fa_cash_type_info.typecode2 IS '二级编码';
+COMMENT ON COLUMN fa_cash_type_info.typecode3 IS '三级编码';
+COMMENT ON COLUMN fa_cash_type_info.typecode4 IS '四级编码';
+COMMENT ON COLUMN fa_cash_type_info.typecode5 IS '五级编码';
+COMMENT ON COLUMN fa_cash_type_info.typename IS '类别名称';
+COMMENT ON COLUMN fa_cash_type_info.level IS '级别';
+COMMENT ON COLUMN fa_cash_type_info.sign IS '流入流出标志(1流入,2流出,3其他)';
+COMMENT ON COLUMN fa_cash_type_info.islast IS '是否末级';
+COMMENT ON COLUMN fa_cash_type_info.itemflag IS '主附表(1主表项目,2附表项目)';
+COMMENT ON COLUMN fa_cash_type_info.parentid IS '上级ID';
+COMMENT ON COLUMN fa_cash_type_info.parentcode IS '上级编码';
+COMMENT ON COLUMN fa_cash_type_info.parentname IS '上级名称';
+COMMENT ON COLUMN fa_cash_type_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_cash_type_info.creater IS '创建人';
+COMMENT ON COLUMN fa_cash_type_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_cash_type_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_cash_type_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_cash_type_info.isvalid IS '是否有效';
+
+
+================系统费率表 =================
+CREATE TABLE fa_sys_rate_info
+(
+  id integer NOT NULL, -- 主键ID
+  ratecode character varying(16), -- 系统费率代码
+  ratename character varying(32), -- 费率名称
+  initrate decimal(16,8), -- 初始费率
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_sys_rate_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_sys_rate_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_sys_rate_info
+  IS '系统费率表';
+COMMENT ON COLUMN fa_sys_rate_info.id IS '主键ID';
+COMMENT ON COLUMN fa_sys_rate_info.ratecode IS '系统费率代码';
+COMMENT ON COLUMN fa_sys_rate_info.ratename IS '费率名称';
+COMMENT ON COLUMN fa_sys_rate_info.initrate IS '初始费率';
+COMMENT ON COLUMN fa_sys_rate_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_sys_rate_info.creater IS '创建人';
+COMMENT ON COLUMN fa_sys_rate_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_sys_rate_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_sys_rate_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_sys_rate_info.isvalid IS '是否有效';
+
+
+================现金日记账信息表 =================
+CREATE TABLE fa_cash_account_regist_info
+(
+  id integer NOT NULL, -- 主键ID
+  cashpoolid integer , -- 现金ID
+  occurdate date , -- 发生日期
+  summary character varying(256), -- 摘要
+  billno character varying(32) , -- 单据编号
+  cashperiod smallint, -- 出纳周期
+  subname character varying(32), -- 科目名称
+  debitamo decimal(16,2) , -- 借方金额
+  loanamo decimal(16,2), -- 贷方金额
+  accountflag smallint, -- 对账标志
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_cash_account_regist_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_cash_account_regist_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_cash_account_regist_info
+  IS '现金日记账信息表';
+COMMENT ON COLUMN fa_cash_account_regist_info.id IS '主键ID';
+COMMENT ON COLUMN fa_cash_account_regist_info.cashpoolid IS '现金ID';
+COMMENT ON COLUMN fa_cash_account_regist_info.occurdate IS '发生日期';
+COMMENT ON COLUMN fa_cash_account_regist_info.summary IS '摘要';
+COMMENT ON COLUMN fa_cash_account_regist_info.billno IS '单据编号';
+COMMENT ON COLUMN fa_cash_account_regist_info.cashperiod IS '出纳周期';
+COMMENT ON COLUMN fa_cash_account_regist_info.subname IS '科目名称';
+COMMENT ON COLUMN fa_cash_account_regist_info.debitamo IS '借方金额';
+COMMENT ON COLUMN fa_cash_account_regist_info.loanamo IS '贷方金额';
+COMMENT ON COLUMN fa_cash_account_regist_info.accountflag IS '对账标志';
+COMMENT ON COLUMN fa_cash_account_regist_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_cash_account_regist_info.creater IS '创建人';
+COMMENT ON COLUMN fa_cash_account_regist_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_cash_account_regist_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_cash_account_regist_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_cash_account_regist_info.isvalid IS '是否有效';
+
+
+================现金信息表 =================
+CREATE TABLE fa_cash_pool_info
+(
+  id integer NOT NULL, -- 主键ID
+  subid integer NOT NUL , -- 科目ID
+  subcode character varying(16) , --科目代码
+  subname character varying(32) , --科目名称
+  cashpoolname character varying(32), -- 现金名称
+  cashbalance decimal(16,2) NOT NULL, -- 库存现金余额
+  createdate date, -- 创建日期
+  canclesign smallint, -- 销户标志
+  cancledate date, -- 销户日期
+  remark character varying(256), -- 备注
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_cash_pool_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_cash_pool_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_cash_pool_info
+  IS '现金信息表';
+COMMENT ON COLUMN fa_cash_pool_info.id IS '主键ID';
+COMMENT ON COLUMN fa_cash_pool_info.subid IS '科目ID';
+COMMENT ON COLUMN fa_cash_pool_info.subcode IS '科目代码';
+COMMENT ON COLUMN fa_cash_pool_info.subname IS '科目名称';
+COMMENT ON COLUMN fa_cash_pool_info.cashpoolname IS '现金名称';
+COMMENT ON COLUMN fa_cash_pool_info.cashbalance IS '库存现金余额';
+COMMENT ON COLUMN fa_cash_pool_info.createdate IS '创建日期';
+COMMENT ON COLUMN fa_cash_pool_info.canclesign IS '销户标志';
+COMMENT ON COLUMN fa_cash_pool_info.cancledate IS '销户日期';
+COMMENT ON COLUMN fa_cash_pool_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_cash_pool_info.creater IS '创建人';
+COMMENT ON COLUMN fa_cash_pool_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_cash_pool_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_cash_pool_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_cash_pool_info.isvalid IS '是否有效';
+
+
+================银行日记账信息表 =================
+CREATE TABLE fa_bank_account_regist_info
+(
+  id integer NOT NULL, -- 主键ID
+  bankaccountid integer , -- 银行账户ID
+  bankaccountno character varying(32), -- 银行账号
+  bankname character varying(32), -- 银行名称
+  occurdate date , -- 发生日期
+  summary character varying(256), -- 摘要
+  billno character varying(32), -- 单据编号
+  cashperiod smallint, -- 出纳周期
+  settletype smallint, -- 结算方式
+  settlenum character varying(32), -- 结算号
+  othercompname character varying(32) , -- 对方单位名称
+  debitamo decimal(16,2) , -- 借方金额
+  loanamo decimal(16,2), -- 贷方金额
+  accountflag smallint, -- 对账标志
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_bank_account_regist_info PRIMARY KEY (id),
+  CONSTRAINT uq_fa_bank_account_regist_info UNIQUE (arcid, procno)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_bank_account_regist_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_bank_account_regist_info
+  IS '银行日记账信息表';
+COMMENT ON COLUMN fa_bank_account_regist_info.id IS '主键ID';
+COMMENT ON COLUMN fa_bank_account_regist_info.bankaccountid IS '银行账户ID';
+COMMENT ON COLUMN fa_bank_account_regist_info.bankaccountno IS '银行账号';
+COMMENT ON COLUMN fa_bank_account_regist_info.bankname IS '银行名称';
+COMMENT ON COLUMN fa_bank_account_regist_info.occurdate IS '发生日期';
+COMMENT ON COLUMN fa_bank_account_regist_info.summary IS '摘要';
+COMMENT ON COLUMN fa_bank_account_regist_info.billno IS '单据编号';
+COMMENT ON COLUMN fa_bank_account_regist_info.cashperiod IS '出纳周期';
+COMMENT ON COLUMN fa_bank_account_regist_info.settletype IS '结算方式';
+COMMENT ON COLUMN fa_bank_account_regist_info.settlenum IS '结算号';
+COMMENT ON COLUMN fa_bank_account_regist_info.othercompname IS '对方单位名称';
+COMMENT ON COLUMN fa_bank_account_regist_info.debitamo IS '借方金额';
+COMMENT ON COLUMN fa_bank_account_regist_info.loanamo IS '贷方金额';
+COMMENT ON COLUMN fa_bank_account_regist_info.accountflag IS '对账标志';
+COMMENT ON COLUMN fa_bank_account_regist_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_bank_account_regist_info.creater IS '创建人';
+COMMENT ON COLUMN fa_bank_account_regist_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_bank_account_regist_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_bank_account_regist_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_bank_account_regist_info.isvalid IS '是否有效';
+
+
+================银行账户信息表 =================
+CREATE TABLE fa_bank_account_info
+(
+  id integer NOT NULL, -- 主键ID
+  subid integer NOT NUL , -- 科目ID
+  subcode character varying(16) , --科目代码
+  subname character varying(32) , --科目名称
+  bankname character varying(32), -- 银行名称
+  type smallint NOT NULL , -- 账户类别
+  bankaccount character varying(32) NOT NULL, -- 银行账号
+  bankbalance decimal(16,2) NOT NULL, -- 银行存款余额
+  opendate date NOT NULL, -- 开户日期
+  useprint character varying(16), -- 使用印签
+  canclesign smallint, -- 销户标志
+  cancledate date, -- 销户日期
+  remark character varying(256), -- 备注
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_bank_account_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_bank_account_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_bank_account_info
+  IS '银行账户信息表';
+COMMENT ON COLUMN fa_bank_account_info.id IS '主键ID';
+COMMENT ON COLUMN fa_bank_account_info.subid IS '科目ID';
+COMMENT ON COLUMN fa_bank_account_info.subcode IS '科目代码';
+COMMENT ON COLUMN fa_bank_account_info.subname IS '科目名称';
+COMMENT ON COLUMN fa_bank_account_info.bankname IS '银行名称';
+COMMENT ON COLUMN fa_bank_account_info.type IS '账户类别';
+COMMENT ON COLUMN fa_bank_account_info.bankaccount IS '银行账号';
+COMMENT ON COLUMN fa_bank_account_info.bankbalance IS '银行存款余额';
+COMMENT ON COLUMN fa_bank_account_info.opendate IS '开户日期';
+COMMENT ON COLUMN fa_bank_account_info.useprint IS '使用印签';
+COMMENT ON COLUMN fa_bank_account_info.canclesign IS '销户标志';
+COMMENT ON COLUMN fa_bank_account_info.cancledate IS '销户日期';
+COMMENT ON COLUMN fa_bank_account_info.remark IS '备注';
+COMMENT ON COLUMN fa_bank_account_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_bank_account_info.creater IS '创建人';
+COMMENT ON COLUMN fa_bank_account_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_bank_account_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_bank_account_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_bank_account_info.isvalid IS '是否有效';
+
+
+================辅助核算信息表 =================
+CREATE TABLE fa_adjust_info
+(
+  id integer NOT NULL, -- 主键ID
+  infotype smallint, -- 信息类别（辅助类别/辅助名称）
+  adjustcode character varying(16), -- 编码
+  adjustname character varying(16), -- 名称
+  level smallint, -- 级别
+  parentid integer , -- 上级ID
+  sourceid integer , -- 信息来源ID
+  remark character varying(256), -- 说明
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_adjust_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_adjust_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_adjust_info
+  IS '辅助核算信息表';
+COMMENT ON COLUMN fa_adjust_info.id IS '主键ID';
+COMMENT ON COLUMN fa_adjust_info.infotype IS '信息类别（辅助类别/辅助名称）';
+COMMENT ON COLUMN fa_adjust_info.adjustcode IS '编码';
+COMMENT ON COLUMN fa_adjust_info.adjustname IS '名称';
+COMMENT ON COLUMN fa_adjust_info.level IS '级别';
+COMMENT ON COLUMN fa_adjust_info.parentid IS '上级ID';
+COMMENT ON COLUMN fa_adjust_info.sourceid IS '信息来源ID';
+COMMENT ON COLUMN fa_adjust_info.remark IS '说明';
+COMMENT ON COLUMN fa_adjust_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_adjust_info.creater IS '创建人';
+COMMENT ON COLUMN fa_adjust_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_adjust_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_adjust_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_adjust_info.isvalid IS '是否有效';
+
+
+================财务周期信息表 =================
+CREATE TABLE fa_period_info
+(
+  id integer NOT NULL, -- 主键ID
+  period smallint NOT NULL, -- 财务周期
+  periodtype smallint NOT NULL, -- 周期类型
+  state smallint NOT NULL, -- 结转状态
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_period_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_period_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_period_info
+  IS '财务周期信息表';
+COMMENT ON COLUMN fa_period_info.id IS '主键ID';
+COMMENT ON COLUMN fa_period_info.period IS '财务周期';
+COMMENT ON COLUMN fa_period_info.periodtype IS '周期类型';
+COMMENT ON COLUMN fa_period_info.state IS '结转状态';
+COMMENT ON COLUMN fa_period_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_period_info.creater IS '创建人';
+COMMENT ON COLUMN fa_period_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_period_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_period_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_period_info.isvalid IS '是否有效';
+
+
+================会计期末结转信息表 =================
+CREATE TABLE fa_final_turn_info
+(
+  id integer NOT NULL, -- 主键ID
+  accountperiod smallint , -- 会计周期
+  flag smallint NOT NULL, -- 结转标志
+  vouchernum smallint NOT NULL, -- 凭证张数
+  workreport character varying(512), -- 工作报告
+  appstate smallint NOT NULL, -- 申请状态
+  applyid integer, -- 申请人
+  apptime timestamp without time zone, -- 申请时间
+  remark character varying(256), -- 申请说明
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_final_turn_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_final_turn_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_final_turn_info
+  IS '会计期末结转信息表';
+COMMENT ON COLUMN fa_final_turn_info.id IS '主键ID';
+COMMENT ON COLUMN fa_final_turn_info.accountperiod IS '会计周期';
+COMMENT ON COLUMN fa_final_turn_info.flag IS '结转标志';
+COMMENT ON COLUMN fa_final_turn_info.vouchernum IS '凭证张数';
+COMMENT ON COLUMN fa_final_turn_info.workreport IS '工作报告';
+COMMENT ON COLUMN fa_final_turn_info.appstate IS '申请状态';
+COMMENT ON COLUMN fa_final_turn_info.applyid IS '申请人';
+COMMENT ON COLUMN fa_final_turn_info.apptime IS '申请时间';
+COMMENT ON COLUMN fa_final_turn_info.remark IS '申请说明';
+COMMENT ON COLUMN fa_final_turn_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_final_turn_info.creater IS '创建人';
+COMMENT ON COLUMN fa_final_turn_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_final_turn_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_final_turn_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_final_turn_info.isvalid IS '是否有效';
+
+
+================日终记账信息表 =================
+CREATE TABLE fa_final_account_info
+(
+  id integer NOT NULL, -- 主键ID
+  accountperiod smallint , -- 会计周期
+  vouchernum smallint NOT NULL, -- 凭证张数
+  flag smallint NOT NULL, -- 结转标志
+  accounttype smallint, -- 记账类别
+  appstate smallint NOT NULL, -- 申请状态
+  applyid integer, -- 申请人
+  apptime timestamp without time zone, -- 申请时间
+  remark character varying(256), -- 申请说明
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_final_account_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_final_account_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_final_account_info
+  IS '日终记账信息表';
+COMMENT ON COLUMN fa_final_account_info.id IS '主键ID';
+COMMENT ON COLUMN fa_final_account_info.accountperiod IS '会计周期';
+COMMENT ON COLUMN fa_final_account_info.flag IS '结转标志';
+COMMENT ON COLUMN fa_final_account_info.vouchernum IS '凭证张数';
+COMMENT ON COLUMN fa_final_account_info.accounttype IS '记账类别';
+COMMENT ON COLUMN fa_final_account_info.appstate IS '申请状态';
+COMMENT ON COLUMN fa_final_account_info.applyid IS '申请人';
+COMMENT ON COLUMN fa_final_account_info.apptime IS '申请时间';
+COMMENT ON COLUMN fa_final_account_info.remark IS '申请说明';
+COMMENT ON COLUMN fa_final_account_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_final_account_info.creater IS '创建人';
+COMMENT ON COLUMN fa_final_account_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_final_account_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_final_account_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_final_account_info.isvalid IS '是否有效';
+
+
+================凭证模板分录信息表 =================
+CREATE TABLE fa_voucher_model_detail
+(
+  id integer NOT NULL, -- 主键ID
+  modelid integer NOT NULL, -- 凭证模板ID
+  summary character varying(256), -- 摘要
+  subid integer, --科目ID
+  subcode character varying(16) , --科目代码
+  subname character varying(32) , --科目名称
+  debitamo decimal(16,2) , -- 借方金额
+  loanamo decimal(16,2), -- 贷方金额
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_voucher_model_detail PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_voucher_model_detail
+  OWNER TO petty;
+COMMENT ON TABLE fa_voucher_model_detail
+  IS '凭证模板分录信息表';
+COMMENT ON COLUMN fa_voucher_model_detail.id IS '主键ID';
+COMMENT ON COLUMN fa_voucher_model_detail.modelid IS '凭证模板ID';
+COMMENT ON COLUMN fa_voucher_model_detail.summary IS '摘要';
+COMMENT ON COLUMN fa_voucher_model_detail.subid IS '科目ID';
+COMMENT ON COLUMN fa_voucher_model_detail.subcode IS '科目代码';
+COMMENT ON COLUMN fa_voucher_model_detail.subname IS '科目名称';
+COMMENT ON COLUMN fa_voucher_model_detail.debitamo IS '借方金额';
+COMMENT ON COLUMN fa_voucher_model_detail.loanamo IS '贷方金额';
+COMMENT ON COLUMN fa_voucher_model_detail.orgid IS '公司ID';
+COMMENT ON COLUMN fa_voucher_model_detail.creater IS '创建人';
+COMMENT ON COLUMN fa_voucher_model_detail.ctime IS '建档时间';
+COMMENT ON COLUMN fa_voucher_model_detail.mtime IS '变更时间';
+COMMENT ON COLUMN fa_voucher_model_detail.rtime IS '同步时间';
+COMMENT ON COLUMN fa_voucher_model_detail.isvalid IS '是否有效';
+
+
+================凭证模板信息表 =================
+CREATE TABLE fa_voucher_model
+(
+  id integer NOT NULL, -- 主键ID
+  modelname character varying(32), -- 模板名称
+  infotype smallint , -- 信息类型（模板分类/模板名称）
+  level smallint , -- 级别
+  iscommon smallint , -- 是否常用
+  isuseamo smallint , -- 是否沿用模板金额
+  summary character varying(256), -- 凭证模板摘要
+  amount decimal(16,2), -- 发生金额
+  remark character varying(256), -- 备注
+  parentid integer, -- 上级ID
+ 	orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_voucher_model PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_voucher_model
+  OWNER TO petty;
+COMMENT ON TABLE fa_voucher_model
+  IS '凭证模板信息表';
+COMMENT ON COLUMN fa_voucher_model.id IS '主键ID';
+COMMENT ON COLUMN fa_voucher_model.modelname IS '模板名称';
+COMMENT ON COLUMN fa_voucher_model.infotype IS '信息类型（模板分类/模板名称）';
+COMMENT ON COLUMN fa_voucher_model.level IS '级别';
+COMMENT ON COLUMN fa_voucher_model.iscommon IS '是否常用';
+COMMENT ON COLUMN fa_voucher_model.isuseamo IS '是否沿用模板金额';
+COMMENT ON COLUMN fa_voucher_model.summary IS '凭证模板摘要';
+COMMENT ON COLUMN fa_voucher_model.amount IS '发生金额';
+COMMENT ON COLUMN fa_voucher_model.remark IS '备注';
+COMMENT ON COLUMN fa_voucher_model.parentid IS '上级ID';
+COMMENT ON COLUMN fa_voucher_model.orgid IS '公司ID';
+COMMENT ON COLUMN fa_voucher_model.creater IS '创建人';
+COMMENT ON COLUMN fa_voucher_model.ctime IS '建档时间';
+COMMENT ON COLUMN fa_voucher_model.mtime IS '变更时间';
+COMMENT ON COLUMN fa_voucher_model.rtime IS '同步时间';
+COMMENT ON COLUMN fa_voucher_model.isvalid IS '是否有效';
+
+================凭证信息关联关系表 =================
+CREATE TABLE fa_voucher_relation_info
+(
+  id integer NOT NULL, -- 主键ID
+  voucherid integer NOT NULL, -- 组织ID
+  relatedid integer NOT NULL, -- 档案ID
+  remark character varying(256), -- 关联说明
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 创建人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_voucher_relation_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_voucher_relation_info
+  OWNER TO petty;
+COMMENT ON TABLE fa_voucher_relation_info
+  IS '凭证信息关联关系表';
+COMMENT ON COLUMN fa_voucher_relation_info.id IS '主键ID';
+COMMENT ON COLUMN fa_voucher_relation_info.voucherid IS '组织ID';
+COMMENT ON COLUMN fa_voucher_relation_info.relatedid IS '档案ID';
+COMMENT ON COLUMN fa_voucher_relation_info.remark IS '处理序号';
+COMMENT ON COLUMN fa_voucher_relation_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_voucher_relation_info.creater IS '创建人';
+COMMENT ON COLUMN fa_voucher_relation_info.ctime IS '建档时间';
+COMMENT ON COLUMN fa_voucher_relation_info.mtime IS '变更时间';
+COMMENT ON COLUMN fa_voucher_relation_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_voucher_relation_info.isvalid IS '是否有效';
+
+
+CREATE SEQUENCE "seq_fa_cash_flow_type_sub_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+ CREATE SEQUENCE "seq_sys_switch_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+
+ CREATE SEQUENCE "seq_fa_cash_type_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+
+ CREATE SEQUENCE "seq_fa_sys_rate_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+  CREATE SEQUENCE "seq_fa_cash_account_regist_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+
+  CREATE SEQUENCE "seq_fa_cash_pool_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+   CREATE SEQUENCE "seq_fa_bank_account_regist_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+    CREATE SEQUENCE "seq_fa_bank_account_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+ CREATE SEQUENCE "seq_fa_adjust_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+  CREATE SEQUENCE "seq_fa_period_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+ CREATE SEQUENCE "seq_fa_final_turn_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+  CREATE SEQUENCE "seq_fa_final_account_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+
+  CREATE SEQUENCE "seq_fa_voucher_model_detail"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+ CREATE SEQUENCE "seq_fa_voucher_model"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+ 
+ CREATE SEQUENCE "seq_fa_voucher_relation_info"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+
+
+=================财务数据操作变更记录表====================
+CREATE TABLE fa_date_ope_record
+(
+  id integer NOT NULL, -- 主键id
+  creater integer NOT NULL, -- 操作人
+  ctime timestamp without time zone NOT NULL, -- 创建时间
+  mtime timestamp without time zone, -- 修改时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint DEFAULT 1 NOT NULL, -- 是否有效
+  orgid int4 NOT NULL,--公司ID
+  sourcetable character varying(100) NOT NULL,--数据来源表
+  sourceid int4 NOT NULL,--数据主键ID
+  sourcecolumn character varying(100),--数据修改列（英文）
+  sourcename character varying(100),--数据修改列（中文）
+  beforevalue text NOT NULL,--操作前值
+  aftervalue text NOT NULL,--操作后值
+  remark character varying(1000),--备注
+  CONSTRAINT pk_fa_date_ope_record PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_date_ope_record OWNER TO petty;
+COMMENT ON TABLE fa_date_ope_record IS '财务数据操作变更记录表';
+COMMENT ON COLUMN fa_date_ope_record.id IS '表id';
+COMMENT ON COLUMN fa_date_ope_record.creater IS '创建人';
+COMMENT ON COLUMN fa_date_ope_record.ctime IS '创建时间';
+COMMENT ON COLUMN fa_date_ope_record.mtime IS '修改时间';
+COMMENT ON COLUMN fa_date_ope_record.rtime IS '同步时间';
+COMMENT ON COLUMN fa_date_ope_record.isvalid IS '是否有效';
+COMMENT ON COLUMN fa_date_ope_record.orgid IS '公司ID';
+COMMENT ON COLUMN fa_date_ope_record.sourcetable IS '数据来源表';
+COMMENT ON COLUMN fa_date_ope_record.sourceid IS '数据主键ID';
+COMMENT ON COLUMN fa_date_ope_record.sourcecolumn IS '数据修改列（英文）';
+COMMENT ON COLUMN fa_date_ope_record.sourcename IS '数据修改列（中文）';
+COMMENT ON COLUMN fa_date_ope_record.beforevalue IS '操作前值';
+COMMENT ON COLUMN fa_date_ope_record.aftervalue IS '操作后值';
+COMMENT ON COLUMN fa_date_ope_record.remark IS '备注';
+
+CREATE SEQUENCE seq_fa_date_ope_record
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+
+=================会计科目信息表====================
+CREATE TABLE fa_subject_info
+(
+  id integer NOT NULL, -- 主键id
+  creater integer NOT NULL, -- 操作人
+  ctime timestamp without time zone NOT NULL, -- 创建时间
+  mtime timestamp without time zone, -- 修改时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint DEFAULT 1 NOT NULL, -- 是否有效
+  orgid int4 NOT NULL,--公司ID
+  subcode character varying(50) NOT NULL,-- 科目代码
+  subcode1 character varying(10) NOT NULL,-- 一级科目代码
+  subcode2 character varying(10),-- 二级科目代码
+  subcode3 character varying(10),-- 三级科目代码
+  subcode4 character varying(10),-- 四级科目代码
+  subcode5 character varying(10),-- 五级科目代码
+  subcode6 character varying(10),-- 六级科目代码
+  subcode7 character varying(10),-- 七级科目代码
+  subname character varying(100),-- 科目名称
+  subtype smallint NOT NULL,--科目类别
+  level smallint NOT NULL,-- 科目级别
+  balance decimal(16,2) NOT NULL,-- 科目余额
+  debitorloan smallint NOT NULL,-- 借贷方向
+  iscontrol smallint NOT NULL,-- 是否管控
+  iscommon smallint DEFAULT 1 NOT NULL,-- 是否常用
+  isbill smallint,-- 是否挂账科目
+  islast smallint NOT NULL,-- 是否末级科目
+  isoverdraft smallint,-- 允许透支
+  iscount smallint,-- 数量核算
+  iscash smallint,-- 现金标志
+  isadjust smallint,-- 辅助核算
+  adjusttypes character varying(50),-- 辅助核算类型
+  pushstate smallint,-- 推送状态
+  enablestate smallint,-- 启用状态
+  parentid int4,-- 上级科目ID
+  remark text,-- 科目说明
+  applier int4,-- 申请人
+  apptime timestamp without zone,-- 申请时间
+  appdesc text,-- 申请说明
+  appstate smallint,-- 审核状态
+  CONSTRAINT pk_fa_subject_info PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_subject_info OWNER TO petty;
+COMMENT ON TABLE fa_subject_info IS '会计科目信息表';
+COMMENT ON COLUMN fa_subject_info.id IS '表id';
+COMMENT ON COLUMN fa_subject_info.creater IS '创建人';
+COMMENT ON COLUMN fa_subject_info.ctime IS '创建时间';
+COMMENT ON COLUMN fa_subject_info.mtime IS '修改时间';
+COMMENT ON COLUMN fa_subject_info.rtime IS '同步时间';
+COMMENT ON COLUMN fa_subject_info.isvalid IS '是否有效';
+COMMENT ON COLUMN fa_subject_info.orgid IS '公司ID';
+COMMENT ON COLUMN fa_subject_info.subcode IS '科目代码';
+COMMENT ON COLUMN fa_subject_info.subcode1 IS '一级科目代码';
+COMMENT ON COLUMN fa_subject_info.subcode2 IS '二级科目代码';
+COMMENT ON COLUMN fa_subject_info.subcode3 IS '三级科目代码';
+COMMENT ON COLUMN fa_subject_info.subcode4 IS '四级科目代码';
+COMMENT ON COLUMN fa_subject_info.subcode5 IS '五级科目代码';
+COMMENT ON COLUMN fa_subject_info.subcode6 IS '六级科目代码';
+COMMENT ON COLUMN fa_subject_info.subcode7 IS '七级科目代码';
+COMMENT ON COLUMN fa_subject_info.subname IS '科目名称';
+COMMENT ON COLUMN fa_subject_info.subtype IS '科目类别';
+COMMENT ON COLUMN fa_subject_info.level IS '科目级别';
+COMMENT ON COLUMN fa_subject_info.balance IS '科目余额';
+COMMENT ON COLUMN fa_subject_info.debitorloan IS '借贷方向';
+COMMENT ON COLUMN fa_subject_info.iscontrol IS '是否管控';
+COMMENT ON COLUMN fa_subject_info.iscommon IS '是否常用';
+COMMENT ON COLUMN fa_subject_info.isbill IS '是否挂账科目';
+COMMENT ON COLUMN fa_subject_info.islast IS '是否末级科目';
+COMMENT ON COLUMN fa_subject_info.isoverdraft IS '允许透支';
+COMMENT ON COLUMN fa_subject_info.iscount IS '数量核算';
+COMMENT ON COLUMN fa_subject_info.iscash IS '现金标志';
+COMMENT ON COLUMN fa_subject_info.isadjust IS '辅助核算';
+COMMENT ON COLUMN fa_subject_info.adjusttypes IS '辅助核算类型';
+COMMENT ON COLUMN fa_subject_info.pushstate IS '推送状态';
+COMMENT ON COLUMN fa_subject_info.enablestate IS '启用状态';
+COMMENT ON COLUMN fa_subject_info.parentid IS '上级科目ID';
+COMMENT ON COLUMN fa_subject_info.remark IS '科目说明';
+COMMENT ON COLUMN fa_subject_info.applier IS '申请人';
+COMMENT ON COLUMN fa_subject_info.apptime IS '申请时间';
+COMMENT ON COLUMN fa_subject_info.appdesc IS '申请说明';
+COMMENT ON COLUMN fa_subject_info.appstate IS '审核状态';
+
+CREATE SEQUENCE seq_fa_subject_info
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+=================科目转换记录信息====================
+CREATE TABLE fa_sub_change_record
+(
+  id integer NOT NULL, -- 主键id
+  creater integer NOT NULL, -- 操作人
+  ctime timestamp without time zone NOT NULL, -- 创建时间
+  mtime timestamp without time zone, -- 修改时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint DEFAULT 1 NOT NULL, -- 是否有效
+  orgid	int4 NOT NULL,--公司ID
+  sourcesubid	int4 NOT NULL,--	源科目ID
+  sourcesubcode	character varying(50),--源科目代码
+  sourcesubname	character varying(100),--源科目名称
+  targetsubid	int4 NOT NULL,--	目标科目ID
+  targetsubcode	character varying(50),--目标科目代码
+  targetsubname	character varying(100),--目标科目名称
+  remark text,--备注
+  state smallint NOT NULL,--转换状态
+  CONSTRAINT pk_fa_sub_change_record PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_sub_change_record OWNER TO petty;
+COMMENT ON TABLE fa_sub_change_record IS '科目转换记录信息';
+COMMENT ON COLUMN fa_sub_change_record.id IS '表id';
+COMMENT ON COLUMN fa_sub_change_record.creater IS '创建人';
+COMMENT ON COLUMN fa_sub_change_record.ctime IS '创建时间';
+COMMENT ON COLUMN fa_sub_change_record.mtime IS '修改时间';
+COMMENT ON COLUMN fa_sub_change_record.rtime IS '同步时间';
+COMMENT ON COLUMN fa_sub_change_record.isvalid IS '是否有效';
+COMMENT ON COLUMN fa_sub_change_record.orgid IS '公司ID';
+COMMENT ON COLUMN fa_subject_info.sourcesubid IS '源科目ID';
+COMMENT ON COLUMN fa_subject_info.sourcesubcode IS '源科目代码';
+COMMENT ON COLUMN fa_subject_info.sourcesubname IS '源科目名称';
+COMMENT ON COLUMN fa_subject_info.targetsubid IS '目标科目ID';
+COMMENT ON COLUMN fa_subject_info.targetsubcode IS '目标科目代码';
+COMMENT ON COLUMN fa_subject_info.targetsubname IS '目标科目名称';
+COMMENT ON COLUMN fa_subject_info.remark IS '备注';
+COMMENT ON COLUMN fa_subject_info.state IS '转换状态';
+
+CREATE SEQUENCE seq_fa_sub_change_record
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+
+=================凭证信息表====================
+CREATE TABLE fa_account_voucher
+(
+  id integer NOT NULL, -- 主键id
+  creater integer NOT NULL, -- 操作人
+  ctime timestamp without time zone NOT NULL, -- 创建时间
+  mtime timestamp without time zone, -- 修改时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint DEFAULT 1 NOT NULL, -- 是否有效
+  orgid	int4 NOT NULL,--公司ID
+  vouchercode character varying(100) NOT NULL,-- 凭证编号
+  sourcecode character varying(100) ,-- 原始凭证编号
+  voucherdate date NOT NULL,-- 凭证日期
+  busidate date ,-- 业务日期
+  summary character varying(300) NOT NULL,-- 凭证摘要
+  filenum smallint ,-- 附件张数
+  amount decimal(16,2) NOT NULL,-- 发生金额
+  currency character varying(100) ,-- 币种（默认01）
+  accountperiod smallint NOT NULL,-- 会计周期
+  cashflag smallint ,-- 现金流量标志
+  auditor int4 ,-- 审核人
+  audittime timestamp without zone ,-- 审核时间
+  auditmark smallint ,-- 审核标志
+  status smallint NOT NULL,-- 记账状态
+  accountdate date ,-- 记账日期
+  knotstate smallint ,-- 结转状态
+  vouchersource smallint ,-- 凭证来源
+  vouchertype smallint NOT NULL,-- 凭证类别
+  label character varying(100) ,-- 标签（保留字段，暂时不使用）
+  CONSTRAINT pk_fa_account_voucher PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_account_voucher OWNER TO petty;
+COMMENT ON TABLE fa_account_voucher IS '凭证信息表';
+COMMENT ON COLUMN fa_account_voucher.id IS '表id';
+COMMENT ON COLUMN fa_account_voucher.creater IS '创建人';
+COMMENT ON COLUMN fa_account_voucher.ctime IS '创建时间';
+COMMENT ON COLUMN fa_account_voucher.mtime IS '修改时间';
+COMMENT ON COLUMN fa_account_voucher.rtime IS '同步时间';
+COMMENT ON COLUMN fa_account_voucher.isvalid IS '是否有效';
+COMMENT ON COLUMN fa_account_voucher.orgid IS '公司ID';
+COMMENT ON COLUMN fa_subject_info.vouchercode IS '凭证编号';
+COMMENT ON COLUMN fa_subject_info.sourcecode IS '原始凭证编号';
+COMMENT ON COLUMN fa_subject_info.voucherdate IS '凭证日期';
+COMMENT ON COLUMN fa_subject_info.busidate IS '业务日期';
+COMMENT ON COLUMN fa_subject_info.summary IS '凭证摘要';
+COMMENT ON COLUMN fa_subject_info.filenum IS '附件张数';
+COMMENT ON COLUMN fa_subject_info.amount IS '发生金额';
+COMMENT ON COLUMN fa_subject_info.currency IS '币种（默认01）';
+COMMENT ON COLUMN fa_subject_info.accountperiod IS '会计周期';
+COMMENT ON COLUMN fa_subject_info.cashflag IS '现金流量标志';
+COMMENT ON COLUMN fa_subject_info.auditor IS '审核人';
+COMMENT ON COLUMN fa_subject_info.audittime IS '审核时间';
+COMMENT ON COLUMN fa_subject_info.auditmark IS '审核标志';
+COMMENT ON COLUMN fa_subject_info.accountstatus IS '记账状态';
+COMMENT ON COLUMN fa_subject_info.accountdate IS '记账日期';
+COMMENT ON COLUMN fa_subject_info.knotstate IS '结转状态';
+COMMENT ON COLUMN fa_subject_info.vouchersource IS '凭证来源';
+COMMENT ON COLUMN fa_subject_info.vouchertype IS '凭证类别';
+COMMENT ON COLUMN fa_subject_info.label IS '标签（保留字段，暂时不使用）';
+
+CREATE SEQUENCE seq_fa_account_voucher
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+
+=================凭证分录信息表====================
+CREATE TABLE fa_account_voucher_detail
+(
+  id integer NOT NULL, -- 主键id
+  creater integer NOT NULL, -- 操作人
+  ctime timestamp without time zone NOT NULL, -- 创建时间
+  mtime timestamp without time zone, -- 修改时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint DEFAULT 1 NOT NULL, -- 是否有效
+  orgid	int4 NOT NULL,--公司ID
+  voucherid int4 NOT NULL,-- 凭证主表ID
+  detailindex smallint NOT NULL,-- 凭证分录号
+  summary character varying(300) NOT NULL,-- 摘要
+  subid int4 NOT NULL,-- 科目id
+  subcode character varying(50) ,-- 科目代码
+  subname character varying(100) ,-- 科目名称
+  debitamo decimal(16,2) ,-- 借方金额
+  loanamo decimal(16,2) ,-- 贷方金额
+  capitalamo character varying(1000) ,-- 大写金额
+  cashtypeid int4 ,-- 现金流量类别ID
+  cashtypecode character varying(100) ,-- 现金流量类别编码
+  cashtypename character varying(500) ,-- 现金流量类别名称
+  conid int4 ,-- 合同ID
+  CONSTRAINT pk_fa_account_voucher_detail PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_account_voucher_detail OWNER TO petty;
+COMMENT ON TABLE fa_account_voucher_detail IS '凭证分录信息表';
+COMMENT ON COLUMN fa_account_voucher_detail.id IS '表id';
+COMMENT ON COLUMN fa_account_voucher_detail.creater IS '创建人';
+COMMENT ON COLUMN fa_account_voucher_detail.ctime IS '创建时间';
+COMMENT ON COLUMN fa_account_voucher_detail.mtime IS '修改时间';
+COMMENT ON COLUMN fa_account_voucher_detail.rtime IS '同步时间';
+COMMENT ON COLUMN fa_account_voucher_detail.isvalid IS '是否有效';
+COMMENT ON COLUMN fa_account_voucher_detail.orgid IS '公司ID';
+COMMENT ON COLUMN fa_subject_info.voucherid IS '凭证主表ID';
+COMMENT ON COLUMN fa_subject_info.detailindex IS '凭证分录号';
+COMMENT ON COLUMN fa_subject_info.summary IS '摘要';
+COMMENT ON COLUMN fa_subject_info.subid IS '科目id';
+COMMENT ON COLUMN fa_subject_info.subcode IS '科目代码';
+COMMENT ON COLUMN fa_subject_info.subname IS '科目名称';
+COMMENT ON COLUMN fa_subject_info.debitamo IS '借方金额';
+COMMENT ON COLUMN fa_subject_info.loanamo IS '贷方金额';
+COMMENT ON COLUMN fa_subject_info.capital amo IS '大写金额';
+COMMENT ON COLUMN fa_subject_info.cashtypeid IS '现金流量类别ID';
+COMMENT ON COLUMN fa_subject_info.cashtypecode IS '现金流量类别编码';
+COMMENT ON COLUMN fa_subject_info.cashtypename IS '现金流量类别名称';
+COMMENT ON COLUMN fa_subject_info.conid IS '合同ID';
+
+CREATE SEQUENCE seq_fa_account_voucher_detail
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+
+=================凭证分录辅助信息表====================
+CREATE TABLE fa_account_voucher_detail_adjust
+(
+  id integer NOT NULL, -- 主键id
+  creater integer NOT NULL, -- 操作人
+  ctime timestamp without time zone NOT NULL, -- 创建时间
+  mtime timestamp without time zone, -- 修改时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint DEFAULT 1 NOT NULL, -- 是否有效
+  orgid	int4 NOT NULL,--公司ID
+  voucherdetailid int4 NOT NULL,-- 凭证分录ID
+  adjusttype smallint NOT NULL,-- 辅助核算类型
+  adjustid int4 NOT NULL,-- 辅助核算ID
+  adjustcode varchar ,-- 辅助核算编号
+  adjustname varchar ,-- 辅助核算名称
+  CONSTRAINT pk_fa_account_voucher_detail_adjust PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_account_voucher_detail_adjust OWNER TO petty;
+COMMENT ON TABLE fa_account_voucher_detail_adjust IS '凭证分录辅助信息表';
+COMMENT ON COLUMN fa_account_voucher_detail_adjust.id IS '表id';
+COMMENT ON COLUMN fa_account_voucher_detail_adjust.creater IS '创建人';
+COMMENT ON COLUMN fa_account_voucher_detail_adjust.ctime IS '创建时间';
+COMMENT ON COLUMN fa_account_voucher_detail_adjust.mtime IS '修改时间';
+COMMENT ON COLUMN fa_account_voucher_detail_adjust.rtime IS '同步时间';
+COMMENT ON COLUMN fa_account_voucher_detail_adjust.isvalid IS '是否有效';
+COMMENT ON COLUMN fa_account_voucher_detail_adjust.orgid IS '公司ID';
+COMMENT ON COLUMN fa_subject_info.voucherdetailid IS '凭证分录ID';
+COMMENT ON COLUMN fa_subject_info.adjusttype IS '辅助核算类型';
+COMMENT ON COLUMN fa_subject_info.adjustid IS '辅助核算ID';
+COMMENT ON COLUMN fa_subject_info.adjustcode IS '辅助核算编号';
+COMMENT ON COLUMN fa_subject_info.adjustname IS '辅助核算名称';
+
+CREATE SEQUENCE seq_fa_account_voucher_detail_adjust
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+================财务数据字典表 =================
+CREATE TABLE fa_data_dic
+(
+  id integer NOT NULL, -- 主键ID
+  paramname character varying(50) , -- 参数名
+  paramkey character varying(30) , -- 参数键
+  paramvalue smallint , -- 参数值
+  remark character varying(256) , -- 参数说明
+  orgid integer NOT NULL, -- 公司ID
+  creater integer NOT NULL, -- 操作人
+  ctime timestamp without time zone NOT NULL, -- 建档时间
+  mtime timestamp without time zone, -- 变更时间
+  rtime timestamp without time zone, -- 同步时间
+  isvalid smallint NOT NULL DEFAULT 1, -- 是否有效
+  CONSTRAINT pk_fa_data_dic PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE fa_data_dic
+  OWNER TO petty;
+COMMENT ON TABLE fa_data_dic
+  IS '财务数据字典表';
+COMMENT ON COLUMN fa_data_dic.id IS '主键ID';
+COMMENT ON COLUMN fa_data_dic.paramname IS '参数名';
+COMMENT ON COLUMN fa_data_dic.paramkey IS '参数键';
+COMMENT ON COLUMN fa_data_dic.paramvalue IS '参数值';
+COMMENT ON COLUMN fa_data_dic.remark IS '参数说明';
+COMMENT ON COLUMN fa_data_dic.orgid IS '公司ID';
+COMMENT ON COLUMN fa_data_dic.creater IS '操作人';
+COMMENT ON COLUMN fa_data_dic.ctime IS '建档时间';
+COMMENT ON COLUMN fa_data_dic.mtime IS '变更时间';
+COMMENT ON COLUMN fa_data_dic.rtime IS '同步时间';
+COMMENT ON COLUMN fa_data_dic.isvalid IS '是否有效';
+
+CREATE SEQUENCE seq_fa_data_dic
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+
+===========统一创建外键===============
+alter table fa_voucher_model_detail add constraint fk_modelid foreign key (modelid) references fa_voucher_model (id);
+
+alter table fa_voucher_model_detail add constraint fk_subid foreign key (subid) references fa_subject_info (id);
+
+alter table fa_account_voucher_detail add constraint fk_voucherid foreign key (voucherid) references fa_account_voucher (id);
+
+alter table fa_account_voucher_detail add constraint fk_subid foreign key (subid) references fa_subject_info (id);
+
+alter table fa_account_voucher_detail_adjust add constraint fk_voucherdetailid foreign key (voucherdetailid) references fa_account_voucher_detail (id);
+
+============统一创建索引==============
+alter table fa_date_ope_record add index inx_fdor_sourcetable (sourcetable);
+alter table fa_date_ope_record add index inx_fdor_orgid (orgid);
+alter table fa_subject_info add index inx_fsi_orgid (orgid);
+alter table fa_sub_change_record add index inx_fscr_orgid (orgid);
+alter table fa_account_voucher add index inx_fav_orgid (orgid);
+alter table fa_account_voucher_detail add index inx_favd_orgid (orgid);
+alter table fa_account_voucher_detail_adjust add index inx_favda_orgid (orgid);
+alter table sys_switch_info add index inx_ssi_orgid (orgid);
+alter table fa_cash_flow_type_sub_info add index inx_fcftsi_orgid (orgid);
+alter table fa_cash_type_info add index inx_fcti_orgid (orgid);
+alter table fa_sys_rate_info add index inx_fsri_orgid (orgid);
+alter table fa_cash_account_regist_info add index inx_fcari_orgid (orgid);
+alter table fa_cash_pool_info add index inx_fcpi_orgid (orgid);
+alter table fa_bank_account_regist_info add index inx_fbari_orgid (orgid);
+alter table fa_bank_account_info add index inx_fbai_orgid (orgid);
+alter table fa_adjust_info add index inx_fai_orgid (orgid);
+alter table fa_period_info add index inx_fpi_orgid (orgid);
+alter table fa_final_turn_info add index inx_ffti_orgid (orgid);
+alter table fa_final_account_info add index inx_ffai_orgid (orgid);
+alter table fa_voucher_model_detail add index inx_fvmd_orgid (orgid);
+alter table fa_voucher_model add index inx_fvm_orgid (orgid);
+alter table fa_voucher_relation_info add index inx_fvri_orgid (orgid);
+
+

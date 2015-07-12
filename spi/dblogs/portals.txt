@@ -1,0 +1,43 @@
+--===============跑马灯pic存储web路径 , add by wangfan 2015-07-06=================
+ALTER TABLE "petty"."ptl_marquee"
+ALTER COLUMN "pic" TYPE varchar(200);
+--===============附件功能增加 , add by wangfan 2015-07-04=================
+--=======增加内网附件表========
+CREATE TABLE ptl_attachment(
+  id		int4 NOT NULL,
+  type		varchar(100),
+  typeid	int4,
+  filename	varchar(200),
+  filetype	varchar(100),
+  filesize	int8,
+  server	varchar(200),
+  url		varchar(200),
+  downloads	int4,
+  ctime		timestamp(6),
+  mtime		timestamp(6),
+  rtime		timestamp(6),
+  creater	int4,
+  isvalid	int2 DEFAULT 1,
+  CONSTRAINT "pk_ptl_attachment" PRIMARY KEY ("id") USING INDEX TABLESPACE "db40"
+);
+CREATE SEQUENCE seq_ptl_attachment INCREMENT BY 1 MINVALUE 1 NO MAXVALUE START WITH 1;
+COMMENT ON TABLE  "petty"."ptl_attachment" IS '内网附件表';
+COMMENT ON COLUMN "petty"."ptl_attachment"."id" IS '主键ID';
+COMMENT ON COLUMN "petty"."ptl_attachment"."type" IS '附件类型';
+COMMENT ON COLUMN "petty"."ptl_attachment"."typeid" IS '类型关联表ID';
+COMMENT ON COLUMN "petty"."ptl_attachment"."filename" IS '附件原始名';
+COMMENT ON COLUMN "petty"."ptl_attachment"."filetype" IS '附件类型';
+COMMENT ON COLUMN "petty"."ptl_attachment"."filesize" IS '附件大小';
+COMMENT ON COLUMN "petty"."ptl_attachment"."server" IS '存放服务器';
+COMMENT ON COLUMN "petty"."ptl_attachment"."path" IS '附件路径';
+COMMENT ON COLUMN "petty"."ptl_attachment"."downloads" IS '下载次数';
+COMMENT ON COLUMN "petty"."ptl_attachment"."ctime" IS '创建时间';
+COMMENT ON COLUMN "petty"."ptl_attachment"."mtime" IS '修改时间';
+COMMENT ON COLUMN "petty"."ptl_attachment"."rtime" IS '同步时间';
+COMMENT ON COLUMN "petty"."ptl_attachment"."creater" IS '创建人';
+COMMENT ON COLUMN "petty"."ptl_attachment"."isvalid" IS '是否有效';
+--===============跑马灯更新 , add by wangfan 2015-07-02=================
+--=======增加发布状态,为门户首页查询提供便利========
+ALTER TABLE "petty"."ptl_marquee"
+ADD COLUMN "status" int2 DEFAULT 0;
+COMMENT ON COLUMN "petty"."ptl_marquee"."status" IS '发布状态,0未发布,1已发布';

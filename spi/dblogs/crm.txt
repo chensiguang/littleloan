@@ -1,0 +1,2149 @@
+
+
+/*==============================================================*/
+
+/* Table: crm_customer_basic_information (客户基本信息)         */
+
+/*==============================================================*/
+
+create table crm_customer_basic_information 
+
+(id integer   not null,
+   organizationid   integer  ,
+
+   certificatetype      varchar(10)               null,
+
+   certificateno        varchar(30)                 null,
+
+   customername         varchar(10)                 null,
+
+   customertype         varchar(30)                null,
+
+   details              varchar(10)                null,
+
+   correspondent        smallint                  null,
+
+   gender               smallint                  null,
+
+   age                  smallint                     null,
+
+   birthday             date                          null,
+
+   marriage             smallint                      null,
+
+   degree               varchar(10)                 null,
+
+   nationaltype         varchar(5)                   null,
+
+   country              varchar(10)                   null,
+
+   govermentregion      varchar(10)                   null,
+
+   customerlocal        varchar(10)                  null,
+
+   annualincome         decimal(16,2)                 null,
+
+   clientsource         varchar(10)                    null,
+
+   accountlocal         varchar(10)                    null,
+
+   mainmanagerid        varchar(10)                    null,
+
+   vicemanagerid        varchar(10)                    null,
+
+   evaluation           varchar(50)                    null,
+
+   customerrank         int                            null,
+
+   isold                smallint                         null,
+
+   ruleid               integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_BASIC_INFORMAT primary key   (id)
+
+);
+
+comment on table crm_customer_basic_information is 
+
+'客户基本信息';
+
+comment on column crm_customer_basic_information.customertype is 
+
+'个人/机构';
+
+comment on column crm_customer_basic_information.details is 
+
+'农村企业（工商企业）、城市企业（工商企业）、城市各类企业、农村各类企业';
+
+comment on column crm_customer_basic_information.correspondent is 
+
+'默认为否，若是往来客户，则只显示客户基础信息、联系信息供填写。';
+
+ 
+
+/*==============================================================*/
+
+/* Table: crm_customer_family(客户家庭成员表)                   */
+
+/*==============================================================*/
+
+drop table if exists crm_customer_family;
+
+create table crm_customer_family 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         not null,
+
+   organizationid       integer                         null,
+
+   name                 varchar(10)                    not null,
+
+   gender               int                            not null,
+
+   relation             varchar(10)                    not null,
+
+   identitytype         varchar(10)                    not null,
+
+   identityno           varchar(20)                    not null,
+
+   telephone            varchar(10)                    not null,
+
+   company              varchar(20)                    not null,
+
+   department           varchar(10)                    not null,
+
+   post                 varchar(10)                    not null,
+
+   annualincome         decimal(16,2)                  not null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_FAMILY primary key (id)
+
+);
+comment on table crm_customer_family is 
+
+'客户家庭成员表';
+
+
+alter table crm_customer_family add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+ 
+/*==============================================================*/
+
+/* Table: crm_customer_job(客户工作情况表)                      */
+
+/*==============================================================*/
+
+drop table if exists crm_customer_job;
+
+create table crm_customer_job 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         not null,
+
+   organizationid       integer                         null,
+
+   occupation           varchar(2)                     not null,
+
+   vocation             varchar(10)                    not null,
+
+   company              varchar(20)                    not null,
+
+   address              varchar(50)                    not null,
+
+   zipcode              varchar(10)                    not null,
+
+   telephone            varchar(10)                    not null,
+
+   companyvocation      varchar(1)                     not null,
+
+   beginyear            varchar(5)                     not null,
+
+   post                 varchar(10)                    not null,
+
+   title                varchar(10)                    not null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_JOB primary key  (id)
+
+);
+
+comment on table crm_customer_job is 
+
+'客户工作情况表';
+
+comment on column crm_customer_job.customerid is 
+
+'客户基础信息表的 id ';
+
+
+
+comment on column crm_customer_job.occupation is 
+
+'0-国家机关、党群组织、企业、事业单位负责人；
+
+1-专业技术人员；
+
+3-办事人员和有关人员；
+
+4-商业、服务业人员；
+
+5-农、林、牧、渔、水利业生产人员；
+
+6-生产、运输设备操作人员及有关人员；
+
+X-军人；
+
+Y-不便分类的其他从业人员；
+
+Z-未知。
+
+';
+
+
+
+comment on column crm_customer_job.company is 
+
+'无法填报时，暂时填“暂缺”';
+
+
+
+comment on column crm_customer_job.companyvocation is 
+
+'A-农、林、牧、渔业；	
+
+B-采掘业；	
+
+C-制造业；	
+
+D-电力、燃气及水的生产和供应业；	
+
+E-建筑业；	
+
+F-交通运输、仓储和邮政业；	
+
+G-信息传输、计算机服务和软件业；	
+
+H-批发和零售业；	
+
+I-住宿和餐饮业；	
+
+J-金融业；	
+
+K-房地产业；	
+
+L-租赁和商务服务业；	
+
+M-科学研究、技术服务业和地质勘察业；N-水利、环境和公共设施管理业；
+
+O-居民服务和其他服务业；
+
+P-教育；	
+
+Q-卫生、社会保障和社会福利业；	
+
+R-文化、体育和娱乐业；
+
+S-公共管理和社会组织；	
+
+T-国际组织；	
+
+Z-未知。
+
+';
+
+
+
+comment on column crm_customer_job.beginyear is 
+
+'格式为YYYY。在本单位工作的起始年份';
+
+
+
+comment on column crm_customer_job.post is 
+
+'1-高级领导（行政级别局级及局级以上领导或大公司高级管理人员）；
+
+2-中级领导（行政级别局级以下领导或大公司中级管理人员）；
+
+3-一般员工；
+
+4-其他；
+
+9-未知。
+
+';
+
+
+
+comment on column crm_customer_job.title is 
+
+'0-无；
+
+1-高级；
+
+2-中级；
+
+3-初级；
+
+9-未知。
+
+';
+
+
+
+alter table crm_customer_job add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+select * from crm_customer_job
+ 
+
+/*==============================================================*/
+
+/* Table: crm_customer_contact_informatoin(客户联系信息表)      */
+
+/*==============================================================*/
+
+drop table if exists crm_customer_contact_informatoin;
+
+create table crm_customer_contact_informatoin 
+
+(
+
+   id                   integer                         not null,
+
+   userid               integer                         not null,
+
+   organizationid       integer                         null,
+
+   address              varchar(20)                    not null,
+
+   telephone            varchar(10)                    not null,
+
+   mobile               varchar(11)                    not null,
+
+   email                varchar(20)                    not null,
+
+   wechat               varchar(20)                    not null,
+
+   QQ                   varchar(20)                    not null,
+
+   fax                  varchar(20)                    not null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_CONTACT_INFORM primary key   (id)
+
+);
+
+comment on table crm_customer_contact_informatoin is 
+
+'客户联系信息表';
+
+comment on column crm_customer_contact_informatoin.userid is 
+
+'客户基础信息表的 id ';
+
+
+
+comment on column crm_customer_contact_informatoin.address is 
+
+'包含省市县（区）等详细信息。
+
+无法填报时，暂时用“暂缺”填充。
+
+';
+
+
+
+alter table crm_customer_contact_informatoin add foreign key (userid)  references crm_customer_basic_information (id)   on update no action  on delete no action ;
+
+
+
+/*==============================================================*/
+
+/* Table: crm_customer_bank_account (客户银行账户信息表)        */
+
+/*==============================================================*/
+
+drop table if exists crm_customer_bank_account;
+
+create table crm_customer_bank_account 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   organizationid       integer                         null,
+
+   bank                 varchar(10)                    not null,
+
+   branch               varchar(20)                    not null,
+
+   accountno            varchar(10)                    not null,
+
+   isdefault            smallint                         null,
+
+   bankcardtype         smallint                         null,
+
+   loancard             varchar(10)                    not null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_BANK_ACCOUNT primary key  (id)
+
+);
+comment on table crm_customer_bank_account is 
+
+'客户银行账户信息表';
+comment on column crm_customer_bank_account.customerid is '客户基础信息表的主键';
+
+alter table crm_customer_bank_account add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action ;
+
+
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_department_information (机构基础信息表)           */
+
+/*==============================================================*/
+
+drop table if exists crm_departmentinfo;
+
+create table crm_department_information 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   organizationid       integer                         null,
+
+   details              varchar(10)                    null,
+
+   correspondent        smallint                         null,
+
+   shortname            varchar(5)                     null,
+
+   scale                varchar(10)                    null,
+
+   property             varchar(10)                    null,
+
+   regnum               varchar(20)                    null,
+
+   validdate            date                           null,
+
+   regorgan             varchar(10)                    null,
+
+   country              varchar(10)                    null,
+
+   govermentregion      varchar(10)                    null,
+
+   customerlocal        varchar(10)                    null,
+
+   deptno               varchar(10)                    null,
+
+   businessscope        varchar(20)                    null,
+
+   licence              varchar(20)                    null,
+
+   approvalno           varchar(20)                    null,
+
+   vocationdetails      varchar(50)                    null,
+
+   vocation             varchar(10)                    null,
+
+   annualsalse          decimal(16,2)                  null,
+
+   regdate              date                           null,
+
+   regcapital           decimal(16,2)                  null,
+
+   localtaxno           varchar(10)                    null,
+
+   countrytaxno         varchar(10)                    null,
+
+   clientsource         varchar(10)                    null,
+
+   chargedept           varchar(10)                    null,
+
+   regaddress           varchar(20)                    null,
+
+   mainmanagerid        varchar(10)                    null,
+
+   vicemanagerid        varchar(10)                    null,
+
+   evaluation           varchar(50)                    null,
+
+   customerrank         smallint                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_DEPARTMENT_INFORMATION primary key   (id)
+
+);
+
+comment on table crm_department_information is 
+
+'机构基础信息表';
+
+comment on column crm_department_information.details is 
+
+'农村企业（工商企业）、城市企业（工商企业）、城市各类企业、农村各类企业';
+
+
+
+comment on column crm_department_information.correspondent is 
+
+'默认为否，若是往来客户，则只显示客户基础信息、联系信息供填写。';
+
+alter table crm_department_information add foreign key (customerid) references crm_customer_basic_information (id) on update no action  on delete no action ;
+
+
+
+
+
+drop table if exists crm_department_contact;
+
+
+
+/*==============================================================*/
+
+/* Table: crm_department_contact (机构联系信息表)               */
+
+/*==============================================================*/
+
+create table crm_department_contact 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   organizationid       integer                         null,
+
+   name                 varchar(10)                    null,
+
+   telephone            varchar(10)                    null,
+
+   mobile               varchar(11)                    null,
+
+   email                varchar(20)                    null,
+
+   zipcode              varchar(10)                    null,
+
+   address              varchar(20)                    null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_DEPARTMENT_CONTACT primary key   (id)
+
+);
+
+comment on table crm_department_contact is 
+
+'机构联系信息表';
+
+alter table crm_department_contact add foreign key (customerid) references crm_customer_basic_information (id) on update no action  on delete no action  ;
+
+
+
+/*==============================================================*/
+
+/* Table: crm_department_shareholder (机构股东信息表)           */
+
+/*==============================================================*/
+
+drop table if exists crm_department_shareholder;
+
+create table crm_department_shareholder 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   organizationid       integer                         null,
+
+   name                 varchar(10)                    null,
+
+   holdertype           varchar(10)                    null,
+
+   category             varchar(10)                    null,
+
+   holdings             decimal(16,2)                  null,
+
+   shares               int                            null,
+
+   ratio                decimal(4,2)                   null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_DEPARTMENT_SHAREHOLDER primary key   (id)
+
+);
+
+comment on table crm_department_shareholder is 
+
+'机构股东信息表';
+
+comment on column crm_department_shareholder.name is 
+
+'联系人可增加多个，可设一个主联系人
+
+';
+
+
+comment on column crm_department_shareholder.category is 
+
+'相对控股、绝对控股、参股';
+
+alter table crm_department_shareholder add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action   ;
+
+
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_department_senior (机构高管信息表)                */
+
+/*==============================================================*/
+
+drop table if exists crm_department_senior;
+
+create table crm_department_senior 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   organizationid       integer                         null,
+
+   seniorname           varchar(10)                    not null,
+
+   seniortype           varchar(5)                     not null,
+
+   departmentname       varchar(10)                    not null,
+
+   holdings             varchar(10)                    not null,
+
+   shares               decimal(16,2)                  not null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_DEPARTMENT_SENIOR primary key   (id)
+
+);
+
+comment on table crm_department_senior is 
+
+'机构高管信息表';
+
+comment on column crm_department_senior.seniorname is 
+
+'
+
+';
+
+
+
+comment on column crm_department_senior.seniortype is 
+
+'法定代表人、董事长、董事会成员、总经理、财务总监、贷款联系人';
+
+
+
+alter table crm_department_senior add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action  ;
+
+
+
+/*==============================================================*/
+
+/* able: crm_customer_info_modify_history(客户基本信息变更明细表)*/
+
+/*==============================================================*/
+
+drop table if exists crm_customer_info_modify_history;
+
+create table crm_customer_info_modify_history 
+
+(
+
+   id                   int                            not null,
+
+   modifierid           integer                         not null,
+
+   organizationid       integer                         null,
+
+   customerid           integer                         null,
+
+   modifydate           date                           not null,
+
+   fieldname            varchar(10)                    not null,
+
+   oldvalue             varchar(50)                    not null,
+
+   newvalue             varchar(50)                    not null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_INFO_MODIFY_HI primary key   (id)
+
+);
+
+comment on table crm_customer_info_modify_history is 
+
+'客户基本信息变更明细表';
+
+comment on column crm_customer_info_modify_history.modifydate is 
+
+'第几期的还款';
+
+
+
+comment on column crm_customer_info_modify_history.oldvalue is 
+
+'还本、还息、还本还息等';
+
+alter table crm_customer_info_modify_history add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action  ;
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_customer_house (客户住宅情况表)                  */
+
+/*==============================================================*/
+
+drop table if exists crm_customer_house;
+
+create table crm_customer_house 
+
+(
+
+   id                   integer                         not null,
+
+   organizationid       integer                         null,
+
+   customerid           integer                         not null,
+
+   address              varchar(20)                    not null,
+
+   liveproperty         varchar(10)                    not null,
+
+   liveyear             smallint                         not null,
+
+   livecondition        varchar(1)                     not null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_HOUSE primary key (id)
+
+);
+
+comment on table crm_customer_house is 
+
+'客户住宅情况表';
+
+
+comment on column crm_customer_house.customerid is 
+
+'客户基础信息表的 id ';
+
+
+
+comment on column crm_customer_house.address is 
+
+'
+
+';
+
+
+
+comment on column crm_customer_house.liveproperty is 
+
+'自有住房（无贷款）、借款购房、与亲属合住、租房、集体宿舍';
+
+
+
+comment on column crm_customer_house.livecondition is 
+
+'1-自置；
+
+2-按揭；
+
+3-亲属楼宇；
+
+4-集体宿舍；
+
+5-租房；
+
+6-共有住宅；
+
+7-其他； 
+
+9-未知。
+
+';
+
+alter table crm_customer_house add foreign key (customerid) references crm_customer_basic_information (id) on update no action  on delete no action ;
+
+
+
+/*==============================================================*/
+
+/* Table: crm_customer_chat_history(客户交往记录表)             */
+
+/*==============================================================*/
+
+drop table if exists crm_customer_chat_history;
+
+create table crm_customer_chat_history 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         not null,
+
+   organizationid       integer                         null,
+
+   managerid            integer                         not null,
+
+   chattime             timestamp(6)                   not null,
+
+   chataddress          varchar(50)                    not null,
+
+   datacomefrom         varchar(30)                    not null,
+
+   outline              varchar(100)                   not null,
+
+   details              text                           not null,
+
+   filename             varchar(50)                    null,
+
+   filepath             varchar(100)                   null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null default '1',
+
+   constraint PK_CRM_CUSTOMER_CHAT_HISTORY primary key   (id)
+
+);
+
+comment on table crm_customer_chat_history is 
+
+'客户交往记录表';
+
+
+comment on column crm_customer_chat_history.datacomefrom is 
+
+'手工录入、贷前调查、贷后检查、短信';
+
+alter table crm_customer_chat_history add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+/*==============================================================*/
+
+/* Table: crm_old_customer_rule_config (新老用户规则管理)       */
+
+/*==============================================================*/
+
+drop table if exists crm_old_customer_rule_config;
+
+create table crm_old_customer_rule_config 
+
+(
+
+   id                   integer                         not null,
+
+   businesstype         varchar(10)                    null,
+
+   businesstatus        varchar(2)                     null,
+
+   contractamount       decimal(16,2)                  null,
+
+   contractnumber       smallint                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_OLD_CUSTOMER_RULE_CONFI primary key   (id)
+
+);
+
+
+
+comment on table crm_old_customer_rule_config is 
+
+'新老用户规则管理';
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_personal_financial_information(个人财务信息管理)  */
+
+/*==============================================================*/
+
+drop table if exists crm_personal_financial_information;
+
+create table crm_personal_financial_information 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   customername         varchar(30)                    null,
+
+   customertype         varchar(30)                    null,
+
+   certificatetype      varchar(30)                    null,
+
+   certificateno        varchar(30)                    null,
+
+   filename             varchar(30)                    null,
+
+   filepath             varchar(100)                   null,
+
+   filetype             varchar(30)                    null,
+
+   descriptoin          varchar(100)                   null,
+
+   uploaduserid         integer                         null,
+
+   uploadtime           timestamp                      null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_PERSONAL_FINANCIAL_INFO primary key   (id)
+
+);
+
+
+
+comment on table crm_personal_financial_information is 
+
+'个人财务信息管理';
+
+alter table crm_personal_financial_information add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+/*==============================================================*/
+
+/* Table: crm_enterprise_target_rule (企业指标规则)             */
+
+/*==============================================================*/
+
+drop table if exists crm_enterprise_target_rule;
+
+create table crm_enterprise_target_rule 
+
+(
+
+   id                   integer                         not null,
+
+   ruletype             varchar(10)                    null,
+
+   typename             varchar(10)                    null,
+
+   targetno             varchar(10)                    null,
+
+   targetname           varchar(30)                    null,
+
+   formula              varchar(200)                   null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_ENTERPRISE_TARGET_RULE primary key   (id)
+
+);
+
+
+
+comment on table crm_enterprise_target_rule is 
+
+'企业指标规则';
+
+
+
+/*================================================================*/
+
+/* Table: crm_enterprise_financial_information（企业财务信息管理）*/
+
+/*================================================================*/
+
+drop table if exists crm_enterprise_financial_information;
+
+create table crm_enterprise_financial_information 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   customername         varchar(30)                    null,
+
+   reportcreatedate     date                           null,
+
+   reportname           varchar(30)                    null,
+
+   reportfilepath       varchar(100)                   null,
+
+   descriptoin          varchar(100)                   null,
+
+   uploaduserid         integer                         null,
+
+   uploadtime           timestamp(6)                   null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_ENTERPRISE_FINANCIAL_IN primary key  (id)
+
+);
+
+
+
+comment on table crm_enterprise_financial_information is 
+
+'企业财务信息管理';
+
+alter table crm_enterprise_financial_information add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_enterprise_guarantor                              */
+
+/*==============================================================*/
+
+drop table if exists crm_enterprise_guarantor;
+
+create table crm_enterprise_guarantor 
+
+(
+
+   id                   integer                         not null,
+
+   username             varchar(30)                    null,
+    
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+
+   usertype             varchar(30)                    null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(11)                    null,
+
+   address              varchar(200)                   null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_ENTERPRISE_GUARANTOR primary key   (id)
+
+);
+
+
+
+comment on table crm_enterprise_guarantor is 
+
+'担保';
+
+
+
+alter table crm_enterprise_guarantor add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_enterprise_sponsor                                */
+
+/*==============================================================*/
+
+drop table if exists crm_enterprise_sponsor;
+
+create table crm_enterprise_sponsor 
+
+(
+
+   id                   integer                         not null,
+
+   username             varchar(30)                    null,
+    
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+
+   usertype             varchar(30)                    null,
+
+   datacome             varchar(50)                    null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(11)                    null,
+
+   address              varchar(200)                   null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_ENTERPRISE_SPONSOR primary key   (id)
+
+);
+
+
+
+comment on table crm_enterprise_sponsor is 
+
+'被担保（保证人）';
+
+alter table crm_enterprise_sponsor add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_enterprise_stocker                                */
+
+/*==============================================================*/
+
+drop table if exists crm_enterprise_stocker;
+
+create table crm_enterprise_stocker 
+
+(
+
+   id                   integer                         not null,
+
+   stockername          varchar(30)                    null,
+    
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+
+   stockertype          varchar(30)                    null,
+
+   holdamount           decimal(16,2)                  null,
+
+   holdnumber           numeric(30)                        null,
+
+   holdscale            varchar(10)                    null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_ENTERPRISE_STOCKER primary key   (id)
+
+);
+
+
+
+comment on table crm_enterprise_stocker is 
+
+'股东';
+
+alter table crm_enterprise_stocker add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_enterprise_top_manager                            */
+
+/*==============================================================*/
+
+drop table if exists crm_enterprise_top_manager;
+
+create table crm_enterprise_top_manager 
+
+(
+
+   id                   integer                         not null,
+
+   username             varchar(30)                    null,
+    
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+
+   managertype          varchar(30)                    null,
+
+   workdepartment       varchar(100)                   null,
+
+   duty                 varchar(50)                    null,
+
+   yearincome           decimal(16,2)                  null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_ENTERPRISE_TOP_MANAGER primary key   (id)
+
+);
+
+
+
+comment on table crm_enterprise_top_manager is 
+
+'高管';
+
+alter table crm_enterprise_top_manager add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_family_member                                     */
+
+/*==============================================================*/
+
+drop table if exists crm_family_member;
+
+create table crm_family_member 
+
+(
+
+   id                   integer                         not null,
+
+   name                 varchar(30)                     null,
+    
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+
+   appellation          varchar(30)                    null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(30)                    null,
+
+   workunit             varchar(200)                   null,
+
+   workdepartment       varchar(100)                   null,
+
+   duty                 varchar(50)                    null,
+
+   yearincome           decimal(16,2)                  null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                        null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_FAMILY_MEMBER primary key   (id)
+
+);
+
+comment on column crm_family_member.customerid is 
+
+'用户编号';
+
+alter table crm_family_member add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_personal_guarantor                                */
+
+/*==============================================================*/
+
+drop table if exists crm_personal_guarantor;
+
+create table crm_personal_guarantor 
+
+(
+
+   id                   integer                         not null,
+
+   contractnumber       varchar(50)                    null,
+
+   name                 varchar(30)                    null,
+   
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+   
+   usertype             varchar(30)                    null,
+
+   startdate            date                           null,
+
+   enddate              date                           null,
+
+   contractamount       decimal(16,2)                  null,
+
+   loanamount           decimal(16,2)                  null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(11)                    null,
+
+   address              varchar(200)                   null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_PERSONAL_GUARANTOR primary key  (id)
+
+);
+
+
+
+comment on table crm_personal_guarantor is 
+
+'担保人';
+
+alter table crm_personal_guarantor add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_personal_sponsor                                  */
+
+/*==============================================================*/
+
+drop table if exists crm_personal_sponsor;
+
+create table crm_personal_sponsor 
+
+(
+
+   id                   integer                         not null,
+
+   contractnumber       varchar(50)                    null,
+
+   name                 varchar(30)                    null,
+    
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+
+   usertype             varchar(30)                    null,
+
+   datacome             varchar(50)                    null,
+
+   startdate            date                           null,
+
+   enddate              date                           null,
+
+   contractamount       decimal(16,2)                  null,
+
+   loanamount           decimal(16,2)                  null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(30)                    null,
+
+   address              varchar(200)                   null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_PERSONAL_SPONSOR primary key   (id)
+
+);
+
+
+
+comment on table crm_personal_sponsor is 
+
+'被担保（保证人）';
+
+alter table crm_personal_sponsor add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+drop table if exists crm_work_friend;
+
+
+
+/*==============================================================*/
+
+/* Table: crm_work_friend                                       */
+
+/*==============================================================*/
+
+create table crm_work_friend 
+
+(
+
+   id                   integer                         not null,
+
+   name                 varchar(30)                    null,
+    
+   certificatetype      varchar(10)                     null,
+   
+   certificateno        varchar(30)                     null,
+
+   workunit             varchar(200)                   null,
+
+   duty                 varchar(100)                   null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(11)                    null,
+
+   address              varchar(200)                   null,
+
+   issystemuser         smallint                         null,
+
+   customerid           integer                    null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_WORK_FRIEND primary key   (id)
+
+);
+
+alter table crm_work_friend add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_user_manager_change_history                       */
+
+/*==============================================================*/
+
+drop table if exists crm_user_manager_change_history;
+
+create table crm_user_manager_change_history 
+
+(
+
+   id                   integer                         not null,
+
+   operateuserid        integer                         null,
+
+   operateusername      varchar(30)                    null,
+
+   customerid           integer                         null,
+
+   operatedate          date                           null,
+
+   opreatecolumnname    varchar(30)                    null,
+
+   oldvalue             varchar(30)                    null,
+
+   currentvalue         varchar(30)                    null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_USER_MANAGER_CHANGE_HIS primary key   (id)
+
+);
+
+
+
+comment on table crm_user_manager_change_history is 
+
+'客户经理变更历史记录表';
+
+alter table crm_user_manager_change_history add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_black_list                                        */
+
+/*==============================================================*/
+
+drop table if exists crm_black_list;
+
+create table crm_black_list 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   customername         varchar(30)                    null,
+
+   customertype         varchar(30)                    null,
+
+   certificatetype      varchar(30)                    null,
+
+   certificateno        varchar(30)                    null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(11)                    null,
+
+   address              varchar(200)                   null,
+
+   manager              varchar(30)                    null,
+
+   applyuserid          integer                         null,
+
+   status               varchar(30)                    null,
+
+   checkeruserid        integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_BLACK_LIST primary key   (id)
+
+);
+
+
+
+comment on table crm_black_list is 
+
+'客户关系-黑名单';
+
+alter table crm_black_list add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+
+
+
+/*==============================================================*/
+
+/* Table: crm_customer_status_history                           */
+
+/*==============================================================*/
+
+drop table if exists crm_customer_status_history;
+
+create table crm_customer_status_history 
+
+(
+
+   id                   integer                         not null,
+
+   customerid           integer                         null,
+
+   customername         varchar(30)                    null,
+
+   customertype         varchar(30)                    null,
+
+   certificatetype      varchar(30)                    null,
+
+   certificateno        varchar(30)                    null,
+
+   telphone             varchar(30)                    null,
+
+   mobile               varchar(11)                    null,
+
+   address              varchar(200)                   null,
+
+   manager              varchar(30)                    null,
+
+   applyuserid          integer                         null,
+
+   checktime            timestamp                      null,
+
+   status               varchar(30)                    null,
+
+   operateruserid       integer                         null,
+
+   ctime                timestamp(6)                   null,
+
+   mtime                timestamp(6)                   null,
+
+   rtime                timestamp(6)                   null,
+
+   creater              integer                         null,
+
+   isvalid              smallint                         null,
+
+   constraint PK_CRM_CUSTOMER_STATUS_HISTORY primary key   (id)
+
+);
+
+
+
+comment on table crm_customer_status_history is 
+
+'客户状态信息';
+
+alter table crm_customer_status_history add foreign key (customerid) references crm_customer_basic_information (id) on update no action on delete no action;
+
+
+/*==============================================================*/
+
+/*                CREATE SEQUENCE                               */
+
+/*==============================================================*/
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_black_list 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_black_list 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_black_list TO petty; 
+GRANT ALL ON TABLE seq_crm_black_list TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_bank_account 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_bank_account 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_bank_account TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_bank_account TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_basic_information 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_basic_information 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_basic_information TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_basic_information TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_chat_history 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_chat_history 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_chat_history TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_chat_history TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_contact_informatoin 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_contact_informatoin 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_contact_informatoin TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_contact_informatoin TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_family 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_family 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_family TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_family TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_house 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_house 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_house TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_house TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_info_modify_history 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_info_modify_history 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_info_modify_history TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_info_modify_history TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_job 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_job 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_job TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_job TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_customer_status_history 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_customer_status_history 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_status_history TO petty; 
+GRANT ALL ON TABLE seq_crm_customer_status_history TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_department_contact 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_department_contact 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_department_contact TO petty; 
+GRANT ALL ON TABLE seq_crm_department_contact TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_department_information 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_department_information 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_department_information TO petty; 
+GRANT ALL ON TABLE seq_crm_department_information TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_department_senior 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_department_senior 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_department_senior TO petty; 
+GRANT ALL ON TABLE seq_crm_department_senior TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_department_shareholder 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_department_shareholder 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_department_shareholder TO petty; 
+GRANT ALL ON TABLE seq_crm_department_shareholder TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_enterprise_financial_information 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_enterprise_financial_information 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_financial_information TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_financial_information TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_enterprise_guarantor 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_enterprise_guarantor 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_guarantor TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_guarantor TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_enterprise_sponsor 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_enterprise_sponsor 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_sponsor TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_sponsor TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_enterprise_stocker 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_enterprise_stocker 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_stocker TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_stocker TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_enterprise_target_rule 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_enterprise_target_rule 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_target_rule TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_target_rule TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_enterprise_top_manager 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_enterprise_top_manager 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_top_manager TO petty; 
+GRANT ALL ON TABLE seq_crm_enterprise_top_manager TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_family_member 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_family_member 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_family_member TO petty; 
+GRANT ALL ON TABLE seq_crm_family_member TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_old_customer_rule_config 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_old_customer_rule_config 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_old_customer_rule_config TO petty; 
+GRANT ALL ON TABLE seq_crm_old_customer_rule_config TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_personal_financial_information 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_personal_financial_information 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_personal_financial_information TO petty; 
+GRANT ALL ON TABLE seq_crm_personal_financial_information TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_personal_guarantor 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_personal_guarantor 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_personal_guarantor TO petty; 
+GRANT ALL ON TABLE seq_crm_personal_guarantor TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_personal_sponsor 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_personal_sponsor 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_personal_sponsor TO petty; 
+GRANT ALL ON TABLE seq_crm_personal_sponsor TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_user_manager_change_history 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_user_manager_change_history 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_user_manager_change_history TO petty; 
+GRANT ALL ON TABLE seq_crm_user_manager_change_history TO petty_dev;');
+INSERT INTO  VALUES ('CREATE SEQUENCE seq_crm_work_friend 
+INCREMENT 1 
+MINVALUE 1 
+MAXVALUE 9223372036854775807 
+START 1 
+CACHE 1; 
+ALTER TABLE seq_crm_work_friend 
+OWNER TO petty; 
+GRANT ALL ON TABLE seq_crm_work_friend TO petty; 
+GRANT ALL ON TABLE seq_crm_work_friend TO petty_dev;');
+
