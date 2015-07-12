@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="arc_elec_file">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" /> -->
+	
+	<delete id="physicalDelete" parameterType="com.hexin.pettyLoan.archives.model.ElectronicArchivesItem">
+	delete from arc_electronic where arcid = #{arcid} and isvalid = 1
+	</delete>
+	
+	<delete id="logicalDelete" parameterType="com.hexin.pettyLoan.archives.model.ElectronicArchivesItem">
+	update arc_electronic
+	   set isvalid = 0
+	 where orgid = #{orgId}
+	   and arcid = #{arcId}
+	   and isvalid = 1
+	</delete>
+	
+	<insert id="insert" parameterType="com.hexin.pettyLoan.archives.model.ElectronicArchivesFileItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_arc_elec_file')
+		</selectKey>
+		insert into arc_elec_file
+		values(
+		  #{id, jdbcType=INTEGER},
+		  #{orgId, jdbcType=INTEGER},
+		  #{arcid, jdbcType=INTEGER},
+		  #{procNo, jdbcType=SMALLINT},
+		  #{isValid, jdbcType=SMALLINT},
+		  #{fileNo, jdbcType=SMALLINT},
+		  #{fileName, jdbcType=VARCHAR},
+		  #{fileId, jdbcType=VARCHAR},
+		  #{fileSize, jdbcType=INTEGER},
+		  #{previewTimes, jdbcType=INTEGER},
+		  #{downloadTimes, jdbcType=INTEGER},
+		  #{creater, jdbcType=INTEGER},
+		  #{ctime, jdbcType=DATE},
+		  #{mender, jdbcType=INTEGER},
+		  #{mtime, jdbcType=DATE})
+	</insert>
+
+</mapper>

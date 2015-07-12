@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="arc_category">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_arc_category')
+		</selectKey>
+		insert into arc_category(id,orgid,name,parentid,path,depth,notes,creater,ctime)
+		values(
+		#{id,jdbcType=INTEGER},
+		#{orgId,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR},
+		#{parentId,jdbcType=INTEGER},
+		concat(#{path},#{id,jdbcType=INTEGER},'/'),
+		#{depth,jdbcType=INTEGER},
+		#{notes,jdbcType=VARCHAR},
+		#{creater,jdbcType=INTEGER},
+		now()
+		)
+	</insert>
+	
+	<select id="getRoot" parameterType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem" resultType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem">
+		SELECT T1.id , T1.orgid as orgId,T1.isvalid, T1.name, T1.parentid as parentId, (SELECT name FROM arc_category WHERE T1.parentid = arc_category.id ) as parentName ,T1.path, T1.depth, T1.notes, T1.creater, T1.ctime,
+		mender, T1.mtime, T2.username as createrName,(SELECT username FROM sys_userinfo WHERE T1.mender = sys_userinfo.id) as menderName
+		FROM arc_category T1 join sys_userinfo T2 ON T1.creater = T2.id
+		<where> 
+			T1.isvalid = 1 AND T1.depth = 0 AND T1.parentid = 0 AND T1.orgid in (#{orgId},1)
+		</where>
+		ORDER BY T1.id
+	</select>
+	
+	<select id="getChildren" parameterType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem" resultType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem">
+		SELECT T1.id , T1.orgid as orgId,T1.isvalid, T1.name, T1.parentid as parentId, (SELECT name FROM arc_category WHERE T1.parentid = arc_category.id ) as parentName, T1.path, T1.depth, T1.notes, T1.creater, T1.ctime, 
+		mender, T1.mtime, T2.username as createrName,(SELECT username FROM sys_userinfo WHERE T1.mender = sys_userinfo.id) as menderName
+		FROM arc_category T1 join sys_userinfo T2 ON T1.creater = T2.id 
+		<where> 
+			T1.isvalid = 1 AND T1.parentid = #{id}
+		</where>
+		ORDER BY T1.id
+	</select>
+	
+	<select id="countChildren" parameterType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem" resultType="int" >
+		select count(*) from arc_category
+		<where>
+			isvalid = 1 AND parentid = #{id}
+		</where>
+	</select>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem">
+		update arc_category
+		<set>
+			name=#{name},
+			notes=#{notes},
+			mtime=now(),
+			mender=#{mender}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.archives.model.ArchivesCategoryItem">
+		update arc_category set isvalid=0 where id=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="arc_entity">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.archives.model.EntityArchivesItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_arc_entity')
+		</selectKey>
+		insert into arc_entity(id,arcName,arcNo,arcCategoryId,arcLocation,lendStatusCode,arcNoElec,creater,ctime)
+		values(
+			#{id,jdbcType=INTEGER}
+			#{arcName,jdbcType=VARCHAR},
+			#{arcNo,jdbcType=INTEGER},
+			#{arcCategoryId,jdbcType=INTEGER},
+			#{arcLocation,jdbcType=VARCHAR},
+			#{lendStatusCode,jdbcType=INTEGER},
+			#{arcNoElec,jdbcType=INTEGER},
+			#{creater,jdbcType=INTEGER},
+			now()
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hexin.pettyLoan.archives.model.EntityArchivesItem">
+		update arc_entity
+		<set>
+			arcno=#{arcNo},
+			mender=#{mender},
+			mtime=now(),
+			arcname=#{arcName},
+			arccategory=#{arcCategoryId},
+			arclocation=#{arcLocation},
+			arcnoelec=#{arcNoElec}
+		</set>
+		where id=#{id}
+	</update>
+	<select id="query" resultType="com.hexin.pettyLoan.archives.model.EntityArchivesItem" parameterType="com.hexin.pettyLoan.archives.model.EntityArchivesItem">
+		select T1.arcname,T1.arcno,T2.name as arcCategoryName,T3.valuedescrib,T1.arcnoelec,T1.creater,T1.ctime,T1.mender,T1.mtime
+		from arc_entity T1,arc_category T2,sys_flaxkey T3
+		<where>
+			T1.isvalid AND T2.isvalid AND T1.CategoryId=T2.CategoryId AND T3.flaxkey="archivelendstatus" AND T1.lendstatus=T3.flaxvalue
+			<if test="arcName != null and id != '' ">
+				<![CDATA[
+					 AND T1.arcname like concat('%',#{arcName},'%')
+				]]>
+			</if>
+			<if test="arcNo != null and arcNo != 0">
+				<![CDATA[
+					AND T1.arcno= #{arcNo}
+				]]>
+			</if>
+			<if test="arcCategoryId != null and arcCategoryId != 0">
+				<![CDATA[
+					AND T1.arccategory= #{arcCategoryId}
+				]]>
+			</if>
+			<if test="lendStatusCode != null and lendStatusCode != 0">
+				<![CDATA[
+					AND T1.lendstatus= #{lendStatusCode}
+				]]>
+			</if>
+		</where>
+		order by arccategory
+		<if test="rows != null and start != null">
+				<![CDATA[
+					limit #{rows} offset #{start}
+				]]>
+			</if>
+	</select>
+	<select id="count" resultType="int" parameter="com.hexin.pettyLoan.archives.model.EntityArchivesItem">
+		select count(*) from arc_entity
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0">
+				<![CDATA[
+					AND id= #{id}
+				]]>
+			</if>
+			<if test="arcNo != null and arcNo != 0">
+				<![CDATA[
+					AND arcno= #{arcNo}
+				]]>
+			</if>
+		</where>
+	</select>
+</mapper>

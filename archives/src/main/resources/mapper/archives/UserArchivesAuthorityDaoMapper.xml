@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="arc_authority">
+	<select id="page" parameterType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem" resultType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem">
+		SELECT id, orgid as orgId, isvalid, level, type, userid as userId, 
+		(SELECT userName FROM sys_userinfo WHERE sys_userinfo.id=userid) userName,
+		targetUser as targetUserId,(SELECT userName FROM sys_userinfo WHERE sys_userinfo.id=targetUser) targetUserName,
+		arccategory as arcCategoryId, (SELECT name FROM arc_category WHERE arc_category.id=arccategory) arcCategoryName,
+		arcno as arcNo,(SELECT arcname FROM arc_electronic WHERE arc_electronic.arcno=arcno) arcName,creater, ctime, mender, mtime 
+		FROM arc_authority 
+		<where>
+			isvalid = 1
+			<if test="userId != null and userId != 0 ">
+				<![CDATA[
+					AND userid = #{userId} 
+				]]>
+			</if>
+			<if test="orgId != null and orgId != 0 ">
+				<![CDATA[
+					AND orgid = #{orgId} 
+				]]>
+			</if>
+		</where>
+	</select>
+	
+	<select id="count" parameterType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem" resultType="int" >
+		select count(*) from arc_authority
+		<where>
+			isvalid = 1
+			<if test="userId != null and userId != 0 ">
+				<![CDATA[
+					AND userid = #{userId} 
+				]]>
+			</if>
+			<if test="orgId != null and orgId != 0 ">
+				<![CDATA[
+					AND orgid = #{orgId} 
+				]]>
+			</if>
+		</where>		
+	</select>
+	
+	<select id="getone" parameterType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem" resultType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem">
+		select id,isvalid,type FROM arc_authority
+		<where>
+			type=1
+			<if test="orgId != null and orgId != 0 ">
+				<![CDATA[
+					AND orgid = #{orgId} 
+				]]>
+			</if>
+			<if test="userId != null and userId != 0 ">
+				<![CDATA[
+					AND userid = #{userId} 
+				]]>
+			</if>
+			<if test="level != null and level != 0 ">
+				<![CDATA[
+					AND level = #{level} 
+				]]>
+			</if>
+			<if test="targetUserId != null and targetUserId != 0 ">
+				<![CDATA[
+					AND targetuser = #{targetUserId} 
+				]]>
+			</if>
+			<if test="arcCategoryId != null and arcCategoryId != 0 ">
+				<![CDATA[
+					AND arccategory = #{arcCategoryId} 
+				]]>
+			</if>
+			<if test="arcNo != null and arcNo != 0 ">
+				<![CDATA[
+					AND arcno = #{arcNo} 
+				]]>
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insert" parameterType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_arc_authority')
+		</selectKey>
+		insert into arc_authority (id,orgid,level,type,userid,targetuser,arccategory,arcno,creater,ctime) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{orgId,jdbcType=INTEGER},
+		#{level,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{targetUserId,jdbcType=INTEGER},
+		#{arcCategoryId,jdbcType=INTEGER},
+		#{arcNo,jdbcType=VARCHAR},
+		#{creater,jdbcType=INTEGER},
+		now()
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem">
+		update arc_authority set isvalid=0 where id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.archives.model.UserArchivesAuthorityItem">
+		update arc_authority set isvalid=1 where id=#{id}
+	</update>
+</mapper>
