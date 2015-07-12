@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+
+<mapper namespace="crm_department_shareholder">
+	<!-- 启用ehcache缓存，注意不是所有的模块都加，会耗内存 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache" /> -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.DepartmentShareholder">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+		    select nextval('seq_crm_department_shareholder')
+		</selectKey>
+		insert into crm_department_shareholder(id,customerid,organizationid,name,holdertype,category,holdings,shares,ratio,ctime,mtime,creater)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{customerId,jdbcType=INTEGER},
+			#{organizationId,jdbcType=INTEGER},
+			#{name,jdbcType=VARCHAR},
+			#{holderType,jdbcType=VARCHAR},
+			#{category,jdbcType=VARCHAR},
+			#{holdings,jdbcType=DOUBLE},
+			#{shares,jdbcType=INTEGER},
+			#{ratio,jdbcType=DOUBLE},
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	
+	<select id="query" resultType="com.hexin.pettyLoan.crm.model.DepartmentShareholder" parameterType="com.hexin.pettyLoan.crm.model.DepartmentShareholder">
+		select *
+		from crm_department_shareholder
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">  
+	            <![CDATA[  
+	              AND customerId =#{customerId}
+	            ]]> 
+	        </if>
+		</where>
+		order by mtime
+	</select>
+	
+	<!-- 
+	<update id="update" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		update sys_userinfo 
+		<set>
+			username = #{username},
+			password = #{password},
+			realname = #{realname},
+			email = #{email},
+			telephone = #{telephone},
+			departmentid = #{departmentId},
+			orgnizationid = #{orgnizationId},
+			status = #{status},
+			mtime=now(),
+			spell=#{spell}
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		update sys_userinfo set isvalid = 0 where id = #{id}
+	</delete>
+	
+	
+
+	<select id="query" resultType="com.hexin.pettyLoan.system.model.UserinfoItem" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		select *
+		from v_userinfo
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="username != null and username != '' ">  
+	            <![CDATA[  
+	              AND username like concat('%', #{username}, '%')
+	            ]]> 
+	        </if>
+	        <if test="realname != null and realname != '' ">  
+	            <![CDATA[  
+	              AND realname like concat('%', #{realname}, '%')
+	            ]]> 
+	        </if>
+	        <if test="telephone != null and telephone != '' ">  
+	            <![CDATA[  
+	              AND telephone= #{telephone}
+	            ]]> 
+	        </if>
+	        <if test="email != null and email != '' ">  
+	            <![CDATA[  
+	              AND email= #{email}
+	            ]]> 
+	        </if>
+	        <if test="departmentId != null and departmentId != 0 ">  
+	            <![CDATA[  
+	              AND departmentId= #{departmentId}
+	            ]]> 
+	        </if>
+	        <if test="parentDepartmentId != null and parentDepartmentId != 0 ">  
+	            <![CDATA[  
+	              AND departmentIdPath like concat('%/', #{parentDepartmentId}, '/%')
+	            ]]> 
+	        </if>
+	        <if test="parentOrgnizationId != null and parentOrgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationIdPath like concat('%/', #{parentOrgnizationId}, '/%')
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationId= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="spell != null and spell != '' ">  
+	            <![CDATA[  
+	              AND spell like concat('%', #{spell}, '%')
+	            ]]> 
+	        </if>
+		</where>
+		order by mtime
+	</select>
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		select count(id)
+		from v_userinfo
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="username != null and username != '' ">  
+	            <![CDATA[  
+	              AND username like concat('%', #{username}, '%')
+	            ]]> 
+	        </if>
+	        <if test="realname != null and realname != '' ">  
+	            <![CDATA[  
+	              AND realname like concat('%', #{realname}, '%')
+	            ]]> 
+	        </if>
+	        <if test="telephone != null and telephone != '' ">  
+	            <![CDATA[  
+	              AND telephone= #{telephone}
+	            ]]> 
+	        </if>
+	        <if test="email != null and email != '' ">  
+	            <![CDATA[  
+	              AND email= #{email}
+	            ]]> 
+	        </if>
+	        <if test="departmentId != null and departmentId != 0 ">  
+	            <![CDATA[  
+	              AND departmentId= #{departmentId}
+	            ]]> 
+	        </if>
+	        <if test="parentDepartmentId != null and parentDepartmentId != 0 ">  
+	            <![CDATA[  
+	              AND departmentIdPath like concat('%/', #{parentDepartmentId}, '/%')
+	            ]]> 
+	        </if>
+	        <if test="parentOrgnizationId != null and parentOrgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationIdPath like concat('%/', #{parentOrgnizationId}, '/%')
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationId= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="spell != null and spell != '' ">  
+	            <![CDATA[  
+	              AND spell like concat('%', #{spell}, '%')
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+	<select id="page" resultType="com.hexin.pettyLoan.system.model.UserinfoItem" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		select *
+		from v_userinfo
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="username != null and username != '' ">  
+	            <![CDATA[  
+	              AND username like concat('%', #{username}, '%')
+	            ]]> 
+	        </if>
+	        <if test="realname != null and realname != '' ">  
+	            <![CDATA[  
+	              AND realname like concat('%', #{realname}, '%')
+	            ]]> 
+	        </if>
+	        <if test="telephone != null and telephone != '' ">  
+	            <![CDATA[  
+	              AND telephone= #{telephone}
+	            ]]> 
+	        </if>
+	        <if test="email != null and email != '' ">  
+	            <![CDATA[  
+	              AND email= #{email}
+	            ]]> 
+	        </if>
+	        <if test="departmentId != null and departmentId != 0 ">  
+	            <![CDATA[  
+	              AND departmentId= #{departmentId}
+	            ]]> 
+	        </if>
+	        <if test="parentDepartmentId != null and parentDepartmentId != 0 ">  
+	            <![CDATA[  
+	              AND departmentIdPath like concat('%/', #{parentDepartmentId}, '/%')
+	            ]]> 
+	        </if>
+	        <if test="parentOrgnizationId != null and parentOrgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationIdPath like concat('%/', #{parentOrgnizationId}, '/%')
+	            ]]> 
+	        </if>
+	        <if test="orgnizationId != null and orgnizationId != 0 ">  
+	            <![CDATA[  
+	              AND orgnizationId= #{orgnizationId}
+	            ]]> 
+	        </if>
+	        <if test="spell != null and spell != '' ">  
+	            <![CDATA[  
+	              AND spell like concat('%', #{spell}, '%')
+	            ]]> 
+	        </if>
+		</where>
+		order by mtime
+		limit #{rows} offset #{start}
+	</select>
+	
+	<select id="getUserinfoListByOrgnizationAndRole" resultType="com.hexin.pettyLoan.system.model.UserinfoItem" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		select u.*
+		from v_userinfo u
+		inner join sys_user_role ur on u.id = ur.userid
+		inner join sys_role r on r.id = ur.roleid
+		where
+			u.isvalid=1 
+			AND ur.roleId= #{roleId} 
+			AND r.orgnizationId = #{orgnizationId}
+		union
+		select u.*
+		from v_userinfo u
+		inner join sys_user_role ur on u.id = ur.userid
+		inner join sys_role r on r.id = ur.roleid	
+		where r.isSystemRole = 1
+	</select>
+	<select id="getRoleNeeded" resultType="com.hexin.pettyLoan.system.model.RoleItem" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		select T1.id,T1.rolename,T1.roledescription,T1.orgnizationid,T1.issystemrole,T1.ctime,T1.mtime,T1.rtime,T1.creater,T1.isvalid
+		from sys_role T1 WHERE T1.isvalid=1 AND (orgnizationId=#{orgnizationId} OR issystemrole=1
+		<if test="listType=='server' or listType=='loan'">
+			<![CDATA[
+				)
+			]]>
+		</if>
+		AND not exists (SELECT 1 from sys_user_role t2 where t2.roleid= t1.id and t2.userid=#{id})
+		<if test="rows != null and start != null">
+			<![CDATA[
+				limit #{rows} offset #{start}
+			]]>
+		</if>
+	</select>
+	<select id="countRoleNeeded" resultType="int" parameterType="com.hexin.pettyLoan.system.model.UserinfoItem">
+		select count(*) from sys_role T1
+		WHERE T1.isvalid=1 AND (orgnizationId=#{orgnizationId} OR issystemrole=1
+		<if test="listType=='server' or listType=='loan'">
+			<![CDATA[
+				)
+			]]>
+		</if>
+		AND not exists (SELECT 1 from sys_user_role t2 where t2.roleid= t1.id and t2.userid=#{id})
+	</select>-->
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="crm_manager_change">
+	<!-- 插入一条记录 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.CustomerManagerChangeHistoryItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			SELECT nextval('seq_crm_user_manager_change_history')
+		</selectKey>
+		INSERT INTO crm_user_manager_change_history(id,operateuserid,operateusername,customerid,operatedate,opreatecolumnname,
+			oldvalue,currentvalue,ctime,mtime,rtime,creater) 
+		VALUES(
+			#{id,jdbcType=INTEGER},
+			#{operateuserid,jdbcType=INTEGER},
+			#{operateusername,jdbcType=VARCHAR},
+			#{customerid,jdbcType=INTEGER},
+			#{operatedate,jdbcType=DATE},
+			#{opreatecolumnname,jdbcType=VARCHAR},
+			#{oldvalue,jdbcType=VARCHAR},
+			#{currentvalue,jdbcType=VARCHAR},
+			now(),
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改一条记录 -->
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.CustomerManagerChangeHistoryItem">
+		UPDATE crm_user_manager_change_history
+		<set>
+			operateuserid = #{operateUserId},
+			operateusername = #{operateUserName},
+			customerid = #{customerId},
+			operatedate = #{operateDate},
+			opreatecolumnname = #{opreateColumnName},
+			oldvalue = #{oldValue},
+			currentvalue = #{currentValue},
+			mtime = now()
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 获取一条交往记录 -->
+	<!-- <select id="getone" resultType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem">
+		SELECT 
+			id,customerid,customername,customertype,certificatetype,certificateno,
+			filename,filepath,filetype,descriptoin,uploaduserid,uploadtime,ctime,mtime,rtime,creater
+ 		FROM crm_personal_financial_information 
+ 		<where>
+			isvalid = 1
+			AND id = #{id} 
+		</where>
+	</select> -->
+	
+	<!-- 根据查询条件进行查询 -->
+	<select id="query" parameterType="com.hexin.pettyLoan.crm.model.CustomerManagerChangeHistoryItem" resultType="com.hexin.pettyLoan.crm.model.CustomerManagerChangeHistoryItem">
+		SELECT 
+			id,operateuserid,operateusername,customerid,operatedate,opreatecolumnname,
+			oldvalue,currentvalue,ctime,mtime,rtime,creater
+ 		FROM crm_user_manager_change_history 
+		<where>
+			isvalid = 1
+				<if test="operateUserName != null and operateUserName != '' ">
+					<![CDATA[
+						AND operateusername = #{operateUserName} 
+					]]>
+				</if>
+				<if test="operateDate != null and operateDate != '' ">
+					<![CDATA[
+						AND operatedate = #{operateDate}
+					]]>
+				</if>
+		</where>
+	</select>
+	
+	<select id="count" parameterType="com.hexin.pettyLoan.crm.model.CustomerManagerChangeHistoryItem" resultType="int" >
+		SELECT count(*) FROM crm_user_manager_change_history
+		<where>
+			isvalid = 1
+				<if test="operateUserName != null and operateUserName != '' ">
+					<![CDATA[
+						AND operateusername = #{operateUserName} 
+					]]>
+				</if>
+				<if test="operateDate != null and operateDate != '' ">
+					<![CDATA[
+						AND operatedate = #{operateDate}
+					]]>
+				</if>
+		</where>
+	</select>
+	
+	
+	<select id="page" parameterType="com.hexin.pettyLoan.crm.model.CustomerManagerChangeHistoryItem" resultType="com.hexin.pettyLoan.crm.model.CustomerManagerChangeHistoryItem">
+		SELECT 
+			id,operateuserid,operateusername,customerid,operatedate,opreatecolumnname,
+			oldvalue,currentvalue,ctime,mtime,rtime,creater
+ 		FROM crm_user_manager_change_history 
+		<where>
+			isvalid = 1
+				<if test="operateUserName != null and operateUserName != '' ">
+					<![CDATA[
+						AND operateusername = #{operateUserName} 
+					]]>
+				</if>
+				<if test="operateDate != null and operateDate != '' ">
+					<![CDATA[
+						AND operatedate = #{operateDate}
+					]]>
+				</if>
+		</where>
+		ORDER BY id DESC
+		LIMIT #{rows} OFFSET #{start}
+	</select>
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="crm_work_friend">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_work_friend')
+		</selectKey>
+		insert into crm_work_friend(
+			id,name,workunit,
+			duty,telphone,mobile,
+			address,issystemuser, customerid,
+			certificatetype,certificateno,
+			ctime, creater, isvalid)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{name,jdbcType=VARCHAR},
+			#{workUnit,jdbcType=VARCHAR},
+			#{duty,jdbcType=VARCHAR},
+			#{telphone,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{address,jdbcType=VARCHAR},
+			#{isSystemUser,jdbcType=INTEGER},
+			#{customerId,jdbcType=INTEGER},
+			#{certificateType,jdbcType=VARCHAR},
+			#{certificateNo,jdbcType=VARCHAR},
+			now(),
+			#{creater,jdbcType=INTEGER},
+			1
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem">
+		update crm_work_friend 
+		<set>
+			name=#{name},
+			workunit=#{workUnit},
+			duty=#{duty},
+			telphone=#{telphone},
+			mobile=#{mobile},
+			address=#{address},
+			issystemuser=#{isSystemUser},
+			certificatetype=#{certificateType},
+			certificateno=#{certificateNo},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem">
+		update crm_work_friend set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem">
+		select id,name,workunit,
+			duty,telphone,mobile,
+			address,issystemuser, customerid,certificatetype,certificateno,ctime,mtime,rtime,creater,isvalid from crm_work_friend
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name= #{name}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem">
+		select id,name,workunit,
+			duty,telphone,mobile,
+			address,issystemuser, customerid,certificatetype,certificateno,ctime,mtime,rtime,creater,isvalid from crm_work_friend
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name like concat('%',#{name},'%') 
+	            ]]> 
+	        </if>
+	        <if test="workUnit !=null and workUnit != '' ">
+	        	<![CDATA[  
+	              AND workUnit= #{workUnit}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="address != null and address != '' ">
+	        	<![CDATA[  
+	              AND address like concat('%',#{address},'%') 
+	            ]]> 
+	        </if>
+	        <if test="duty != null and duty != '' ">
+	        	<![CDATA[  
+	              AND duty= #{duty}
+	            ]]> 
+	        </if>
+	         <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+			</where>
+			order by ctime
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.crm.model.PersonalWorkFriendItem">
+		select count(*) from crm_work_friend
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name like concat('%',#{name},'%') 
+	            ]]> 
+	        </if>
+	        <if test="workUnit !=null and workUnit != '' ">
+	        	<![CDATA[  
+	              AND workUnit= #{workUnit}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="address != null and address != '' ">
+	        	<![CDATA[  
+	              AND address like concat('%',#{address},'%') 
+	            ]]> 
+	        </if>
+	        <if test="duty != null and duty != '' ">
+	        	<![CDATA[  
+	              AND duty= #{duty}
+	            ]]> 
+	        </if>
+	         <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+			</where>
+	</select>
+</mapper>

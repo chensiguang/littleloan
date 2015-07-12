@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="crm_customer_chat_history">
+	<!-- 插入一条交往记录 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_crm_customer_chat_history')
+		</selectKey>
+		insert into crm_customer_chat_history(id,customerid,organizationid,managerid,chattime,chataddress,datacomefrom,outline,
+			details,filename,filepath,ctime,mtime,rtime,creater) 
+		values(
+		#{id,jdbcType=INTEGER},
+		#{customerid,jdbcType=INTEGER},
+		#{organizationid,jdbcType=INTEGER},
+		#{managerid,jdbcType=INTEGER},
+		#{chattime,jdbcType=TIMESTAMP},
+		#{chataddress,jdbcType=VARCHAR},
+		#{datacomefrom,jdbcType=VARCHAR},
+		#{outline,jdbcType=VARCHAR},
+		#{details,jdbcType=TEXT},
+		#{filename,jdbcType=VARCHAR},
+		#{filepath,jdbcType=VARCHAR},
+		now(),
+		now(),
+		now(),
+		#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改一天交往记录 -->
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem">
+		update crm_customer_chat_history
+		<set>
+			customerid=#{customerid},
+			organizationid=#{organizationid},
+			managerid=#{managerid},
+			chattime=#{chattime},
+			chataddress=#{chataddress},
+			datacomefrom=#{datacomefrom},
+			outline=#{outline},
+			details=#{details},
+			filename=#{filename},
+			filepath=#{filepath},
+			mtime=now()
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 删除一条交往记录，非物理删除 -->
+	<delete id="delete" parameterType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem">
+		update crm_customer_chat_history set isvalid=0, mtime=now() where id=#{id}
+	</delete>
+	
+	<!-- 获取一条交往记录 -->
+	<select id="getone" resultType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem" parameterType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem">
+		select 
+			id,customerid,organizationid,managerid,chattime,chataddress,datacomefrom,outline,
+			details,filename,filepath,ctime,mtime,rtime,creater
+ 		from crm_customer_chat_history 
+ 		<where>
+			isvalid = 1
+			AND id = #{id} 
+		</where>
+	</select>
+	
+	<!-- 根据查询条件进行查询 -->
+	<select id="query" parameterType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem" resultType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem">
+		select 
+			id,customerid,organizationid,managerid,chattime,chataddress,datacomefrom,outline,
+			details,filename,filepath,ctime,mtime,rtime,creater
+ 		from crm_customer_chat_history 
+		<where>
+			isvalid = 1
+				<if test="customerid != null and customerid != 0 ">
+					<![CDATA[
+						AND customerid = #{customerid} 
+					]]>
+				</if>
+				<if test="customertype != null and customertype != '' ">
+					<![CDATA[
+						AND customertype = #{customertype}
+					]]>
+				</if>
+				<if test="managerid != null and managerid != 0 ">
+					<![CDATA[
+						AND managerid = #{managerid}
+					]]>
+				</if>
+				<if test="chattime != null and chattime != '' ">
+					<![CDATA[
+						AND chattime = #{chattime}
+					]]>
+				</if>
+		</where>
+	</select>
+	
+	<select id="count" parameterType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem" resultType="int" >
+		select count(*) from crm_customer_chat_history
+		<where>
+			isvalid = 1
+				<if test="customerid != null and customerid != 0 ">
+					<![CDATA[
+						AND customerid = #{customerid} 
+					]]>
+				</if>
+				<if test="customertype != null and customertype != '' ">
+					<![CDATA[
+						AND customertype = #{customertype}
+					]]>
+				</if>
+				<if test="managerid != null and managerid != 0 ">
+					<![CDATA[
+						AND managerid = #{managerid}
+					]]>
+				</if>
+				<if test="chattime != null and chattime != '' ">
+					<![CDATA[
+						AND chattime = #{chattime}
+					]]>
+				</if>
+		</where>
+	</select>
+	
+	
+	<select id="page" parameterType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem" resultType="com.hexin.pettyLoan.crm.model.CustomerChatHistoryItem">
+		select 
+			id,customerid,organizationid,managerid,chattime,chataddress,datacomefrom,outline,
+			details,filename,filepath,ctime,mtime,rtime,creater
+ 		from crm_customer_chat_history 
+		<where>
+			isvalid = 1
+				<if test="customerid != null and customerid != 0 ">
+					<![CDATA[
+						AND customerid = #{customerid} 
+					]]>
+				</if>
+				<if test="customertype != null and customertype != '' ">
+					<![CDATA[
+						AND customertype = #{customertype}
+					]]>
+				</if>
+				<if test="managerid != null and managerid != 0 ">
+					<![CDATA[
+						AND managerid = #{managerid}
+					]]>
+				</if>
+				<if test="chattime != null and chattime != '' ">
+					<![CDATA[
+						AND chattime = #{chattime}
+					]]>
+				</if>
+		</where>
+		order by id desc
+		limit #{rows} offset #{start}
+	</select>
+</mapper>

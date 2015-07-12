@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="crm_enterprise_stocker">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_enterprise_stocker')
+		</selectKey>
+		insert into crm_enterprise_stocker(
+			id,stockername,stockertype,
+			holdamount,holdnumber,holdscale,
+			certificatetype,certificateno,
+			issystemuser, customerid,
+			ctime,creater, isvalid)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{stockerName,jdbcType=VARCHAR},
+			#{stockerType,jdbcType=VARCHAR},
+			#{holdAmount,jdbcType=NUMERIC},
+			#{holdNumber,jdbcType=NUMERIC},
+			#{holdScale,jdbcType=VARCHAR},
+			#{certificateType,jdbcType=VARCHAR},
+			#{certificateNo,jdbcType=VARCHAR},
+			#{isSystemUser,jdbcType=INTEGER},
+			#{customerId,jdbcType=INTEGER},
+			now(),
+			#{creater,jdbcType=INTEGER},
+			1
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem">
+		update crm_enterprise_stocker 
+		<set>
+			stockername=#{stockerName,jdbcType=VARCHAR},
+			usertype= #{userType,jdbcType=VARCHAR},
+			stockertype= #{stockerType,jdbcType=VARCHAR},
+			holdamount= #{holdAmount,jdbcType=NUMERIC},
+			holdnumber= #{holdNumber,jdbcType=NUMERIC},
+			holdscale= #{holdScale,jdbcType=VARCHAR},
+			certificatetype=#{certificateType},
+			certificateno=#{certificateNo},
+			issystemuser=#{isSystemUser},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem">
+		update crm_enterprise_stocker set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem">
+		select id,stockername,stockertype,
+			holdamount,holdnumber,holdscale,certificatetype,certificateno,
+			issystemuser, customerid, ctime,mtime,rtime,creater,isvalid from crm_enterprise_stocker
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="stockerName != null and stockerName != '' ">  
+	            <![CDATA[  
+	              AND stockername= #{stockerName}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem">
+		select id,stockername,stockertype,
+			holdamount,holdnumber,holdscale,certificatetype,certificateno,
+			issystemuser, customerid, ctime,mtime,rtime,creater,isvalid from crm_enterprise_stocker
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="stockerType !=null and stockerType != '' ">
+	        	<![CDATA[  
+	              AND stockertype= #{stockerType}
+	            ]]> 
+	        </if>
+	        <if test="holdAmount != null and holdAmount != '' ">
+	        	<![CDATA[  
+	              AND holdamount= #{holdAmount}
+	            ]]> 
+	        </if>
+	        <if test="holdNumber != null and holdNumber != '' ">
+	        	<![CDATA[  
+	              AND holdnumber= #{holdNumber}
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+			order by ctime
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseStockerItem">
+		select count(*) from crm_enterprise_stocker
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="stockerType !=null and stockerType != '' ">
+	        	<![CDATA[  
+	              AND stockertype= #{stockerType}
+	            ]]> 
+	        </if>
+	        <if test="holdAmount != null and holdAmount != '' ">
+	        	<![CDATA[  
+	              AND holdamount= #{holdAmount}
+	            ]]> 
+	        </if>
+	        <if test="holdNumber != null and holdNumber != '' ">
+	        	<![CDATA[  
+	              AND holdnumber= #{holdNumber}
+	            ]]>
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+</mapper>

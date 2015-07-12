@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="crm_enterprise_sponsor">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_enterprise_sponsor')
+		</selectKey>
+		insert into crm_enterprise_sponsor(
+			id,username,usertype,
+			telphone,mobile,address,
+			certificatetype,certificateno,
+			issystemuser, customerid, datacome,
+			ctime,creater, isvalid)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{username,jdbcType=VARCHAR},
+			#{userType,jdbcType=VARCHAR},
+			#{telphone,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{address,jdbcType=VARCHAR},
+			#{certificateType,jdbcType=VARCHAR},
+			#{certificateNo,jdbcType=VARCHAR},
+			#{isSystemUser,jdbcType=INTEGER},
+			#{customerId,jdbcType=INTEGER},
+			#{dataCome,jdbcType=VARCHAR},
+			now(),
+			#{creater,jdbcType=INTEGER},
+			1
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem">
+		update crm_enterprise_sponsor 
+		<set>
+			username=#{username,jdbcType=VARCHAR},
+			usertype= #{userType,jdbcType=VARCHAR},
+			telphone= #{telphone,jdbcType=VARCHAR},
+			mobile= #{mobile,jdbcType=VARCHAR},
+			address= #{address,jdbcType=VARCHAR},
+			datacome= #{dataCome,jdbcType=VARCHAR},
+			certificatetype=#{certificateType},
+			certificateno=#{certificateNo},
+			issystemuser=#{isSystemUser},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem">
+		update crm_enterprise_sponsor set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem">
+		select id,username,usertype,
+			telphone,mobile,address,certificatetype,certificateno,
+			issystemuser, customerid,datacome,ctime,mtime,rtime,creater,isvalid from crm_enterprise_sponsor
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="username != null and username != '' ">  
+	            <![CDATA[  
+	              AND username= #{username}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem">
+		select id,username,usertype,
+			telphone,mobile,address,certificatetype,certificateno,
+			issystemuser, customerid,datacome,ctime,mtime,rtime,creater,isvalid from crm_enterprise_sponsor
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="userType !=null and userType != '' ">
+	        	<![CDATA[  
+	              AND usertype= #{userType}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="address != null and address != '' ">
+	        	<![CDATA[  
+	               AND address like concat('%',#{address},'%') 
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+			order by ctime
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.crm.model.EnterpriseSponsorItem">
+		select count(*) from crm_enterprise_sponsor
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="userType !=null and userType != '' ">
+	        	<![CDATA[  
+	              AND usertype= #{userType}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="address != null and address != '' ">
+	        	<![CDATA[  
+	               AND address like concat('%',#{address},'%') 
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+</mapper>

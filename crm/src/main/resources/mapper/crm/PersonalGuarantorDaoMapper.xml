@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="crm_personal_guarantor">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_personal_guarantor')
+		</selectKey>
+		insert into crm_personal_guarantor(
+			id,contractnumber,name,
+			usertype,datacome,startdate,
+			enddate,contractamount,loanamount,
+			telphone,mobile,address,
+			certificatetype,certificateno,
+			issystemuser, customerid, ctime,
+			creater, isvalid)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{contractNumber,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{userType,jdbcType=VARCHAR},
+			#{dataCome,jdbcType=VARCHAR},
+			#{startDate,jdbcType=DATE},
+			#{endDate,jdbcType=DATE},
+			#{contractAmount,jdbcType=NUMERIC},
+			#{loanAmount,jdbcType=NUMERIC},
+			#{telphone,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{address,jdbcType=VARCHAR},
+			#{certificateType,jdbcType=VARCHAR},
+			#{certificateNo,jdbcType=VARCHAR},
+			#{isSystemUser,jdbcType=INTEGER},
+			#{customerId,jdbcType=INTEGER},
+			now(),
+			#{creater,jdbcType=INTEGER},
+			1
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem">
+		update crm_personal_guarantor 
+		<set>
+			contractnumber=#{contractNumber},
+			name=#{name},
+			usertype=#{userType},
+			datacome=#{dataCome},
+			startdate=#{startDate},
+			enddate=#{endDate},
+			contractamount=#{contractAmount},
+			loanamount=#{loanAmount},
+			telphone=#{telphone},
+			mobile=#{mobile},
+			address=#{address},
+			certificatetype=#{certificateType},
+			certificateno=#{certificateNo},
+			issystemuser=#{isSystemUser},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem">
+		update crm_personal_guarantor set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem">
+		select id,contractnumber,name,
+			usertype,datacome,startdate,
+			enddate,contractamount,loanamount,
+			telphone,mobile,address,certificatetype,certificateno,
+			issystemuser, customerid,ctime,mtime,rtime,creater,isvalid from crm_personal_guarantor
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name= #{name}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem">
+		select id,contractnumber,name,
+			usertype,datacome,startdate,
+			enddate,contractamount,loanamount,
+			telphone,mobile,address,certificatetype,certificateno,
+			issystemuser, customerid,ctime,mtime,rtime,creater,isvalid from crm_personal_guarantor
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="contractNumber != null and contractNumber != '' ">  
+	            <![CDATA[  
+	              AND contractnumber like concat('%',#{contractNumber},'%') 
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name like concat('%',#{name},'%') 
+	            ]]> 
+	        </if>
+	        <if test="userType !=null and userType != '' ">
+	        	<![CDATA[  
+	              AND usertype= #{userType}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="contractAmount != null and contractAmount != '' ">
+	        	<![CDATA[  
+	               AND contractamount = #{contractAmount} 
+	            ]]> 
+	        </if>
+	        <if test="loanAmount != null and loanAmount != '' ">
+	        	<![CDATA[  
+	              AND loanamount = #{loanAmount} 
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+			order by ctime
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.crm.model.PersonalGuarantorItem">
+		select count(*) from crm_personal_guarantor
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="contractNumber != null and contractNumber != '' ">  
+	            <![CDATA[  
+	              AND contractnumber like concat('%',#{contractNumber},'%') 
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name like concat('%',#{name},'%') 
+	            ]]> 
+	        </if>
+	        <if test="userType !=null and userType != '' ">
+	        	<![CDATA[  
+	              AND usertype= #{userType}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="contractAmount != null and contractAmount != '' ">
+	        	<![CDATA[  
+	               AND contractamount = #{contractAmount} 
+	            ]]> 
+	        </if>
+	        <if test="loanAmount != null and loanAmount != '' ">
+	        	<![CDATA[  
+	              AND loanamount = #{loanAmount} 
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+</mapper>

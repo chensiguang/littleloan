@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="crm_personal_finance">
+	<!-- 插入一条记录 -->
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			SELECT nextval('seq_crm_personal_financial_information')
+		</selectKey>
+		INSERT INTO crm_personal_financial_information(id,customerid,customername,customertype,certificatetype,certificateno,
+			filename,filepath,filetype,descriptoin,uploaduserid,uploadtime,ctime,mtime,rtime,creater) 
+		VALUES(
+			#{id,jdbcType=INTEGER},
+			#{customerId,jdbcType=INTEGER},
+			#{customerName,jdbcType=VARCHAR},
+			#{customerType,jdbcType=VARCHAR},
+			#{certificateType,jdbcType=VARCHAR},
+			#{certificateNo,jdbcType=VARCHAR},
+			#{fileName,jdbcType=VARCHAR},
+			#{filePath,jdbcType=VARCHAR},
+			#{fileType,jdbcType=VARCHAR},
+			#{descriptoin,jdbcType=VARCHAR},
+			#{uploadUserId,jdbcType=INTEGER},
+			#{uploadTime,jdbcType=TIMESTAMP},
+			now(),
+			now(),
+			now(),
+			#{creater,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改一条记录 -->
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem">
+		UPDATE crm_personal_financial_information
+		<set>
+			customerid = #{customerid},
+			customername = #{customername},
+			customertype = #{customertype},
+			certificatetype = #{certificatetype},
+			certificateno = #{certificateno},
+			filename = #{filename},
+			filepath = #{filepath},
+			filetype = #{filetype},
+			descriptoin = #{descriptoin},
+			uploaduserid = #{uploaduserid},
+			uploadtime = #{uploadtime},
+			mtime = now()
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 获取一条交往记录 -->
+	<select id="getone" resultType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem">
+		SELECT 
+			id,customerid,customername,customertype,certificatetype,certificateno,
+			filename,filepath,filetype,descriptoin,uploaduserid,uploadtime,ctime,mtime,rtime,creater
+ 		FROM crm_personal_financial_information 
+ 		<where>
+			isvalid = 1
+			AND id = #{id} 
+		</where>
+	</select>
+	
+	<!-- 根据查询条件进行查询 -->
+	<select id="query" parameterType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem" resultType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem">
+		SELECT 
+			id,customerid,customername,customertype,certificatetype,certificateno,
+			filename,filepath,filetype,descriptoin,uploaduserid,uploadtime,ctime,mtime,rtime,creater
+ 		FROM crm_personal_financial_information 
+		<where>
+			isvalid = 1
+				<if test="customerName != null and customerName != '' ">
+					<![CDATA[
+						AND customername = #{customerName} 
+					]]>
+				</if>
+				<if test="customerType != null and customerType != '' ">
+					<![CDATA[
+						AND customertype = #{customerType}
+					]]>
+				</if>
+				<if test="certificateNo != null and certificateNo != '' ">
+					<![CDATA[
+						AND certificateno = #{certificateNo}
+					]]>
+				</if>
+		</where>
+	</select>
+	
+	<select id="count" parameterType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem" resultType="int" >
+		SELECT count(*) FROM crm_personal_financial_information
+		<where>
+			isvalid = 1
+				<if test="customerName != null and customerName != '' ">
+					<![CDATA[
+						AND customername = #{customerName} 
+					]]>
+				</if>
+				<if test="customerType != null and customerType != '' ">
+					<![CDATA[
+						AND customertype = #{customerType}
+					]]>
+				</if>
+				<if test="certificateNo != null and certificateNo != '' ">
+					<![CDATA[
+						AND certificateno = #{certificateNo}
+					]]>
+				</if>
+		</where>
+	</select>
+	
+	
+	<select id="page" parameterType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem" resultType="com.hexin.pettyLoan.crm.model.PersonalFinanceItem">
+		SELECT 
+			id,customerid,customername,customertype,certificatetype,certificateno,
+			filename,filepath,filetype,descriptoin,uploaduserid,uploadtime,ctime,mtime,rtime,creater
+ 		FROM crm_personal_financial_information 
+		<where>
+			isvalid = 1
+				<if test="customerName != null and customerName != '' ">
+					<![CDATA[
+						AND customername = #{customerName} 
+					]]>
+				</if>
+				<if test="customerType != null and customerType != '' ">
+					<![CDATA[
+						AND customertype = #{customerType}
+					]]>
+				</if>
+				<if test="certificateNo != null and certificateNo != '' ">
+					<![CDATA[
+						AND certificateno = #{certificateNo}
+					]]>
+				</if>
+		</where>
+		ORDER BY id DESC
+		LIMIT #{rows} OFFSET #{start}
+	</select>
+</mapper>

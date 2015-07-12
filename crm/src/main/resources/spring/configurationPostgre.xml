@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+	<typeAliases>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/crm/CustomerBasicInformationDaoMapper.xml" />
+		<mapper resource="mapper/crm/PersonalFamilyMemberDaoMapper.xml" />
+		<mapper resource="mapper/crm/PersonalGuarantorDaoMapper.xml" />
+		<mapper resource="mapper/crm/PersonalSponsorDaoMapper.xml" />
+		<mapper resource="mapper/crm/PersonalWorkFriendDaoMapper.xml" />
+		<mapper resource="mapper/crm/EnterpriseTopManagerDaoMapper.xml" />
+		<mapper resource="mapper/crm/EnterpriseGuarantorDaoMapper.xml" />
+		<mapper resource="mapper/crm/EnterpriseSponsorDaoMapper.xml" />
+		<mapper resource="mapper/crm/EnterpriseStockerDaoMapper.xml" />
+		<mapper resource="mapper/crm/CustomerChatHistoryDaoMapper.xml" />
+	</mappers>
+</configuration>

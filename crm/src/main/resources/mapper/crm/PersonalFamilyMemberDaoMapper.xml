@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="crm_family_member">
+	<insert id="insert" parameterType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem">
+		<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+			select nextval('seq_family_member')
+		</selectKey>
+		insert into crm_family_member(
+			id,name,appellation,
+			telphone,mobile,workunit,
+			workdepartment,duty,yearincome,
+			certificatetype,certificateno,
+			issystemuser, customerid, ctime,
+			creater, isvalid)
+		values(
+			#{id,jdbcType=INTEGER},
+			#{name,jdbcType=VARCHAR},
+			#{appellation,jdbcType=VARCHAR},
+			#{telphone,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{workUnit,jdbcType=VARCHAR},
+			#{workDepartment,jdbcType=VARCHAR},
+			#{duty,jdbcType=VARCHAR},
+			#{yearIncome,jdbcType=NUMERIC},
+			#{certificateType,jdbcType=VARCHAR},
+			#{certificateNo,jdbcType=VARCHAR},
+			#{isSystemUser,jdbcType=INTEGER},
+			#{customerId,jdbcType=INTEGER},
+			now(),
+			#{creater,jdbcType=INTEGER},
+			1
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem">
+		update crm_family_member 
+		<set>
+			name=#{name},
+			appellation=#{appellation},
+			telphone=#{telphone},
+			mobile=#{mobile},
+			workunit=#{workUnit},
+			workdepartment=#{workDepartment},
+			duty=#{duty},
+			yearincome=#{yearIncome},
+			certificatetype=#{certificateType},
+			certificateno=#{certificateNo},
+			issystemuser=#{isSystemUser},
+			mtime=now()
+		</set>
+		where id = #{id} 
+	</update>
+	
+	<delete id="delete" parameterType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem">
+		update crm_family_member set isvalid = 0 where id = #{id}
+	</delete>
+	
+	<select id="getone" resultType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem">
+		select id,name,appellation,
+			telphone,mobile,workunit,
+			workdepartment,duty,yearincome,certificatetype,certificateno,
+			issystemuser, customerid,ctime,mtime,rtime,creater,isvalid from crm_family_member
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name= #{name}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+
+	<select id="query" resultType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem" parameterType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem">
+		select id,name,appellation,
+			telphone,mobile,workunit,
+			workdepartment,duty,yearincome,certificatetype,certificateno,
+			issystemuser, customerid,ctime,mtime,rtime,creater,isvalid from crm_family_member
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name like concat('%',#{name},'%') 
+	            ]]> 
+	        </if>
+	        <if test="appellation !=null and appellation != '' ">
+	        	<![CDATA[  
+	              AND appellation= #{appellation}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="workUnit != null and workUnit != '' ">
+	        	<![CDATA[  
+	               AND workunit like concat('%',#{workUnit},'%') 
+	            ]]> 
+	        </if>
+	        <if test="workDepartment != null and workDepartment != '' ">
+	        	<![CDATA[  
+	              AND workdepartment like concat('%',#{workDepartment},'%') 
+	            ]]> 
+	        </if>
+	        <if test="duty != null and duty != '' ">
+	        	<![CDATA[  
+	              AND duty= #{duty}
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+			order by ctime
+	</select>
+	
+	<select id="count" resultType="int" parameterType="com.hexin.pettyLoan.crm.model.PersonalFamilyMemberItem">
+		select count(*) from crm_family_member
+		<where>
+			isvalid=1
+			<if test="id != null and id != 0 ">  
+	            <![CDATA[  
+	              AND id= #{id}
+	            ]]> 
+	        </if>
+	        <if test="name != null and name != '' ">  
+	            <![CDATA[  
+	              AND name like concat('%',#{name},'%') 
+	            ]]> 
+	        </if>
+	        <if test="appellation !=null and appellation != '' ">
+	        	<![CDATA[  
+	              AND appellation= #{appellation}
+	            ]]> 
+	        </if>
+	        <if test="telphone != null and telphone != '' ">
+	        	<![CDATA[  
+	              AND telphone= #{telphone}
+	            ]]> 
+	        </if>
+	        <if test="mobile != null and mobile != '' ">
+	        	<![CDATA[  
+	              AND mobile= #{mobile}
+	            ]]> 
+	        </if>
+	        <if test="workUnit != null and workUnit != '' ">
+	        	<![CDATA[  
+	               AND workunit like concat('%',#{workUnit},'%') 
+	            ]]> 
+	        </if>
+	        <if test="workDepartment != null and workDepartment != '' ">
+	        	<![CDATA[  
+	              AND workdepartment like concat('%',#{workDepartment},'%') 
+	            ]]> 
+	        </if>
+	        <if test="duty != null and duty != '' ">
+	        	<![CDATA[  
+	              AND duty= #{duty}
+	            ]]> 
+	        </if>
+	        <if test="customerId != null and customerId != '' ">
+	        	<![CDATA[  
+	              AND customerid= #{customerId}
+	            ]]> 
+	        </if>
+	        <if test="certificateType != null and certificateType != '' ">
+	        	<![CDATA[  
+	              AND certificatetype= #{certificateType}
+	            ]]> 
+	        </if>
+	         <if test="certificateNo != null and certificateNo != '' ">
+	        	<![CDATA[  
+	              AND certificateno= #{certificateNo}
+	            ]]> 
+	        </if>
+		</where>
+	</select>
+</mapper>
